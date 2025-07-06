@@ -9,8 +9,10 @@ import CompanyDesc from "@/components/CompanyDesc";
 import {getHomeCategories} from "@/api/home-category/api";
 import HomeCategoryButton from "@/components/buttons/HomeCategoryButton";
 
-export async function generateMetadata({ params }: {params: {locale: string}}) {
-  const t = await getTranslations({ locale: params.locale, namespace: 'HomePage' });
+export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
+  const { locale } = await params;
+
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
 
   return {
     title: t('title'),

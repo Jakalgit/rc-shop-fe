@@ -9,6 +9,17 @@ import parse from 'html-react-parser';
 import "@/styles/globals.css";
 import {getRepairServices} from "@/api/repair-service/api";
 
+export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
+	const { locale } = await params;
+
+	const t = await getTranslations({ locale, namespace: 'RepairPage' });
+
+	return {
+		title: t('title'),
+		description: t('description'),
+	};
+}
+
 export default async function RepairPage() {
 
 	const t = await getTranslations("RepairPage");

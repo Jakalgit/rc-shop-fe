@@ -11,9 +11,9 @@ import SimilarProducts from "@/components/product/SimilarProducts";
 import {getProducts} from "@/api/products/api";
 import NotFound from "next/dist/client/components/not-found-error";
 
-export async function generateMetadata({ params }: {params: {locale: string, article: string}}) {
-	const t = await getTranslations({ locale: params.locale, namespace: 'ProductPage' });
-	const article = (await params).article
+export async function generateMetadata({ params }: {params: Promise<{locale: string, article: string}>}) {
+	const { locale, article } = await params;
+	const t = await getTranslations({ locale, namespace: 'ProductPage' });
 
 	const response = await getProducts({ article, limit: 1 });
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: {params: {locale: string, art
 	};
 }
 
-export default async function ProductPage({params}: {params: { article: string }}) {
+export default async function ProductPage({params}: {params: Promise<{ article: string }>}) {
 
 	const t = await getTranslations("ProductPage");
 	const article = (await params).article;

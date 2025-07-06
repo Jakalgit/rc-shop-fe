@@ -17,8 +17,10 @@ import {getProducts} from "@/api/products/api";
 import PaginationCatalog from "@/components/catalog/PaginationCatalog";
 import {ProductPaginationResponse} from "@/api/products/types";
 
-export async function generateMetadata({ params }: {params: {locale: string}}) {
-	const t = await getTranslations({ locale: params.locale, namespace: 'CatalogPage' });
+export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
+	const { locale } = await params;
+
+	const t = await getTranslations({ locale, namespace: 'CatalogPage' });
 
 	return {
 		title: t('title'),
@@ -26,19 +28,19 @@ export async function generateMetadata({ params }: {params: {locale: string}}) {
 	};
 }
 
-export default async function CatalogPage(props: { searchParams: { [key: string]: string | undefined } }) {
+export default async function CatalogPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
 
 	const t = await getTranslations("CatalogPage");
 
-	const searchParams = (await props.searchParams);
+	const sp = await searchParams;
 
-	const finder = searchParams.finder || "";
+	const finder = sp.finder || "";
 
-	const minPrice = Number(searchParams.min) || DEFAULT_MIN_PRICE;
-	const maxPrice = Number(searchParams.max) || DEFAULT_MAX_PRICE;
-	const page = Number(searchParams.page) || 1;
+	const minPrice = Number(sp.min) || DEFAULT_MIN_PRICE;
+	const maxPrice = Number(sp.max) || DEFAULT_MAX_PRICE;
+	const page = Number(sp.page) || 1;
 
-	const tagIdsParam = searchParams.tagIds;
+	const tagIdsParam = sp.tagIds;
 	const tagIds = tagIdsParam
 		? tagIdsParam.split(',').map(x => Number(x)).filter(x => !isNaN(x))
 		: [];
