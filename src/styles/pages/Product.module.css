@@ -1,0 +1,413 @@
+
+.sectionFirst {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.sliderWrapper {
+    padding: 0 60px;
+}
+
+.infoWrapper {
+    flex-grow: 1;
+    border-left: 1px solid var(--space-color-1);
+    padding-left: 18px;
+}
+
+.sliderImage {
+    width: 400px;
+    height: auto;
+}
+
+.name {
+    font-size: 20px;
+}
+
+.article {
+    font-size: 14px;
+    margin-top: 10px;
+    color: var(--blue-color-2);
+}
+
+.availabilityBlock {
+    margin: 25px 0;
+    gap: 10px;
+}
+
+.availabilityBlock p {
+    font-size: 16px;
+}
+
+.availabilityBlock svg {
+    width: 24px;
+    aspect-ratio: 1;
+}
+
+.inStockIcon {
+    fill: var(--green-color);
+}
+
+.notAvailable {
+    fill: var(--red-color);
+}
+
+.priceBlock {
+    gap: 4px;
+}
+
+.priceBlock div {
+    gap: 8px;
+}
+
+.oldPrice {
+    font-size: 16px;
+    color: var(--space-color-2);
+}
+
+.price {
+    font-size: 22px;
+}
+
+.discountPercent {
+    width: 46px;
+    aspect-ratio: 2;
+    border-radius: 5px;
+    background-color: var(--red-color);
+    font-size: 13px;
+    color: white;
+}
+
+.productActions {
+    gap: 15px;
+}
+
+.countWrapper {
+    width: 110px;
+}
+
+.countWrapper p {
+    font-size: 24px;
+}
+
+.countWrapper button {
+    background-color: var(--foreground-color);
+    width: 24px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.countWrapper button svg {
+    width: 90%;
+    aspect-ratio: 1;
+}
+
+.addToBasket {
+    background-color: var(--foreground-color);
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 18px;
+    padding: 0 45px;
+}
+
+.similarProductsSection {
+    --card-size: 140px;
+    --ribbon-gap: 35px;
+
+    margin: 50px 0;
+    padding: 18px 15px;
+    border: 1px solid var(--space-color-1);
+    border-radius: 20px;
+    gap: 18px;
+}
+
+.similarProductsSection h2 {
+    font-size: 20px;
+}
+
+.leftChangeButton {
+    left: -15px;
+}
+
+.rightChangeButton {
+    right: -15px;
+}
+
+.changeSlideButton {
+    width: 30px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--foreground-color);
+    transform: translateY(-50%);
+    top: 50%;
+    padding: 0;
+    z-index: 99;
+}
+
+.changeSlideButton svg {
+    width: 85%;
+}
+
+.sliderHref:hover {
+    filter: none;
+}
+
+.imageSlider {
+    width: var(--card-size);
+    height: var(--card-size);
+}
+
+.specificationAndEquipment {
+    margin-top: 20px;
+}
+
+.specificationAndEquipment div {
+    width: 48%;
+}
+
+.specificationAndEquipment h3 {
+    font-size: 20px;
+}
+
+.specificationAndEquipment ul {
+    margin-top: 21px;
+    list-style-type: none;
+    padding: 0;
+    gap: 18px;
+}
+
+.specificationAndEquipment ul li {
+    font-size: 14px;
+}
+
+.specificationAndEquipment ul li span {
+    width: 6px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--foreground-color);
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.descriptionList {
+    margin-top: 36px;
+    gap: 26px;
+    list-style-type: none;
+}
+
+.descriptionList li {
+    font-size: 18px;
+}
+
+@media (max-width: 1199px) {
+    .sliderWrapper {
+        padding: 0 40px;
+    }
+
+    .sliderImage {
+        width: 280px;
+    }
+
+    .name {
+        font-size: 19px;
+    }
+
+    .availabilityBlock {
+        margin: 18px 0;
+    }
+
+    .oldPrice {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .countWrapper {
+        width: 100px;
+    }
+
+    .countWrapper p {
+        font-size: 22px;
+    }
+
+    .addToBasket {
+        height: 36px;
+        font-size: 16px;
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 991px) {
+    .sliderImage {
+        width: 230px;
+    }
+
+    .name {
+        font-size: 15px;
+    }
+
+    .article {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    .availabilityBlock {
+        margin: 10px 0;
+        gap: 6px;
+    }
+
+    .availabilityBlock p {
+        font-size: 14px;
+    }
+
+    .availabilityBlock svg {
+        width: 20px;
+        aspect-ratio: 1;
+    }
+
+    .priceBlock div {
+        gap: 6px;
+    }
+
+    .oldPrice {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .productActions {
+        gap: 8px;
+    }
+
+    .countWrapper {
+        width: 90px;
+    }
+
+    .countWrapper p {
+        font-size: 20px;
+    }
+
+    .countWrapper button {
+        width: 20px;
+    }
+
+    .addToBasket {
+        height: 32px;
+        font-size: 14px;
+        padding: 0 30px;
+        border-radius: 7px;
+    }
+
+    .similarProductsSection {
+        --card-size: 120px;
+        --ribbon-gap: 25px;
+
+        margin: 30px 0;
+        padding: 15px 12px;
+        border-radius: 17px;
+        gap: 14px;
+    }
+
+    .similarProductsSection h2 {
+        font-size: 18px;
+    }
+
+    .specificationAndEquipment h3 {
+        font-size: 18px;
+    }
+
+    .specificationAndEquipment ul {
+        margin-top: 15px;
+        gap: 12px;
+    }
+
+    .specificationAndEquipment ul li {
+        font-size: 13px;
+    }
+
+    .specificationAndEquipment ul li span {
+        width: 4px;
+        margin-right: 10px;
+    }
+
+    .descriptionList {
+        margin-top: 25px;
+        gap: 20px;
+    }
+
+    .descriptionList li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sectionFirst {
+        flex-direction: column;
+    }
+
+    .sliderWrapper {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .infoWrapper {
+        border-left: none;
+        padding: 0;
+    }
+
+    .sliderImage {
+        width: 290px;
+    }
+
+    .productActions {
+        padding-top: 20px;
+    }
+
+    .specificationAndEquipment {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .specificationAndEquipment div {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
+    .similarProductsSection {
+        --card-size: 100px;
+        --ribbon-gap: 20px;
+
+        margin: 20px 0;
+        padding: 12px 10px;
+        border-radius: 14px;
+        gap: 10px;
+    }
+
+    .similarProductsSection h2 {
+        font-size: 16px;
+    }
+
+    .changeSlideButton {
+        width: 24px;
+    }
+
+    .leftChangeButton {
+        left: -12px;
+    }
+
+    .rightChangeButton {
+        right: -12px;
+    }
+}
+
+@media (max-width: 395px) {
+    .sliderImage {
+        width: 260px;
+    }
+}

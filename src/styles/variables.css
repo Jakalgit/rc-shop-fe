@@ -1,0 +1,33 @@
+
+:root {
+    --header-height: 50px;
+
+    --geologica-font: 'Geologica';
+    --manrope-font: 'Manrope';
+    --montserrat-font: 'Montserrat';
+
+    --background-color: white;
+    --foreground-color:  #424242;
+
+    --blue-color-1: #448AFF;
+    --blue-color-2: #546E7A;
+    --turquoise-color: #00E5FF;
+    --yellow-color: #FDD835;
+    --red-color: #E41515;
+    --green-color: #76FF03;
+
+    --space-color-1: rgba(0, 0, 0, 0.3);
+    --space-color-2: #90A4AE;
+}
+
+.geologica {
+    font-family: var(--geologica-font), sans-serif;
+}
+
+.manrope {
+    font-family: var(--manrope-font), sans-serif;
+}
+
+.montserrat {
+    font-family: var(--montserrat-font), sans-serif;
+}

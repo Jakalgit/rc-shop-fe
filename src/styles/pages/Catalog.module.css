@@ -1,0 +1,193 @@
+
+.panelsGrid {
+    gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 24px 0 41px;
+}
+
+.panelsGrid a {
+    height: 140px;
+    border-radius: 15px;
+    border: 1px solid var(--space-color-1);
+    padding: 14px 18px;
+    gap: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: black;
+}
+
+.buttonIconWrapper {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.noveltyIconWrapper {
+    background-color: var(--turquoise-color);
+}
+
+.noveltyIconWrapper svg {
+    height: 100%;
+}
+
+.popularIconWrapper {
+    background-color: var(--yellow-color);
+}
+
+.popularIconWrapper svg {
+    height: 32px;
+}
+
+.promotionsIconWrapper {
+    background-color: var(--red-color);
+}
+
+.promotionsIconWrapper svg {
+    height: 25px;
+}
+
+.repairIconWrapper {
+    background-color: black;
+}
+
+.repairIconWrapper svg {
+    height: 30px;
+}
+
+.finderBlock {
+    border: 1px solid var(--space-color-1);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 20px;
+}
+
+.finderBlock p {
+    font-size: 14px;
+}
+
+.finderBlock button {
+    border-radius: 10px;
+    font-size: 14px;
+    width: 200px;
+    height: 34px;
+    color: white;
+    background-color: var(--red-color);
+}
+
+.catalogGridWrapper {
+    width: 70%;
+}
+
+.catalogGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1199px) {
+    .panelsGrid {
+        gap: 20px;
+        margin: 15px 0 30px;
+    }
+
+    .catalogGrid {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .catalogGridWrapper {
+        width: 65%;
+    }
+
+    .catalogGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .panelsGrid {
+        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .catalogGridWrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 530px) {
+    .panelsGrid {
+        gap: 10px;
+    }
+
+    .panelsGrid button {
+        height: 100px;
+        border-radius: 12px;
+        padding: 10px 14px;
+        gap: 8px;
+        font-size: 18px;
+    }
+
+    .popularIconWrapper svg {
+        height: 26px;
+    }
+
+    .promotionsIconWrapper svg {
+        height: 18px;
+    }
+
+    .repairIconWrapper svg {
+        height: 22px;
+    }
+
+    .buttonIconWrapper {
+        width: 60px;
+        height: 30px;
+    }
+
+    .finderBlock {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .finderBlock p {
+        font-size: 12px;
+    }
+
+    .finderBlock button {
+        border-radius: 8px;
+        font-size: 12px;
+        width: 130px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalogGrid {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .finderBlock {
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .finderBlock p {
+        font-size: 10px;
+    }
+
+    .finderBlock button {
+        border-radius: 6px;
+        font-size: 10px;
+        width: 110px;
+        height: 26px;
+    }
+}
+
+@media (max-width: 375px) {
+    .catalogGrid {
+        gap: 6px;
+    }
+}

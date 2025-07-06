@@ -1,0 +1,212 @@
+
+.slider {
+    margin-top: 40px;
+}
+
+.sliderImage {
+    height: 500px;
+    width: auto;
+    border-radius: 20px;
+}
+
+.underSliderText {
+    font-size: 16px;
+    margin-top: 25px;
+    width: 40%;
+    text-align: center;
+}
+
+.repairServicesSection {
+    background-color: var(--blue-color-1);
+    padding: 40px 0 50px;
+    margin-top: 9vh;
+}
+
+.repairServicesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.popupButton {
+    margin-top: 50px;
+    width: 240px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--foreground-color);
+    color: white;
+}
+
+.table {
+    color: white;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 32px;
+}
+
+.tableCircle {
+    margin-right: 15px;
+    width: 8px;
+    aspect-ratio: 1;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.table th {
+    font-size: 24px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.table tbody {
+    margin-top: 40px;
+    gap: 30px;
+}
+
+.table td {
+    font-size: 20px;
+    justify-content: center;
+}
+
+.table td:nth-child(1) {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1199px) {
+    .sliderImage {
+        height: 420px;
+        border-radius: 15px;
+    }
+
+    .underSliderText {
+        width: 60%;
+    }
+
+    .repairServicesSection {
+        padding: 25px 0 35px;
+        margin-top: 6vh;
+    }
+
+    .popupButton {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    .slider {
+        margin-top: 20px;
+    }
+
+    .sliderImage {
+        height: 360px;
+    }
+
+    .underSliderText {
+        width: 75%;
+    }
+
+    .repairServicesSection {
+        padding: 10px 0 20px;
+        margin-top: 7vh;
+    }
+
+    .table td {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sliderImage {
+        height: 280px;
+    }
+
+    .table {
+        border-spacing: 0 22px;
+    }
+
+    .tableCircle {
+        width: 6px;
+        margin-right: 10px;
+    }
+
+    .table th {
+        font-size: 22px;
+    }
+
+    .table td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 575px) {
+    .slider {
+        margin-top: 15px;
+    }
+
+    .sliderImage {
+        height: 190px;
+        border-radius: 10px;
+    }
+
+    .underSliderText {
+        font-size: 12px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .repairServicesSection {
+        padding: 10px 0 20px;
+        margin-top: 4vh;
+    }
+
+    .table {
+        border-spacing: 0 16px;
+    }
+
+    .table th {
+        font-size: 18px;
+    }
+
+    .table td {
+        font-size: 12px;
+    }
+
+    .table td:nth-child(1) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .tableCircle {
+        width: 4px;
+        margin-right: 8px;
+    }
+
+    .popupButton {
+        margin-top: 20px;
+        width: 200px;
+        height: 34px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 390px) {
+    .sliderImage {
+        height: 160px;
+    }
+
+    .table {
+        border-spacing: 0 12px;
+    }
+
+    .table th {
+        font-size: 16px;
+    }
+
+    .table td {
+        font-size: 11px;
+    }
+}

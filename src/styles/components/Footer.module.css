@@ -1,0 +1,81 @@
+
+.footer {
+    margin-top: 100px;
+    background-color: var(--foreground-color);
+    padding-bottom: 51px;
+}
+
+.linksLine {
+    justify-content: space-between;
+    padding: 17px 0;
+}
+
+.phoneLink {
+    margin-top: 12px;
+    gap: 14px;
+    font-size: 22px;
+}
+
+.phoneLink svg {
+    width: 28px;
+    aspect-ratio: 1;
+    fill: white;
+}
+
+.address {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.secondaryInfo {
+    gap: 13px;
+    margin-top: 54px;
+}
+
+.secondaryInfo span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+@media (max-width: 767px) {
+    .linksLine a {
+        font-size: 14px;
+    }
+
+    .footer {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .linksLine {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 430px) {
+    .phoneLink {
+        margin-top: 5px;
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    .phoneLink svg {
+        width: 22px;
+    }
+
+    .address {
+        margin-top: 7px;
+        font-size: 12px;
+    }
+
+    .secondaryInfo {
+        gap: 10px;
+        margin-top: 35px;
+    }
+
+    .secondaryInfo span {
+        font-size: 12px;
+    }
+}

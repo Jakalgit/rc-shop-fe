@@ -1,0 +1,19 @@
+
+.textarea {
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid var(--space-color-1);
+    font-size: 14px;
+}
+
+.textarea::placeholder {
+    color: var(--space-color-1);
+}
+
+@media (max-width: 767px) {
+    .textarea {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 7px;
+    }
+}

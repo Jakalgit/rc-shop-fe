@@ -1,0 +1,60 @@
+
+.wrapper {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 102;
+
+    --space-color: rgba(0, 0, 0, 0.5);
+}
+
+.inputWrapper {
+    border-radius: 30px;
+    height: 44px;
+    padding: 0 14px;
+    margin-top: calc(var(--header-height) + 20px);
+    gap: 15px;
+}
+
+.icons {
+    width: 22px;
+    aspect-ratio: 1;
+    fill: var(--space-color);
+}
+
+.input {
+    font-size: 16px;
+    color: black;
+    flex-grow: 1;
+}
+
+.input::placeholder {
+    color: var(--space-color);
+}
+
+.prompt {
+    margin-left: 20px;
+    font-size: 14px;
+    margin-top: 11px;
+}
+
+@media (max-width: 520px) {
+    .inputWrapper {
+        height: 38px;
+        padding: 0 14px;
+        margin-top: calc(var(--header-height) + 10px);
+        gap: 10px;
+    }
+
+    .input {
+        font-size: 14px;
+    }
+    .icons {
+        width: 20px;
+    }
+
+    .prompt {
+        margin-left: 15px;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}

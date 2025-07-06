@@ -1,0 +1,28 @@
+
+.widget {
+    border-radius: 20px;
+}
+
+.iframe {
+    width: 68%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+}
+
+@media (max-width: 1199px) {
+    .iframe {
+        width: 75%;
+    }
+}
+
+@media (max-width: 991px) {
+    .iframe {
+        width: 90%;
+    }
+}
+
+@media (max-width: 767px) {
+    .iframe {
+        width: 80%;
+    }
+}

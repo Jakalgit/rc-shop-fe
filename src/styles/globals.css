@@ -1,0 +1,78 @@
+@import "./variables.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+}
+
+body {
+  background: var(--background);
+  font-family: var(--geologica-font), sans-serif;
+  margin: 0;
+
+  color: black;
+  min-width: 320px;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: all .2s;
+}
+
+a:hover {
+  filter: brightness(75%);
+}
+
+svg {
+  fill: white;
+}
+
+input {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.headText {
+  font-size: 28px;
+}
+
+.loadingRotate {
+  animation: rotate 0.6s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    rotate: 0;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@media (max-width: 991px) {
+  .headText {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 575px) {
+  .headText {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 390px) {
+  .headText {
+    font-size: 20px;
+  }
+}

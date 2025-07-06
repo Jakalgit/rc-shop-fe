@@ -1,0 +1,59 @@
+
+.input {
+    border: 1px solid var(--space-color-1);
+    font-size: 13px;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 6px;
+    color: black;
+}
+
+.input::placeholder {
+    color: var(--space-color-1);
+}
+
+.input:focus {
+    border: 1px solid black;
+}
+
+.tagsWrapper {
+    --tags-gap: 10px;
+    --tag-height: 30px;
+    --visible-lines: 3;
+
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tags-gap);
+    max-height: calc(var(--tag-height) * var(--visible-lines) + var(--tags-gap) * var(--visible-lines));
+    overflow-y: auto;
+    justify-content: center;
+}
+
+.tag {
+    padding: 0 11px;
+    font-size: 13px;
+    border-radius: 6px;
+    height: var(--tag-height);
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.selectedTag {
+    border: 1px solid var(--blue-color-1);
+    background-color: var(--blue-color-1);
+    color: white;
+}
+
+@media (max-width: 575px) {
+    .tagsWrapper {
+        --tags-gap: 8px;
+        --tag-height: 28px;
+    }
+
+    .tag {
+        font-size: 11px;
+        padding: 0 9px;
+        border-radius: 5px;
+    }
+}

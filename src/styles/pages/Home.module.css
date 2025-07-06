@@ -1,0 +1,207 @@
+
+.textBlock {
+    margin-top: 62px;
+    gap: 40px;
+}
+
+.textBlock h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.textBlock ul {
+    margin-top: 24px;
+    gap: 17px;
+}
+
+.textBlock ul li {
+    font-size: 16px;
+}
+
+.textBlock p {
+    font-size: 18px;
+}
+
+.ulWrapper {
+    align-items: center;
+}
+
+.logoIcon {
+    margin: 24px 0;
+    width: 40px;
+    aspect-ratio: 1;
+}
+
+.categories {
+    margin-top: 70px;
+    gap: 40px;
+
+    --blocks-gap: 28px;
+    --number-of-blocks-on-line: 4;
+}
+
+.categories h2 {
+    font-size: 28px;
+}
+
+.showCatalogButton {
+    width: 230px;
+    height: 40px;
+    border-radius: 20px;
+    color: white;
+    gap: 11px;
+    font-size: 16px;
+    background-color: var(--blue-color-1);
+}
+
+.showCatalogButton svg {
+    fill: white;
+    width: 22px;
+    aspect-ratio: 1;
+}
+
+.categoryBlocks {
+    gap: var(--blocks-gap);
+}
+
+.categoryBlocks button {
+    width: calc((100% - ((var(--number-of-blocks-on-line) - 1) * var(--blocks-gap))) / var(--number-of-blocks-on-line));
+    aspect-ratio: 1;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    font-size: 18px;
+    background-color: white;
+    padding: 29px 0 26px;
+}
+
+.categoryBlocks button img {
+    height: 70%;
+    max-width: 90%;
+    width: auto;
+}
+
+@media (max-width: 1199px) {
+    .textBlock {
+        margin-top: 40px;
+        gap: 30px;
+    }
+
+    .textBlock h1 {
+        font-size: 18px;
+    }
+
+    .textBlock ul {
+        margin-top: 20px;
+        gap: 15px;
+    }
+
+    .logoIcon {
+        margin: 18px 0;
+        width: 35px;
+    }
+
+    .categories {
+        margin-top: 50px;
+        gap: 26px;
+
+        --blocks-gap: 20px;
+    }
+
+    .categories h2 {
+        font-size: 26px;
+    }
+
+    .showCatalogButton {
+        width: 210px;
+        height: 38px;
+        gap: 8px;
+        font-size: 14px;
+        background-color: var(--blue-color-1);
+    }
+
+    .categoryBlocks button {
+        font-size: 16px;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .textBlock {
+        margin-top: 30px;
+        gap: 20px;
+    }
+
+    .textBlock h1 {
+        font-size: 16px;
+    }
+
+    .textBlock ul {
+        margin-top: 15px;
+    }
+
+    .textBlock ul li {
+        font-size: 14px;
+    }
+
+    .textBlock p {
+        font-size: 16px;
+    }
+
+    .categories {
+        margin-top: 40px;
+        gap: 22px;
+
+        --number-of-blocks-on-line: 3;
+    }
+}
+
+@media (max-width: 767px) {
+    .ulWrapper {
+        align-items: flex-start;
+    }
+
+    .categories h2 {
+        font-size: 24px;
+    }
+
+    .categories {
+        margin-top: 40px;
+        gap: 22px;
+
+        --number-of-blocks-on-line: 2;
+    }
+}
+
+@media (max-width: 575px) {
+    .textBlock {
+        margin-top: 20px;
+    }
+
+    .categoryBlocks button {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 410px) {
+    .categories {
+        gap: 15px;
+    }
+
+    .categories h2 {
+        font-size: 20px;
+    }
+
+    .showCatalogButton {
+        width: 190px;
+        height: 35px;
+        gap: 5px;
+        font-size: 14px;
+        background-color: var(--blue-color-1);
+    }
+}
+
+@media (max-width: 390px) {
+    .categories {
+        --blocks-gap: 15px;
+    }
+}

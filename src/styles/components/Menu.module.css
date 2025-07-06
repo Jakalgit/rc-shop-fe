@@ -1,0 +1,45 @@
+
+.blockSize {
+    width: 20px;
+    display: none;
+}
+
+.buttonMenu svg {
+    aspect-ratio: 1;
+    fill: white;
+}
+
+.buttonList {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--foreground-color);
+    top: calc(100% + 20px);
+    right: 0;
+    z-index: 101;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    gap: 12px;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.link {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.link:active {
+    color: var(--blue-color-1);
+}
+
+@media (max-width: 767px) {
+    .blockSize {
+        display: flex;
+    }
+
+    .blockSize {
+        width: 24px;
+    }
+}

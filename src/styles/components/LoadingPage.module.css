@@ -1,0 +1,9 @@
+
+.wrapper {
+
+}
+
+.svg {
+    width: 30px;
+    fill: var(--foreground-color);
+}

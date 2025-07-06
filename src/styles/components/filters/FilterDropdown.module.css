@@ -1,0 +1,45 @@
+
+.filter {
+    border: 1px solid var(--foreground-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.filterButton {
+    padding: 0 12px 0 18px;
+    background-color: var(--foreground-color);
+    color: white;
+    font-size: 16px;
+    height: 40px;
+}
+
+.filterButton:active {
+    scale: none !important;
+}
+
+.filterButton svg {
+    fill: white;
+    width: 22px;
+    transition: all .2s;
+}
+
+.contentWrapper {
+    padding: 14px 18px;
+}
+
+@media (max-width: 1199px) {
+    .filter {
+        border-radius: 10px;
+    }
+
+    .filterButton {
+        font-size: 14px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 575px) {
+    .contentWrapper {
+        padding: 10px 14px;
+    }
+}

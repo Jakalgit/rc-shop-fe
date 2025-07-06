@@ -1,0 +1,98 @@
+
+.infoWrapper {
+    margin-top: 55px;
+    display: flex;
+    gap: 40px;
+}
+
+.address {
+    margin-top: 20px;
+}
+
+.infoBlock {
+    flex: 1 2;
+}
+
+.infoBlock:nth-child(1) {
+    text-align: center;
+}
+
+.infoBlock:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactText {
+    font-size: 20px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contactItem svg {
+    width: 22px;
+    aspect-ratio: 1;
+    fill: black;
+}
+
+.contactItem {
+    font-size: 18px;
+    color: black;
+}
+
+.messengersBlock {
+    gap: 27px;
+}
+
+.messengersBlock svg {
+    width: 45px;
+    aspect-ratio: 1;
+}
+
+@media (max-width: 1199px) {
+    .infoWrapper {
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .infoWrapper {
+        flex-direction: column-reverse;
+        margin-top: 35px;
+    }
+
+    .infoBlock:nth-child(2) {
+        gap: 15px;
+    }
+
+    .contactText {
+        font-size: 18px;
+    }
+
+    .contactItem {
+        font-size: 16px;
+    }
+
+    .messengersBlock {
+        gap: 20px;
+    }
+
+    .messengersBlock svg {
+        width: 40px;
+        aspect-ratio: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .infoWrapper {
+        margin-top: 25px;
+    }
+
+    .infoBlock:nth-child(2) {
+        gap: 12px;
+    }
+}

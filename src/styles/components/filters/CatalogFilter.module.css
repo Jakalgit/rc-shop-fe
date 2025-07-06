@@ -1,0 +1,57 @@
+
+.filtersSection {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 27%;
+}
+
+.clearFilters {
+    background-color: var(--red-color);
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.setFilters {
+    background-color: var(--blue-color-1) !important;
+}
+
+.priceRange {
+    font-size: 14px;
+}
+
+.priceSliderWrapper {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1199px) {
+    .filtersSection {
+        gap: 12px;
+    }
+
+    .clearFilters {
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 991px) {
+    .filtersSection {
+        width: 32%;
+    }
+
+    .priceRange {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 767px) {
+    .filtersSection {
+        display: none;
+    }
+}
