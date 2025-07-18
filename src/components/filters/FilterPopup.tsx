@@ -16,24 +16,30 @@ const FilterPopup = () => {
 	const t = useTranslations("CatalogPage.filters");
 	const searchParams = useSearchParams();
 
-	const finder = searchParams.get("finder");
+	const finder = searchParams.get("finder") || "";
 
-	const minPrice = Number(searchParams.get("minPrice")) || DEFAULT_MIN_PRICE;
-	const maxPrice = Number(searchParams.get("maxPrice")) || DEFAULT_MAX_PRICE;
+	const minPrice = Number(searchParams.get("min")) || DEFAULT_MIN_PRICE;
+	const maxPrice = Number(searchParams.get("max")) || DEFAULT_MAX_PRICE;
 
-	const tagIdsParam: string = searchParams.get("tagIds") as string;
+	const tagIdsParam = searchParams.get("tagIds");
 	const tagIds = tagIdsParam
 		? tagIdsParam.split(',').map(x => Number(x)).filter(x => !isNaN(x))
 		: [];
 
 	const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
 
+	let isFilterActive = false;
+
+	if (minPrice !== DEFAULT_MIN_PRICE || maxPrice !== DEFAULT_MAX_PRICE || tagIds.length !== 0) {
+		isFilterActive = true;
+	}
+
 	return (
 		<div className={styles.wrapper}>
 			<Button
 				title={t("buttonFilterPopup.title")}
 				aria-label={t("buttonFilterPopup.ariaLabel")}
-				className={styles.buttonFilter}
+				className={`${styles.buttonFilter} ${isFilterActive && styles.buttonActiveFilters}`}
 				onClick={() => setIsOpenFilters(!isOpenFilters)}
 			>
 				<FilterIcon />

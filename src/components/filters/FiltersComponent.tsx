@@ -13,6 +13,7 @@ import {getTagsForFilter} from "@/api/tags/api";
 import {AnimatePresence, motion} from "framer-motion";
 import {DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE} from "@/consts/filters";
 import {useRouter} from "next/navigation";
+import Loading from "@/components/Loading";
 
 export interface IFilterProps {
 	minPrice: number;
@@ -74,7 +75,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 
 	// Обработчик нажатия на кнопку "Применить фильтры"
 	const setSelectedFilters = useCallback(() => {
-		let url = `/catalog?minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}`;
+		let url = `/catalog?min=${priceRange[0]}&max=${priceRange[1]}`;
 		if (tagsFilter.length > 0) {
 			url += `&tagIds=${tagsFilter.join(',')}`;
 		}
@@ -123,9 +124,17 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 		}
 	}, [priceRange, tagsFilter]);
 
+	if (loading) {
+		return (
+			<div className="flex items-center justify-center">
+				<Loading className={styles.loadingSvg} />
+			</div>
+		)
+	}
+
 	return (
 		<>
-			<AnimatePresence>
+			<AnimatePresence initial={false}>
 				{isVisibleSetFilters && (
 					<motion.div
 						key="setFilters"
@@ -148,9 +157,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 					<motion.div
 						key="clearFilters"
 						style={{overflow: "hidden"}}
-						initial={{opacity: 0, height: 0}}
-						animate={{opacity: 1, height: 'auto'}}
-						exit={{opacity: 0, height: 0}}
 					>
 						<Button
 							onClick={() => clearAllFilters()}

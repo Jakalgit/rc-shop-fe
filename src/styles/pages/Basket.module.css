@@ -227,6 +227,7 @@
 @media (max-width: 490px) {
     .item img {
         height: 120px;
+        max-width: 100%;
     }
 
     .head {

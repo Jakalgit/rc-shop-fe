@@ -6,33 +6,13 @@ import {getTranslations} from "next-intl/server";
 import ShoppingBasketIcon from "@/components/icons/ShoppingBasketIcon";
 import ButtonFinder from "@/components/buttons/ButtonFinder";
 import Menu from "@/components/Menu";
+import {generateNavLinks} from "@/functions/generateNavLinks";
 
 const Header = async () => {
 
 	const t = await getTranslations("header");
 
-	const links = [
-		{
-			text: t("links.catalog"),
-			link: "/catalog",
-		},
-		{
-			text: t("links.yourOrder"),
-			link: "/order-search",
-		},
-		{
-			text: t("links.deliveryAndPayments"),
-			link: "/delivery-and-payments",
-		},
-		{
-			text: t("links.repair"),
-			link: "/repair",
-		},
-		{
-			text: t("links.aboutUs"),
-			link: "/about-us",
-		}
-	];
+	const links = generateNavLinks(t);
 
 	return (
 		<header className={`${styles.header} bg-[color:var(--foreground-color)] sticky top-0 left-0 flex`}>

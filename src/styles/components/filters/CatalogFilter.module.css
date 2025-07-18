@@ -29,6 +29,12 @@
     margin-bottom: 20px;
 }
 
+.loadingSvg {
+    width: 30px;
+    aspect-ratio: 1;
+    fill: var(--foreground-color);
+}
+
 @media (max-width: 1199px) {
     .filtersSection {
         gap: 12px;

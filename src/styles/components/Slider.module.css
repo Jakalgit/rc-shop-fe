@@ -1,0 +1,104 @@
+.imageWrapper {
+    --image-widht: 350px;
+    --image-height: 280px;
+
+    width: var(--image-widht);
+    height: var(--image-height);
+}
+
+.currentImage {
+    max-width: var(--image-widht);
+    max-height: var(--image-height);
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.slides {
+    margin-top: 50px;
+}
+
+.slides div {
+    gap: 20px;
+    padding: 3px;
+}
+
+.slides img {
+    height: 80px;
+    width: auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button {
+    border-radius: 10px;
+    background: none;
+    border: none;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button svg {
+    width: 48px;
+    aspect-ratio: 1;
+    fill: var(--foreground-color);
+}
+
+@media (max-width: 1199px) {
+    .imageWrapper {
+        --image-widht: 310px;
+        --image-height: 240px;
+    }
+
+    .slides {
+        margin-top: 30px;
+    }
+
+    .slides div {
+        gap: 15px;
+    }
+
+    .slides img {
+        height: 74px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 991px) {
+    .imageWrapper {
+        --image-widht: 220px;
+        --image-height: 190px;
+    }
+
+    .button svg {
+        width: 30px;
+    }
+
+    .slides img {
+        height: 64px;
+        border-radius: 6px;
+    }
+
+    .slides div {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .imageWrapper {
+        --image-widht: 280px;
+        --image-height: 280px;
+    }
+
+    .button svg {
+        width: 36px;
+    }
+}
+
+@media (max-width: 400px) {
+    .imageWrapper {
+        --image-widht: 230px;
+        --image-height: 230px;
+    }
+}

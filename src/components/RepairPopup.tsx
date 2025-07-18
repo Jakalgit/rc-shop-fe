@@ -5,7 +5,7 @@ import Button from "@/components/buttons/Button";
 import {AnimatePresence, motion} from "framer-motion";
 import {useTranslations} from "next-intl";
 import stylesRepairPage from "@/styles/pages/Repair.module.css";
-import styles from "@/styles/components/RepairPopup.module.css";
+import styles from "@/styles/components/Popup.module.css";
 import CloseIcon from "@/components/icons/CloseIcon";
 import Input from "@/components/Input";
 import Textarea from "@/components/Textarea";

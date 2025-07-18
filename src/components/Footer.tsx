@@ -5,6 +5,7 @@ import Link from "next/link";
 import {Container} from "react-bootstrap";
 import CallIcon from "@/components/icons/CallIcon";
 import {formatPhoneNumber} from "@/functions/format";
+import {generateNavLinks} from "@/functions/generateNavLinks";
 
 const Footer = async () => {
 
@@ -14,28 +15,7 @@ const Footer = async () => {
 	const t = await getTranslations("footer");
 	const tHeader = await getTranslations("header");
 
-	const links = [
-		{
-			text: tHeader("links.catalog"),
-			link: "/catalog",
-		},
-		{
-			text: tHeader("links.yourOrder"),
-			link: "/order-search",
-		},
-		{
-			text: tHeader("links.deliveryAndPayments"),
-			link: "/delivery-and-payments",
-		},
-		{
-			text: tHeader("links.repair"),
-			link: "/repair",
-		},
-		{
-			text: tHeader("links.aboutUs"),
-			link: "/about-us",
-		}
-	];
+	const links = generateNavLinks(tHeader);
 
 	return (
 		<footer className={styles.footer}>

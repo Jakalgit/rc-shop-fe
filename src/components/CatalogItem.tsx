@@ -65,7 +65,7 @@ const CatalogItem: React.FC<IProps> = async ({ item }) => {
 				article={item.article}
 				availability={item.availability}
 			/>
-		</article>
+		</article >
 	);
 };
 

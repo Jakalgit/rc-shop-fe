@@ -6,6 +6,8 @@
     padding: var(--padding-border);
     border-radius: 15px;
     border: 1px solid var(--space-color-1);
+
+    animation: out-fade 0.2s ease-in-out;
 }
 
 .item img {
@@ -64,6 +66,16 @@
     border-radius: 5px;
     color: white;
     font-size: 12px;
+}
+
+@keyframes out-fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 1199px) {

@@ -2,7 +2,6 @@ import React from "react";
 import styles from "@/styles/pages/Catalog.module.css";
 import MotionMain from "@/components/MotionMain";
 import {Container} from "react-bootstrap";
-import ProductsSlider from "@/components/ProductsSlider";
 import {getTranslations} from "next-intl/server";
 import NewIcon from "@/components/icons/NewIcon";
 import StarIcon from "@/components/icons/StarIcon";
@@ -92,7 +91,6 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 			<FilterPopup />
 			<MotionMain>
 				<Container>
-					<ProductsSlider />
 					<section className={`grid ${styles.panelsGrid}`}>
 						{panelButtons.map((button, index) =>
 							<a
@@ -126,9 +124,9 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 							{response?.records.length || 0 > 0 ? (
 								<>
 									<div className={`grid ml-auto ${styles.catalogGrid}`}>
-										{response?.records.map((item, index) =>
+										{response?.records.map((item) =>
 											<CatalogItem
-												key={index}
+												key={item.article}
 												item={item}
 											/>
 										)}

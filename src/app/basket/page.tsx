@@ -30,6 +30,7 @@ export default function BasketPage() {
 	// Удаляем продукт из корзины
 	const removeItem = (article: string) => {
 		setBasketProducts(prevState => prevState.filter((item) => item.article !== article));
+		updateItemQty(basketProducts);
 	}
 
 	const updateItemQty = (products: ProductResponse[]) => {

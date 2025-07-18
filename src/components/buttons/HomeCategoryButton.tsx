@@ -29,8 +29,8 @@ const HomeCategoryButton: React.FC<IProps> = ({ item }) => {
 			className="flex flex-col justify-between"
 		>
 			<Image
-				width={100}
-				height={100}
+				width={400}
+				height={400}
 				src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.image}`}
 				alt={item.image}
 			/>

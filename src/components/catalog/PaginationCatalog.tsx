@@ -19,7 +19,6 @@ const PaginationCatalog: React.FC<IProps> = ({ currentPage, totalPages }) => {
 		params.set('page', newPage.toString());
 
 		router.push(`?${params.toString()}`);
-		window.location.reload();
 	};
 
 	return (

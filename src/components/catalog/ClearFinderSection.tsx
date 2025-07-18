@@ -20,7 +20,11 @@ const ClearFinderSection: React.FC<IProps> = ({ finder, maxPrice, minPrice, tagI
 
 	// Обработчик нажатия на кнопку "Применить фильтры"
 	const clearFinder = useCallback(() => {
-		router.replace(`/catalog?minPrice=${minPrice}&maxPrice=${maxPrice}&tagIds=${JSON.stringify(tagIds)}`);
+		let url = `/catalog?min=${minPrice}&max=${maxPrice}`;
+		if (tagIds.length > 0) {
+			url += `&tagIds=${tagIds.join(',')}`;
+		}
+		router.replace(url);
 		window.location.reload();
 	}, [router]);
 
