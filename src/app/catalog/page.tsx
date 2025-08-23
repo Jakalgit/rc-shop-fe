@@ -7,14 +7,15 @@ import NewIcon from "@/components/icons/NewIcon";
 import StarIcon from "@/components/icons/StarIcon";
 import PercentIcon from "@/components/icons/PercentIcon";
 import RepairIcon from "@/components/icons/RepairIcon";
-import CatalogFilters from "@/components/filters/CatalogFilters";
-import CatalogItem from "@/components/CatalogItem";
+import LargeScreenFilters from "@/components/filters/LargeScreenFilters";
+import CatalogItem from "@/components/catalog/CatalogItem";
 import FilterPopup from "@/components/filters/FilterPopup";
 import {DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE} from "@/consts/filters";
 import ClearFinderSection from "@/components/catalog/ClearFinderSection";
 import {getProducts} from "@/api/products/api";
 import PaginationCatalog from "@/components/catalog/PaginationCatalog";
 import {ProductPaginationResponse} from "@/api/products/types";
+import { cookies } from 'next/headers';
 
 export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
 	const { locale } = await params;
@@ -31,12 +32,15 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 
 	const t = await getTranslations("CatalogPage");
 
+	// Получаем параметры поиска
 	const sp = await searchParams;
 
-	const finder = sp.finder || "";
+	const finder = decodeURIComponent(sp.finder || "");
 
 	const minPrice = Number(sp.min) || DEFAULT_MIN_PRICE;
 	const maxPrice = Number(sp.max) || DEFAULT_MAX_PRICE;
+	const wMaxPrice = Number(sp.wMax) || DEFAULT_MAX_PRICE;
+	const wMinPrice = Number(sp.wMin) || DEFAULT_MIN_PRICE;
 	const page = Number(sp.page) || 1;
 
 	const tagIdsParam = sp.tagIds;
@@ -46,6 +50,11 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 
 	let response: ProductPaginationResponse | undefined = undefined;
 
+	// Получаем токен авторизации
+	const cookieStore = await cookies();
+	const act: string = cookieStore.get("act")?.value || "";
+
+	// Запрашиваем данные
 	try {
 		response = await getProducts({
 			page,
@@ -53,8 +62,10 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 			limit: 12,
 			finder,
 			maxPrice,
-			minPrice
-		});
+			minPrice,
+			wMaxPrice,
+			wMinPrice,
+		}, act);
 	} catch (e) {
 		console.error(e);
 	}
@@ -88,7 +99,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 
 	return (
 		<>
-			<FilterPopup />
+			<FilterPopup partner={!!response?.partner} />
 			<MotionMain>
 				<Container>
 					<section className={`grid ${styles.panelsGrid}`}>
@@ -114,11 +125,14 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
 						tagIds={tagIds}
 					/>
 					<section className="flex justify-between">
-						<CatalogFilters
+						<LargeScreenFilters
 							minPrice={minPrice}
 							maxPrice={maxPrice}
 							tagIds={tagIds}
 							finder={finder}
+							partner={!!response?.partner}
+							wMinPrice={wMinPrice}
+							wMaxPrice={wMaxPrice}
 						/>
 						<section className={styles.catalogGridWrapper}>
 							{response?.records.length || 0 > 0 ? (

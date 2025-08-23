@@ -61,11 +61,21 @@ const CatalogItem: React.FC<IProps> = async ({ item }) => {
 					{formatPrice(item.price, 2)}
 				</p>
 			</div>
+			{item.wholesalePrice && (
+				<div className={`flex items-center justify-between ${styles.wholesalePriceBlock}`}>
+					<p>
+						{t("wholesalePrice")}
+					</p>
+					<p className="montserrat">
+						{formatPrice(item.wholesalePrice, 2)}
+					</p>
+				</div>
+			)}
 			<ButtonAddToCart
 				article={item.article}
 				availability={item.availability}
 			/>
-		</article >
+		</article>
 	);
 };
 

@@ -7,12 +7,17 @@ import ShoppingBasketIcon from "@/components/icons/ShoppingBasketIcon";
 import ButtonFinder from "@/components/buttons/ButtonFinder";
 import Menu from "@/components/Menu";
 import {generateNavLinks} from "@/functions/generateNavLinks";
+import {cookies} from "next/headers";
 
 const Header = async () => {
 
 	const t = await getTranslations("header");
 
-	const links = generateNavLinks(t);
+	// Получаем токен авторизации
+	const cookieStore = await cookies();
+	const act: string = cookieStore.get("act")?.value || "";
+
+	const links = generateNavLinks(t, act);
 
 	return (
 		<header className={`${styles.header} bg-[color:var(--foreground-color)] sticky top-0 left-0 flex`}>

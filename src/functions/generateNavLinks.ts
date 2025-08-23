@@ -1,13 +1,14 @@
+import {RoutesEnum} from "@/shared/lib/routes.enum";
 
-export const generateNavLinks = (t: any) => {
+export const generateNavLinks = (t: any, act: string) => {
 	return [
 		{
 			text: t("links.catalog"),
-			link: "/catalog",
+			link: RoutesEnum.CATALOG,
 		},
 		{
 			text: t("links.yourOrder"),
-			link: "/order-search",
+			link: RoutesEnum.ORDER_SEARCH,
 		},
 		{
 			text: t("links.deliveryAndPayments"),
@@ -15,15 +16,15 @@ export const generateNavLinks = (t: any) => {
 		},
 		{
 			text: t("links.repair"),
-			link: "/repair",
+			link: RoutesEnum.REPAIR,
 		},
 		{
 			text: t("links.aboutUs"),
-			link: "/about-us",
+			link: RoutesEnum.ABOUT_US,
 		},
 		{
 			text: t("links.becomePartner"),
-			link: '/partners'
+			link: act?.length || 0 > 0 ? RoutesEnum.PROFILE : RoutesEnum.PARTNERS,
 		}
 	];
 }

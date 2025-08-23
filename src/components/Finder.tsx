@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styles from "@/styles/components/Finder.module.css";
 import {Container} from "react-bootstrap";
 import {motion, AnimatePresence} from "framer-motion";
@@ -11,37 +11,40 @@ import CloseIcon from "@/components/icons/CloseIcon";
 import {useActions} from "@/store/hooks";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
-import {useRouter} from "next/navigation";
 
 const Finder = () => {
-
-	const router = useRouter();
 
 	const t = useTranslations("finder");
 	const isOpen = useSelector((state: RootState) => state.finder.isOpen);
 
 	const [text, setText] = useState<string>("");
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const {setIsOpenFinder} = useActions();
 
-	const closeFinder = () => {
+	const closeFinder = useCallback(() => {
 		setIsOpenFinder(false);
 		setText("");
-	}
+	}, []);
 
-	const findProducts = () => {
+	const findProducts = useCallback(() => {
 		if (text.length >= 3) {
-			router.push(`/catalog?finder=${text}`);
-			window.location.reload();
+			window.location.href = `/catalog?finder=${text}`
 			closeFinder();
 		}
-	}
+	}, [text]);
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+	const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			findProducts();
 		}
-	};
+	}, [findProducts]);
+
+	useEffect(() => {
+		if (isOpen) {
+			inputRef.current?.focus();
+		}
+	}, [isOpen]);
 
 	return (
 		<AnimatePresence>
@@ -69,6 +72,7 @@ const Finder = () => {
 								type="text"
 								placeholder={t("inputPlaceholder")}
 								onKeyDown={handleKeyDown}
+								ref={inputRef}
 							/>
 							<Button
 								onClick={closeFinder}

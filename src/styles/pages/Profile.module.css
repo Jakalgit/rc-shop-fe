@@ -1,0 +1,49 @@
+
+.logoutButton {
+    background-color: var(--red-color);
+    color: white;
+    font-size: 16px;
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+.profileInfo {
+    gap: 24px;
+    margin-top: 37px;
+}
+
+.profileInfo > div {
+    column-gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.infoHead {
+    font-size: 18px;
+    margin-bottom: 13px;
+}
+
+.infoTextWrapper {
+    border: 1px solid var(--space-color-1);
+    height: 40px;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 0 13px;
+}
+
+.activityDescription {
+    padding: 13px;
+    height: auto;
+}
+
+.changeButton {
+    color: var(--blue-color-1);
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.changePassword {
+    font-size: 16px;
+    margin-left: 0;
+    margin-top: 25px;
+}

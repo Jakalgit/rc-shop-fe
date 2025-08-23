@@ -10,12 +10,17 @@ import ProductActions from "@/components/product/ProductActions";
 import SimilarProducts from "@/components/product/SimilarProducts";
 import {getProducts} from "@/api/products/api";
 import NotFound from "next/dist/client/components/not-found-error";
+import {cookies} from "next/headers";
 
 export async function generateMetadata({ params }: {params: Promise<{locale: string, article: string}>}) {
 	const { locale, article } = await params;
 	const t = await getTranslations({ locale, namespace: 'ProductPage' });
 
-	const response = await getProducts({ article, limit: 1 });
+	// Получаем токен авторизации
+	const cookieStore = await cookies();
+	const act: string = cookieStore.get("act")?.value || "";
+
+	const response = await getProducts({ article, limit: 1 }, act);
 
 	const product = response.records[0];
 
@@ -35,9 +40,13 @@ export async function generateMetadata({ params }: {params: Promise<{locale: str
 export default async function ProductPage({params}: {params: Promise<{ article: string }>}) {
 
 	const t = await getTranslations("ProductPage");
-	const article = (await params).article;
+	const article = decodeURIComponent((await params).article || "");
 
-	const response = await getProducts({article, limit: 1});
+	// Получаем токен авторизации
+	const cookieStore = await cookies();
+	const act: string = cookieStore.get("act")?.value || "";
+
+	const response = await getProducts({article, limit: 1}, act);
 
 	if (response.records.length === 0) {
 		return NotFound();
@@ -60,6 +69,7 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 	}
 
 	const price = response.records[0].price;
+	const wholesalePrice = response.records[0].wholesalePrice;
 
 	return (
 		<MotionMain>
@@ -85,7 +95,7 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 						</div>
 						<div className={`flex flex-col ${styles.priceBlock}`}>
 							{promotion.oldPrice && (
-								<p className={`montserrat fw-bold ${styles.oldPrice}`}>
+								<p className={`montserrat fw-bold ${styles.additionalPrice}`}>
 									{t("oldPrice")} <span className="line-through">{formatPrice(promotion.oldPrice, 2)}</span>
 								</p>
 							)}
@@ -99,6 +109,11 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 								</span>
 								)}
 							</div>
+							{wholesalePrice && (
+								<p className={`montserrat fw-bold ${styles.additionalPrice} ${styles.wholesalePrice}`}>
+									{formatPrice(wholesalePrice, 2)} - {t("wholesalePrice")}
+								</p>
+							)}
 						</div>
 						<ProductActions
 							availableCount={response.records[0].count}

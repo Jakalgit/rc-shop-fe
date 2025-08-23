@@ -11,6 +11,7 @@
     color: white;
     font-size: 16px;
     height: 40px;
+    border-radius: 0 !important;
 }
 
 .filterButton:active {
@@ -34,7 +35,7 @@
 
     .filterButton {
         font-size: 14px;
-        height: 36px;
+        height: 38px;
     }
 }
 

@@ -8,6 +8,8 @@ export interface GetProductPagination {
 	productGroupId?: number;
 	minPrice?: number;
 	maxPrice?: number;
+	wMaxPrice?: number;
+	wMinPrice?: number;
 }
 
 export enum DetailEnum {
@@ -30,6 +32,7 @@ export type ProductResponse = {
 	article: string;
 	count: number;
 	price: number;
+	wholesalePrice?: number;
 	oldPrice?: number;
 	promotionPercentage?: number;
 	weight?: number;
@@ -60,4 +63,5 @@ export type ProductResponse = {
 export type ProductPaginationResponse = {
 	records: ProductResponse[];
 	totalPages: number;
+	partner: boolean,
 }

@@ -1,0 +1,10 @@
+
+.link {
+    color: var(--blue-color-1);
+}
+
+@media (max-width: 575px) {
+    .ConfirmationUpdate {
+        font-size: 12px;
+    }
+}

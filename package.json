@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
-    "axios": "^1.10.0",
+    "axios": "1.11.0",
     "bootstrap": "^5.3.6",
     "framer-motion": "^12.15.0",
     "html-react-parser": "^5.2.5",
@@ -23,6 +23,7 @@
     "react-dom": "^19.0.0",
     "react-range": "^1.10.0",
     "react-redux": "^9.2.0",
+    "universal-cookie": "^8.0.1",
     "yet-another-react-lightbox": "^3.24.0"
   },
   "devDependencies": {

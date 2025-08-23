@@ -1,10 +1,9 @@
 "use client";
 
-import React from 'react';
+import React, {useCallback} from 'react';
 import Image from "next/image";
 import Button from "@/components/buttons/Button";
 import {HomeCategoryResponse} from "@/api/home-category/types";
-import { useRouter } from 'next/navigation';
 
 interface IProps {
 	item: HomeCategoryResponse;
@@ -12,16 +11,13 @@ interface IProps {
 
 const HomeCategoryButton: React.FC<IProps> = ({ item }) => {
 
-	const router = useRouter();
-
-	const toCatalog = async () => {
+	const toCatalog = useCallback(() => {
 		if (item.tagIds.length > 0) {
-			router.push(`/catalog?tagIds=${item.tagIds.join(',')}`);
+			window.location.href = `/catalog?tagIds=${item.tagIds.join(',')}`;
 		} else {
-			router.push(`/catalog`);
+			window.location.href = `/catalog`;
 		}
-		window.location.reload();
-	}
+	}, []);
 
 	return (
 		<Button

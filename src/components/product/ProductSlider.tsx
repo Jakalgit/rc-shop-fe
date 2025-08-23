@@ -27,20 +27,16 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 
 	const updateIndex = (index: number) => {
 		setIndex(index);
-		restartSliderTimeout();
+		if (intervalRef.current) {
+			clearInterval(intervalRef.current);
+			intervalRef.current = genInterval();
+		}
 	}
 
 	const genInterval = () => {
 		return setInterval(() => {
 			setIndex(prevState => (prevState + 1) % images.length);
 		}, 10000);
-	}
-
-	const restartSliderTimeout = () => {
-		if (intervalRef.current) {
-			clearInterval(intervalRef.current);
-			intervalRef.current = genInterval();
-		}
 	}
 
 	const openImagePopup = () => {
@@ -52,8 +48,6 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 	}
 
 	useEffect(() => {
-		intervalRef.current = genInterval();
-
 		return () => {
 			if (intervalRef.current) {
 				clearInterval(intervalRef.current);
@@ -68,7 +62,13 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 	}, [wrapperRef.current]);
 
 	useEffect(() => {
-		restartSliderTimeout();
+		if (isOpenPopup) {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+		} else {
+			intervalRef.current = genInterval();
+		}
 	}, [isOpenPopup]);
 
 	usePreloadImagesWithCallback(images, () => {
@@ -88,6 +88,7 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 					doubleClickDelay: 300,
 					scrollToZoom: true,
 				}}
+				index={index}
 				slides={images.map(el => ({src: `${process.env.NEXT_PUBLIC_CLOUD_URL}/${el}`}))}
 			/>
 			<div

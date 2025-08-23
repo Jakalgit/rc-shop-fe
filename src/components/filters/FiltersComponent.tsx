@@ -4,9 +4,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useTranslations} from "next-intl";
 import Button from "@/components/buttons/Button";
 import styles from "@/styles/components/filters/CatalogFilter.module.css";
-import FilterDropdown from "@/components/filters/FilterDropdown";
-import {formatPrice} from "@/functions/format";
-import {getTrackBackground, Range} from "react-range";
 import FilterCategory from "@/components/filters/FilterCategory";
 import {TagFilersResponse} from "@/api/tags/types";
 import {getTagsForFilter} from "@/api/tags/api";
@@ -14,17 +11,22 @@ import {AnimatePresence, motion} from "framer-motion";
 import {DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE} from "@/consts/filters";
 import {useRouter} from "next/navigation";
 import Loading from "@/components/Loading";
+import FilterDropdownPriceRange from "@/components/filters/FilterDropdownPriceRange";
 
 export interface IFilterProps {
 	minPrice: number;
 	maxPrice: number;
 	tagIds: number[];
 	finder: string;
+	partner: boolean;
+	wMinPrice: number;
+	wMaxPrice: number;
 }
 
-const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, finder }) => {
+const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, finder, partner, wMaxPrice, wMinPrice }) => {
 
 	const priceFilterId = "price";
+	const wholesaleFilterId = "wholesalePrice";
 	const otherCategoryFilterId = "other";
 	const allCategoryFilterId = "all";
 
@@ -40,6 +42,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 
 	const [tagsFilter, setTagsFilter] = useState<number[]>(tagIds);
 	const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
+	const [wholesalePriceRange, setWholesalePriceRange] = useState([wMinPrice, wMaxPrice]);
 
 	const STEP = 100;
 
@@ -69,8 +72,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 		if (finder) {
 			url += `?finder=${finder}`;
 		}
-		router.replace(url);
-		window.location.reload();
+		window.location.href = url;
 	}, [router]);
 
 	// Обработчик нажатия на кнопку "Применить фильтры"
@@ -79,12 +81,14 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 		if (tagsFilter.length > 0) {
 			url += `&tagIds=${tagsFilter.join(',')}`;
 		}
+		if (partner) {
+			url += `&wMin=${wholesalePriceRange[0]}&wMax=${wholesalePriceRange[1]}`;
+		}
 		if (finder) {
 			url += `&finder=${finder}`;
 		}
-		router.replace(url);
-		window.location.reload();
-	}, [priceRange, tagsFilter, router]);
+		window.location.href = url;
+	}, [priceRange, wholesalePriceRange, tagsFilter, router]);
 
 	// Сравнение массивов
 	const arraysEqual = (a: number[], b: number[]) => {
@@ -109,7 +113,11 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 	}, []);
 
 	useEffect(() => {
-		if (minPrice !== DEFAULT_MIN_PRICE || maxPrice !== DEFAULT_MAX_PRICE || !arraysEqual(tagIds, [])) {
+		if (
+			minPrice !== DEFAULT_MIN_PRICE || maxPrice !== DEFAULT_MAX_PRICE ||
+			wMinPrice !== DEFAULT_MIN_PRICE || wMaxPrice !== DEFAULT_MAX_PRICE ||
+			!arraysEqual(tagIds, [])
+		) {
 			setIsVisibleClearFilters(true);
 		} else {
 			setIsVisibleClearFilters(false);
@@ -117,12 +125,16 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 	}, []);
 
 	useEffect(() => {
-		if (minPrice !== priceRange[0] || maxPrice !== priceRange[1] || !arraysEqual(tagIds, tagsFilter)) {
+		if (
+			minPrice !== priceRange[0] || maxPrice !== priceRange[1] ||
+			wMinPrice !== wholesalePriceRange[0] || wMaxPrice !== wholesalePriceRange[1] ||
+			!arraysEqual(tagIds, tagsFilter)
+		) {
 			setIsVisibleSetFilters(true);
 		} else {
 			setIsVisibleSetFilters(false);
 		}
-	}, [priceRange, tagsFilter]);
+	}, [priceRange, wholesalePriceRange, tagsFilter]);
 
 	if (loading) {
 		return (
@@ -169,87 +181,26 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 					</motion.div>
 				)}
 			</AnimatePresence>
-			<FilterDropdown
-				title={"Цена"}
-				isFilterOpen={openFilterId === priceFilterId}
-				onClick={() => onClickFilter(priceFilterId)}
-			>
-				<div className={`flex manrope fw-bold items-center justify-between ${styles.priceRange}`}>
-					<p>
-						{t("price.from")}<br/>
-						{formatPrice(priceRange[0], 2)}
-					</p>
-					<p className="text-right">
-						{t("price.to")}<br/>
-						{formatPrice(priceRange[1], 2)}
-					</p>
-				</div>
-				<div className={styles.priceSliderWrapper}>
-					<Range
-						values={priceRange}
-						step={STEP}
-						min={DEFAULT_MIN_PRICE}
-						max={DEFAULT_MAX_PRICE}
-						onChange={setPriceRange}
-						renderTrack={({ props, children }) => {
-							const { key, ...restProps } = props as any;
-
-							return (
-								<div
-									key={key}
-									{...restProps}
-									style={{
-										...props.style,
-										height: '6px',
-										width: '100%',
-										background: getTrackBackground({
-											values: priceRange,
-											colors: ['#ccc', '#007bff', '#ccc'],
-											min: DEFAULT_MIN_PRICE,
-											max: DEFAULT_MAX_PRICE,
-										}),
-										borderRadius: '4px',
-										marginTop: '20px',
-									}}
-								>
-									{children}
-								</div>
-							);
-						}}
-						renderThumb={({ props }) => {
-							const { key, ...restProps } = props;
-
-							return (
-								<div
-									key={key}
-									{...restProps}
-									style={{
-										height: '20px',
-										width: '20px',
-										borderRadius: '50%',
-										backgroundColor: '#007bff',
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										boxShadow: '0 2px 6px #aaa',
-										...props.style,
-									}}
-								>
-									<div
-										style={{
-											position: 'absolute',
-											top: '-28px',
-											color: '#000',
-											fontSize: '12px',
-											fontWeight: 'bold',
-										}}
-									/>
-								</div>
-							);
-						}}
-					/>
-				</div>
-			</FilterDropdown>
+			<FilterDropdownPriceRange
+				title={t("price.title")}
+				priceRange={priceRange}
+				setPriceRange={setPriceRange}
+				openFilterId={openFilterId}
+				filterId={priceFilterId}
+				step={STEP}
+				onClick={onClickFilter}
+			/>
+			{partner && (
+				<FilterDropdownPriceRange
+					title={t("price.wholesaleTitle")}
+					priceRange={wholesalePriceRange}
+					setPriceRange={setWholesalePriceRange}
+					openFilterId={openFilterId}
+					filterId={wholesaleFilterId}
+					step={STEP}
+					onClick={onClickFilter}
+				/>
+			)}
 			{responseTags?.listOfGroups.map((item, index) =>
 				<FilterCategory
 					title={item.name}

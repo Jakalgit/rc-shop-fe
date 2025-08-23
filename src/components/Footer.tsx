@@ -6,16 +6,20 @@ import {Container} from "react-bootstrap";
 import CallIcon from "@/components/icons/CallIcon";
 import {formatPhoneNumber} from "@/functions/format";
 import {generateNavLinks} from "@/functions/generateNavLinks";
+import Cookies from "universal-cookie";
 
 const Footer = async () => {
+
+	const cookies = new Cookies();
 
 	const phoneNumber = "+74955743853";
 	const address = "105082, г. Москва, Спартаковская площадь д. 10, стр. 12";
 
 	const t = await getTranslations("footer");
 	const tHeader = await getTranslations("header");
+	const act = cookies.get("act") || "";
 
-	const links = generateNavLinks(tHeader);
+	const links = generateNavLinks(tHeader, act);
 
 	return (
 		<footer className={styles.footer}>

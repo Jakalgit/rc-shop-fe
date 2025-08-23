@@ -1,0 +1,55 @@
+
+.text {
+    margin-top: 17px;
+    font-size: 16px;
+}
+
+.listBlock {
+    margin-top: 25px;
+}
+
+.listBlock h3 {
+    font-size: 16px;
+}
+
+.listBlock ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.listBlock ul li {
+    margin-top: 17px;
+    font-size: 14px;
+    gap: 15px;
+}
+
+.listBlock ul li span {
+    background-color: var(--foreground-color);
+    width: 6px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.sectionForm {
+    margin-top: 35px;
+}
+
+.partnerRegText {
+    font-size: 18px;
+    margin-bottom: 17px;
+}
+
+@media (max-width: 991px) {
+    .text {
+        font-size: 14px;
+    }
+
+    .listBlock h3 {
+        font-size: 14px;
+    }
+
+    .partnerRegText {
+        font-size: 16px;
+        margin-bottom: 14px;
+    }
+}

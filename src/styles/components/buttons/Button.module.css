@@ -34,7 +34,7 @@
 }
 
 .progress {
-    width: 2rem;
+    width: 20px;
 }
 
 @media (max-width: 1199px) {

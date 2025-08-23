@@ -4,7 +4,7 @@ import React from 'react';
 import styles from "@/styles/components/filters/CatalogFilter.module.css";
 import FiltersComponent, {IFilterProps} from "@/components/filters/FiltersComponent";
 
-const CatalogFilters: React.FC<IFilterProps> = (props) => {
+const LargeScreenFilters: React.FC<IFilterProps> = (props) => {
 	return (
 		<section className={styles.filtersSection}>
 			<FiltersComponent {...props} />
@@ -12,4 +12,4 @@ const CatalogFilters: React.FC<IFilterProps> = (props) => {
 	);
 };
 
-export default CatalogFilters;
+export default LargeScreenFilters;

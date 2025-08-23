@@ -4,7 +4,6 @@ import React, {useCallback} from 'react';
 import styles from "@/styles/pages/Catalog.module.css";
 import Button from "@/components/buttons/Button";
 import {useTranslations} from "next-intl";
-import {useRouter} from "next/navigation";
 
 interface IProps {
 	finder: string;
@@ -15,7 +14,6 @@ interface IProps {
 
 const ClearFinderSection: React.FC<IProps> = ({ finder, maxPrice, minPrice, tagIds }) => {
 
-	const router = useRouter();
 	const t = useTranslations("CatalogPage");
 
 	// Обработчик нажатия на кнопку "Применить фильтры"
@@ -24,9 +22,8 @@ const ClearFinderSection: React.FC<IProps> = ({ finder, maxPrice, minPrice, tagI
 		if (tagIds.length > 0) {
 			url += `&tagIds=${tagIds.join(',')}`;
 		}
-		router.replace(url);
-		window.location.reload();
-	}, [router]);
+		window.location.href = url;
+	}, []);
 
 	const formatFinderRequest = (text: string) => {
 		if (text.length > 25) {

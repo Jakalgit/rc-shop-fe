@@ -8,10 +8,14 @@
   --background: #ffffff;
 }
 
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
 body {
   background: var(--background);
   font-family: var(--geologica-font), sans-serif;
-  margin: 0;
 
   color: black;
   min-width: 320px;

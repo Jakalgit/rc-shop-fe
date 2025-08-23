@@ -71,7 +71,7 @@ const RepairPopup = () => {
 							className={`flex flex-col ${styles.popupContent}`}
 						>
 							<div className={`flex items-center justify-between ${styles.popupHead}`}>
-								<h2 id="popup-title">
+								<h2 id="repair-popup-titl">
 									{t("repairPopup.title")}
 								</h2>
 								<Button

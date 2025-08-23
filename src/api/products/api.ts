@@ -2,7 +2,7 @@ import {$host} from "@/api";
 import {GetProductPagination, ProductPaginationResponse, ProductResponse} from "@/api/products/types";
 
 export const getProducts = async (
-	params: GetProductPagination
+	params: GetProductPagination, token: string,
 ): Promise<ProductPaginationResponse> => {
 
 	const searchParams = new URLSearchParams();
@@ -20,11 +20,15 @@ export const getProducts = async (
 
 	const {data} = await $host.get(
 		`/product/catalog${str.length > 0 ? `?${str}` : ''}`,
+		{headers: {Authorization: `Bearer ${token}`}}
 	);
 	return data;
 }
 
-export const getProductsForBasket = async (items: {article: string}[]): Promise<ProductResponse[]> => {
-	const {data} = await $host.get(`/product/basket?cart=${items.map(el => el.article).join(',')}`);
+export const getProductsForBasket = async (items: {article: string}[], token: string): Promise<ProductResponse[]> => {
+	const {data} = await $host.get(
+		`/product/basket?cart=${items.map(el => el.article).join(',')}`,
+		{headers: {Authorization: `Bearer ${token}`}}
+	);
 	return data;
 }

@@ -46,7 +46,7 @@
 .popup {
     background-color: white;
     border-radius: 20px;
-    height: 80vh;
+    height: 70vh;
     width: 80%;
     padding: 20px;
 }
@@ -81,9 +81,9 @@
 
 @media (max-width: 430px) {
     .popup {
-        width: 90%;
-        border-radius: 15px;
-        padding: 15px;
+        width: 95%;
+        border-radius: 12px;
+        padding: 12px;
     }
 
     .buttonFilter {
@@ -95,6 +95,10 @@
 
     .buttonFilter svg {
         width: 26px;
+    }
+
+    .filtersContent {
+        gap: 8px;
     }
 }
 

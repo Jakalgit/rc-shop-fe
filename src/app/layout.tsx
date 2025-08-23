@@ -71,9 +71,7 @@ export default async function RootLayout({
           <ReduxProvider initialState={initialState}>
             <Finder />
             <Header />
-            <div className="min-vh-100">
-              {children}
-            </div>
+            {children}
             <Footer />
           </ReduxProvider>
         </NextIntlClientProvider>

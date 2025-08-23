@@ -1,6 +1,6 @@
 
 .footer {
-    margin-top: 100px;
+    margin-top: 50px;
     background-color: var(--foreground-color);
     padding-bottom: 51px;
 }
@@ -40,10 +40,6 @@
 @media (max-width: 767px) {
     .linksLine a {
         font-size: 14px;
-    }
-
-    .footer {
-        margin-top: 70px;
     }
 }
 

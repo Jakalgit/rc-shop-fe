@@ -54,9 +54,13 @@
     gap: 8px;
 }
 
-.oldPrice {
+.additionalPrice {
     font-size: 16px;
     color: var(--space-color-2);
+}
+
+.wholesalePrice {
+    color: var(--blue-color-1);
 }
 
 .price {
@@ -207,7 +211,7 @@
         margin: 18px 0;
     }
 
-    .oldPrice {
+    .additionalPrice {
         font-size: 14px;
     }
 
@@ -258,7 +262,7 @@
         gap: 6px;
     }
 
-    .oldPrice {
+    .additionalPrice {
         font-size: 12px;
     }
 

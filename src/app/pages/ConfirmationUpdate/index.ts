@@ -1,0 +1,1 @@
+export {ConfirmationUpdatePage} from "./ui/ConfirmationUpdate";

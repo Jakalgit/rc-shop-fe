@@ -1,7 +1,7 @@
 
 .wrapper {
     height: 40px;
-    padding: 0 13px;
+    padding: 13px;
     border-radius: 8px;
     border: 1px solid var(--space-color-1);
     display: flex;
@@ -12,10 +12,34 @@
     width: 100%;
     font-size: 14px;
     color: black;
+    flex-grow: 1;
 }
 
 .wrapper input::placeholder {
     color: rgba(0, 0, 0, 0.2);
+}
+
+.buttonVisibility:hover .icon {
+    fill: black;
+    padding: 0;
+    padding-inline: 0 !important;
+}
+
+.icon {
+    width: 22px;
+    fill: var(--space-color-1);
+    aspect-ratio: 1;
+    transition: fill 0.2s;
+}
+
+@media (max-width: 991px) {
+    .buttonVisibility:hover .icon {
+        fill: var(--space-color-1);
+    }
+
+    .buttonVisibility:active .icon {
+        fill: black;
+    }
 }
 
 @media (max-width: 767px) {
@@ -27,5 +51,11 @@
 
     .wrapper input {
         font-size: 12px;
+    }
+}
+
+@media (max-width: 575px) {
+    .wrapper {
+        padding: 0 6px 0 10px;
     }
 }
