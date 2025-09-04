@@ -5,7 +5,7 @@ import styles from "@/styles/pages/Product.module.css";
 import Button from "@/components/buttons/Button";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {useTranslations} from "next-intl";
-import {saveCartToCookie} from "@/consts/cookieCart";
+import {saveCartToCookie} from "@/shared/lib/func/cookieCart";
 
 interface IProps {
 	availableCount: number;

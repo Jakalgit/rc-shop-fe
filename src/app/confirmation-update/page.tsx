@@ -1,3 +1,3 @@
-import {ConfirmationUpdatePage} from "@/app/pages/ConfirmationUpdate";
+import {ConfirmationUpdatePage} from "@/app/Pages/ConfirmationUpdate";
 
 export default ConfirmationUpdatePage;

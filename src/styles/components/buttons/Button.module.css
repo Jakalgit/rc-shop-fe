@@ -9,6 +9,22 @@
 
 .componentButton {
     transition: all .2s;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    height: 42px;
+}
+
+.light {
+    background-color: var(--blue-color-1);
+}
+
+.dark {
+    background-color: var(--foreground-color);
+}
+
+.none {
+    color: black;
 }
 
 .componentButton:hover {

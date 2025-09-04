@@ -1,0 +1,227 @@
+.item {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--space-color-1);
+    padding: 0 75px 0 20px;
+    height: 120px;
+    border-radius: 15px;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.item a:hover {
+    filter: none !important;
+}
+
+.removeButton {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    width: 34px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--foreground-color);
+}
+
+.removeButton svg {
+    width: 28px;
+    height: 28px;
+}
+
+.item img {
+    height: 105px;
+    margin-right: 30px;
+}
+
+.item h2 {
+    font-size: 15px;
+    max-width: 25%;
+}
+
+.article {
+    margin-left: 25px;
+    font-size: 12px;
+    color: var(--blue-color-2);
+}
+
+.rightPart {
+    margin-left: auto;
+    width: 30%;
+}
+
+.countControlWrapper {
+    width: 110px;
+}
+
+.countControlWrapper button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--foreground-color);
+    padding: 0;
+}
+
+.countControlWrapper p {
+    font-size: 24px;
+}
+
+.countControlWrapper button svg {
+    fill: white;
+    width: 18px;
+}
+
+.priceWrapper {
+    margin-left: auto;
+}
+
+.priceWrapper p:nth-child(1) {
+    font-size: 24px;
+}
+
+.priceWrapper p:nth-child(2) {
+    font-size: 12px;
+}
+
+@media (max-width: 1399px) {
+    .item h2 {
+        max-width: 28%;
+    }
+}
+
+@media (max-width: 1199px) {
+    .item h2 {
+        font-size: 13px;
+    }
+
+    .rightPart {
+        width: 32%;
+    }
+
+    .countControlWrapper {
+        width: 100px;
+    }
+}
+
+@media (max-width: 991px) {
+    .rightPart {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .item {
+        flex-direction: column;
+        padding: 15px;
+        height: 370px;
+        margin-top: 0;
+    }
+
+    .item h2 {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .item img {
+        height: 150px;
+        width: auto;
+        margin-right: 0;
+    }
+
+    .article {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .countControlWrapper {
+        margin-left: 0;
+    }
+
+    .priceWrapper {
+        margin-left: 0;
+        margin-top: 8px;
+        align-items: center;
+    }
+
+    .priceWrapper p:nth-child(1) {
+        font-size: 21px;
+    }
+
+    .priceWrapper p:nth-child(2) {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 767px) {
+    .priceWrapper p:nth-child(1) {
+        font-size: 20px;
+    }
+
+    .priceWrapper p:nth-child(2) {
+        font-size: 10px;
+    }
+
+    .article {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 575px) {
+    .item img {
+        height: 135px;
+    }
+}
+
+@media (max-width: 490px) {
+    .item img {
+        height: 120px;
+        max-width: 100%;
+    }
+
+    .item {
+        padding: 10px;
+        height: 340px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .item h2 {
+        font-size: 12px;
+    }
+
+    .countControlWrapper p {
+        font-size: 22px;
+    }
+
+    .countControlWrapper button {
+        width: 22px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--foreground-color);
+        padding: 0;
+    }
+
+    .countControlWrapper button svg {
+        fill: white;
+        width: 16px;
+    }
+
+    .priceWrapper p:nth-child(1) {
+        font-size: 18px;
+    }
+
+    .article {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 340px) {
+    .priceWrapper p:nth-child(1) {
+        font-size: 16px;
+    }
+
+    .priceWrapper p:nth-child(2) {
+        font-size: 9px;
+    }
+}

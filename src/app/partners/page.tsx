@@ -1,5 +1,5 @@
 import {getTranslations} from "next-intl/server";
-import {Partners} from "@/app/pages/Partners";
+import {Partners} from "@/app/Pages/Partners";
 
 export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
 	const { locale } = await params;

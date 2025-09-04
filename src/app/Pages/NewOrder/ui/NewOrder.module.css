@@ -1,0 +1,105 @@
+
+.blocksGrid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 6vw;
+    margin-top: 60px;
+}
+
+.inputBlocks {
+    gap: 60px;
+}
+
+.inputBlock {
+    gap: 17px;
+}
+
+.inputWrapper {
+    height: 44px;
+}
+
+.input {
+    font-size: 16px;
+}
+
+.textarea {
+    margin-top: auto;
+}
+
+.selectorBlocks {
+    gap: 32px;
+    justify-content: space-between;
+}
+
+.totalPriceBlock {
+    border-top: 1px solid var(--space-color-1);
+    border-bottom: 1px solid var(--space-color-1);
+    padding: 21px 0;
+}
+
+.totalPriceBlock p {
+    font-size: 18px;
+}
+
+.buttonShowItems {
+    font-size: 18px;
+    gap: 15px;
+}
+
+.buttonShowItems svg {
+    width: 24px;
+    aspect-ratio: 1;
+    fill: black;
+}
+
+@media (max-width: 991px) {
+    .inputBlocks {
+        gap: 50px;
+    }
+
+    .inputBlock {
+        gap: 12px;
+    }
+
+    .inputWrapper {
+        height: 40px;
+    }
+
+    .input {
+        font-size: 14px;
+    }
+
+    .selectorBlocks {
+        gap: 22px;
+    }
+
+    .totalPriceBlock {
+        padding: 15px 0;
+    }
+
+    .totalPriceBlock p {
+        font-size: 16px;
+    }
+
+    .buttonShowItems {
+        font-size: 16px;
+        gap: 10px;
+    }
+
+    .buttonShowItems svg {
+        width: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .blocksGrid {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 30px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .inputBlocks {
+        gap: 30px;
+    }
+}

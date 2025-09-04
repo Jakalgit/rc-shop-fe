@@ -85,6 +85,42 @@
       "ariaLabel": "Нажмите, чтобы скрыть текст в поле ввода"
     }
   },
+  "enums": {
+    "paymentMethodEnum": {
+      "cash_on_delivery": "Оплата при получении",
+      "online": "Оплата онлайн"
+    },
+    "deliveryMethodEnum": {
+      "self_pickup": "Самовывоз",
+      "delivery_country": "Доставка по России (в регионы)",
+      "delivery_moscow": "Доставка по Москве"
+    },
+    "deliveryStatusEnum": {
+      "pending": "В обработке",
+      "shipped": "Отправлен",
+      "delivered": "Доставлен в место назначения"
+    },
+    "paymentStatusEnum": {
+      "pending": "В обработке",
+      "paid": "Оплачен",
+      "failed": "Ошибка платежа",
+      "refunded": "Возврат средств"
+    },
+    "orderStatusEnum": {
+      "pending": "Ожидает обработки",
+      "confirmed": "Подтверждён",
+      "canceled": "Отменён",
+      "completed": "Завершён"
+    }
+  },
+  "orderItemComponent": {
+    "pricePerItem": "Цена за шт.",
+    "thing": "шт.",
+    "buttonRemoveItem": {
+      "title": "Удалить товар из корзины",
+      "ariaLabel": "Нажмите, чтобы удалить из корзины товар с названием {name}"
+    }
+  },
   "HomePage": {
     "firstText": "<bold>WORK-RC</bold> - это дружеский коллектив моделистов с большим опытом и знаниями,<br></br>готовый помочь вашему хобби!",
     "ourJob": "Мы занимаемся:",
@@ -184,12 +220,8 @@
       "title": "Оформить заказ",
       "ariaLabel": "Нажмите, чтобы перейти к оформлению заказа"
     },
-    "pricePerItem": "Цена за шт.",
-    "buttonRemoveItem": {
-      "title": "Удалить товар из корзины",
-      "ariaLabel": "Нажмите, чтобы удалить из корзины товар с названием {name}"
-    },
     "title": "Корзина",
+    "description": "Товары, готовые для покупки",
     "itemsNotFound": "Добавьте товары в корзину"
   },
   "RepairPage": {
@@ -269,8 +301,9 @@
   },
   "OrderSearchPage": {
     "head": "Ваш заказ",
-    "text": "Данные о вашем заказе были высланы вам на почту, если вы её указывали",
-    "inputPlaceholder": "Номер заказа или номер телефона (+7XXXXXXXXXX)",
+    "text": "Данные о вашем заказе были высланы вам на почту, не забудьте проверить спам",
+    "order": "Заказ",
+    "inputPlaceholder": "Номер заказа ORD-...",
     "buttonFind": {
       "title": "Найти",
       "ariaLabel": "Нажмите, чтобы найти заказ"
@@ -297,7 +330,7 @@
     },
     "partnerReg": "Регистрация партнёрства",
     "partnerForm": {
-      "namePlaceholder": "Ваше имя*",
+      "namePlaceholder": "Ваше ФИО*",
       "organizationPlaceholder": "Название организации/Ссылка на магазин*",
       "phonePlaceholder": "Номер телефона*",
       "emailPlaceholder": "E-Mail*",
@@ -330,6 +363,7 @@
     "organization": "Название организации",
     "phone": "Номер телефона",
     "activity": "Описание деятельности",
+    "orderHistory": "История заказов",
     "buttonChangeField": {
       "text": "Изменить",
       "title": "Изменить данные ({dataName})",
@@ -364,6 +398,7 @@
       },
       "success": "На указанную почту отправлены инструкции"
     },
+    "emptyOrders": "У вас пока нет заказов",
     "title": "Профиль",
     "description": "Страница с информацией о вашем профиле"
   },
@@ -388,5 +423,70 @@
       "result": "Ошибка, нет соединения или данные запроса не найдены"
     },
     "success": "Пароль успешно сохранён"
+  },
+  "NewOrderPage": {
+    "title": "Новый заказ",
+    "description": "Оформление нового заказа",
+    "head": "Оформление заказа",
+    "inputPlaceholders": {
+      "namePlaceholder": "Имя",
+      "surnamePlaceholder": "Фамилия",
+      "patronymicPlaceholder": "Отчество",
+      "phonePlaceholder": "Номер телефона",
+      "emailPlaceholder": "E-Mail",
+      "addressPlaceholder": "Адрес доставки",
+      "commentPlaceholder": "Комментарий к заказу..."
+    },
+    "totalPrice": "К оплате:",
+    "buttonShowItems": {
+      "title": "Посмотреть товары",
+      "ariaLabel": "Нажмите, чтобы посмотреть товары в заказе"
+    },
+    "paymentMethod": {
+      "title": "Способ оплаты:"
+    },
+    "deliveryMethod": {
+      "title": "Способ доставки:"
+    },
+    "buttonSendOrder": {
+      "title": "Отправить заказ",
+      "ariaLabel": "Нажмите, чтобы отправить заказ на сборку"
+    },
+    "productList": {
+      "title": "Товары к покупке",
+      "buttonClosePopup": {
+        "title": "Закрыть окно",
+        "ariaLabel": "Нажмите, чтобы закрыть окно со списком товаров"
+      },
+      "clue": "Товары из вашей корзины, доступные для покупки"
+    },
+    "errors": {
+      "product": "Внимание! Некоторые товары в вашей корзине выкупили за только что, доступные к покупке товары и их количество вы можете посмотреть нажав на кнопку \"Посмотреть товары\"",
+      "name": "Допустимая длина имени: от {min} до {max} символов",
+      "surname": "Допустимая длина фамилии: от {min} до {max} символов",
+      "phone": "Неверный формат номера телефона",
+      "email": "Неверный формат E-Mail",
+      "address": "Укажите корректный адрес доставки",
+      "emptyBasket": "Прежде чем сделать заказ, наполните корзину товарами"
+    },
+    "success": "Заказ отправлен на проверку, дополнительную информацию мы пришлём на указанный E-Mail"
+  },
+  "OrderPage": {
+    "title": "Заказ {orderNumber}",
+    "description": "Просмотр информации о заказе {orderNumber}",
+    "order": "Заказ",
+    "fields": {
+      "price": "Сумма заказа",
+      "name": "Клиент",
+      "paymentMethod": "Способ оплаты",
+      "status": "Статус заказа",
+      "phone": "Номер телефона",
+      "deliveryMethod": "Способ доставки",
+      "deliveryStatus": "Статус доставки",
+      "address": "Адрес доставки",
+      "comment": "Комментарий к заказу"
+    },
+    "systemNotificationTitle": "Уведомление",
+    "orderItemsTitle": "Товары в заказе"
   }
 }

@@ -1,0 +1,2 @@
+export {UpdatePasswordPopup} from "@/app/Pages/Profile/widgets/UpdatePasswordPopup/ui/UpdatePasswordPopup";
+export {UpdateEmailPopup} from "@/app/Pages/Profile/widgets/UpdateEmailPopup/ui/UpdateEmailPopup";

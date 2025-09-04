@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "@/styles/components/Header.module.css";
 import {Container} from "react-bootstrap";
 import Link from "next/link";
 import {getTranslations} from "next-intl/server";
@@ -8,6 +7,7 @@ import ButtonFinder from "@/components/buttons/ButtonFinder";
 import Menu from "@/components/Menu";
 import {generateNavLinks} from "@/functions/generateNavLinks";
 import {cookies} from "next/headers";
+import styles from "@/styles/components/Header.module.css";
 
 const Header = async () => {
 

@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.wrapper input {
+.wrapper :where(input) {
     width: 100%;
     font-size: 14px;
     color: black;

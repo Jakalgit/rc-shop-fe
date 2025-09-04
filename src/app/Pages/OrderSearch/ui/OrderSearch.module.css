@@ -1,0 +1,11 @@
+
+.text {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+@media (max-width: 767px) {
+    .text {
+        font-size: 12px;
+    }
+}

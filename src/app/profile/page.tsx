@@ -1,3 +1,3 @@
-import {Profile} from "@/app/pages/Profile";
+import {Profile} from "@/app/Pages/Profile";
 
 export default Profile;

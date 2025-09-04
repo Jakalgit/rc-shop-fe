@@ -7,19 +7,22 @@ import {Container} from "react-bootstrap";
 import {formatPrice} from "@/functions/format";
 import ShoppingCartIcon from "@/components/icons/ShoppingCartIcon";
 import {useTranslations} from "next-intl";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {AnimatePresence} from "framer-motion";
 import {ProductResponse} from "@/api/products/types";
-import {COOKIE_NAME, getCartFromCookie, saveCartToCookie} from "@/consts/cookieCart";
+import {COOKIE_CART_NAME, getCartFromCookie, removeItemFromCartByArticle, saveCartToCookie} from "@/shared/lib/func/cookieCart";
 import {getProductsForBasket} from "@/api/products/api";
 import Cookies from 'js-cookie';
-import BasketItem from "@/components/basket/BasketItem";
+import {OrderItem} from "@/widgets/OrderItem";
 import LoadingPage from "@/components/LoadingPage";
 import Head from "next/head";
+import {useRouter} from "next/navigation";
+import {getBasketPrice} from "@/shared/lib/func/updateOrderPrice";
 
 export default function BasketPage() {
 
 	const t = useTranslations("BasketPage");
+	const router = useRouter();
 
 	const [loading, setLoading] = useState(true);
 
@@ -30,20 +33,23 @@ export default function BasketPage() {
 
 	// Удаляем продукт из корзины
 	const removeItem = (article: string) => {
+		// Удаляем товар из стейта
 		setBasketProducts(prevState => prevState.filter((item) => item.article !== article));
-		updateItemQty(basketProducts);
+		// Удаляем товар из куков
+		removeItemFromCartByArticle(article);
 	}
 
-	const updateItemQty = (products: ProductResponse[]) => {
-		const carts = getCartFromCookie();
+	// Обработчик нажатия кнопки "Оформить заказ"
+	const handleClickCheckOutOrder = useCallback(() => {
+		router.push("/new-order");
+	}, [])
 
-		const price = carts.reduce((acc, item) => {
-			const product = products.find(el => el.article === item.article);
-			return acc + item.qty * (product?.price || 0);
-		}, 0);
-
-		setFullPrice(price);
-	}
+	// Обновляем цену корзины
+	const updateCartPrice = useCallback(() => {
+		setFullPrice(
+			getBasketPrice(basketProducts)
+		);
+	}, [basketProducts]);
 
 	useEffect(() => {
 		// Получение данных
@@ -57,7 +63,7 @@ export default function BasketPage() {
 				);
 
 				// Удаляем куки с данными о корзине
-				Cookies.remove(COOKIE_NAME);
+				Cookies.remove(COOKIE_CART_NAME);
 
 				// Обновляем куки согласно с данными, полученными с сервара
 			  carts.forEach(el => {
@@ -73,9 +79,6 @@ export default function BasketPage() {
 				// Устанавливаем состояние
 				setBasketProducts(response);
 
-				// Обновляем полную цену корзины
-				updateItemQty(response);
-
 				setLoading(false);
 			} catch (e: any) {
 				alert(e?.response?.data?.message);
@@ -83,7 +86,12 @@ export default function BasketPage() {
 		}
 
 		getData();
-	}, [])
+	}, []);
+
+	// При обновлении товаров в корзине - обновляем цену заказа
+	useEffect(() => {
+		updateCartPrice();
+	}, [basketProducts]);
 
 	// Если данные загружаются
 	if (loading) {
@@ -122,6 +130,7 @@ export default function BasketPage() {
 								<Button
 									title={t("buttonPlaceAnOrder.title")}
 									aria-label={t("buttonPlaceAnOrder.ariaLabel")}
+									onClick={handleClickCheckOutOrder}
 								>
 									{t("buttonPlaceAnOrder.title")}
 									<ShoppingCartIcon/>
@@ -131,11 +140,11 @@ export default function BasketPage() {
 						<ul className={`flex flex-col ${styles.list}`}>
 							<AnimatePresence>
 								{basketProducts.map((item) =>
-									<BasketItem
+									<OrderItem
 										key={item.article}
-										item={item}
+										itemData={{...item}}
 										removeItem={(article: string) => removeItem(article)}
-										updateItemQty={() => updateItemQty(basketProducts)}
+										updateCartPrice={updateCartPrice}
 									/>
 								)}
 							</AnimatePresence>

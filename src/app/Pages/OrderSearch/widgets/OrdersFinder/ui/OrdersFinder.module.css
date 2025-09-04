@@ -1,0 +1,57 @@
+
+.searchList {
+    margin-top: 40px;
+}
+
+.inputWrapper {
+    border: 1px solid var(--foreground-color);
+    border-radius: 8px;
+    height: 40px;
+    padding-left: 13px;
+    overflow: hidden;
+}
+
+.inputWrapper input {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.inputWrapper input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.inputWrapper button {
+    font-size: 14px;
+    width: 30%;
+    background-color: var(--foreground-color);
+    color: white;
+}
+
+.inputWrapper button:active {
+    scale: none !important;
+}
+
+@media (max-width: 767px) {
+    .searchList {
+        margin-top: 20px;
+    }
+
+    .inputWrapper input {
+        font-size: 12px;
+    }
+
+    .inputWrapper button {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 575px) {
+    .searchList {
+        margin-top: 15px;
+    }
+
+    .inputWrapper {
+        height: 36px;
+        padding-left: 8px;
+    }
+}

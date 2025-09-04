@@ -1,0 +1,96 @@
+.orderUl {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.orderUl li {
+    padding: 10px 13px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    height: 90px;
+    margin-top: 17px;
+}
+
+.orderUl li h2 {
+    font-size: 16px;
+}
+
+.secondInfoLine {
+    gap: 16px;
+}
+
+.secondInfoLine p, .date {
+    font-size: 14px;
+}
+
+.secondInfoLine p {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.viewLink {
+    gap: 3px;
+    font-size: 14px;
+    color: var(--blue-color-1);
+}
+
+.viewLink svg {
+    fill: var(--blue-color-1);
+    width: 18px;
+    aspect-ratio: 1;
+}
+
+@media (max-width: 767px) {
+    .orderUl li {
+        height: 80px;
+    }
+
+    .orderUl li h2 {
+        font-size: 14px;
+    }
+
+    .secondInfoLine p, .date {
+        font-size: 12px;
+    }
+
+    .viewLink {
+        font-size: 12px;
+    }
+
+    .viewLink svg {
+        width: 16px;
+    }
+}
+
+@media (max-width: 575px) {
+    .orderUl {
+        margin-top: 8px;
+    }
+
+    .orderUl li {
+        margin-top: 12px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 430px) {
+    .secondInfoLine {
+        gap: 8px;
+    }
+
+    .secondInfoLine p {
+        font-size: 11px;
+    }
+
+    .orderUl li {
+        height: 95px;
+    }
+}
+
+@media (max-width: 400px) {
+    .secondInfoLine {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+}

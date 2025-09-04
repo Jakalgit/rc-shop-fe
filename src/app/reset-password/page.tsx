@@ -1,3 +1,3 @@
-import {ResetPassword} from "@/app/pages/ResetPassword";
+import {ResetPassword} from "@/app/Pages/ResetPassword";
 
 export default ResetPassword;

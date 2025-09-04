@@ -1,0 +1,32 @@
+
+.VariantSelector {
+    gap: 17px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.labels {
+    gap: 11px;
+}
+
+.label {
+    cursor: pointer;
+    gap: 12px;
+}
+
+@media (max-width: 991px) {
+    .VariantSelector {
+        gap: 12px;
+    }
+
+    .labels {
+        gap: 9px;
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 17px;
+    }
+}
