@@ -2,7 +2,7 @@
 
 import styles from "./OrderItem.module.css";
 import {useTranslations} from "next-intl";
-import {getCartFromCookie, saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import {getCartFromLocalStorage, saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
 import React, {useEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
 import Button from "@/components/buttons/Button";
@@ -33,7 +33,7 @@ interface IProps {
 export function OrderItem({ itemData, removeItem, updateCartPrice, itemType = OrderItemAccessEnum.FULL_ACCESS }: IProps) {
 
 	const t = useTranslations("orderItemComponent");
-	const cart = getCartFromCookie().find(
+	const cart = getCartFromLocalStorage().find(
 		el => el.article === itemData.article
 	);
 
@@ -65,7 +65,7 @@ export function OrderItem({ itemData, removeItem, updateCartPrice, itemType = Or
 	useEffect(() => {
 		if (updateCartPrice) {
 			// Меняем данные корзины в куках
-			saveCartToCookie({article: itemData.article, qty: count})
+			saveCartToLocalStorage({article: itemData.article, qty: count})
 			// Вызываем функцию пересчёта цены заказа
 			updateCartPrice();
 		}

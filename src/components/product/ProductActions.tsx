@@ -5,7 +5,7 @@ import styles from "@/styles/pages/Product.module.css";
 import Button from "@/components/buttons/Button";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {useTranslations} from "next-intl";
-import {saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import {saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
 
 interface IProps {
 	availableCount: number;
@@ -42,7 +42,7 @@ const ProductActions: React.FC<IProps> = ({ availableCount, article }) => {
 		if (availableCount < count) {
 			alert(t("notAvailableCount", {count: availableCount}));
 		} else {
-			saveCartToCookie({article, qty: count});
+			saveCartToLocalStorage({article, qty: count});
 			alert(t("successAdded"));
 		}
 	}

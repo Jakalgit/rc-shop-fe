@@ -12,7 +12,7 @@ import {VariantSelector} from "@/widgets/VariantSelector/ui/VariantSelector";
 import Textarea from "@/components/Textarea";
 import styles from "./NewOrder.module.css";
 import classNames from "classnames";
-import {COOKIE_CART_NAME, getCartFromCookie, saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import {CART_KEY, getCartFromLocalStorage, saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
 import {getProductsForBasket} from "@/api/products/api";
 import Cookies from "js-cookie";
 import {ProductResponse} from "@/api/products/types";
@@ -90,7 +90,7 @@ export const NewOrder: React.FC = () => {
 		try {
 			setLoadingButton(true);
 
-			const cart = getCartFromCookie();
+			const cart = getCartFromLocalStorage();
 			const act = Cookies.get("act") || "";
 
 			await createOrder({
@@ -99,7 +99,7 @@ export const NewOrder: React.FC = () => {
 			});
 
 			alert(t("success"));
-			Cookies.remove(COOKIE_CART_NAME);
+			Cookies.remove(CART_KEY);
 			router.push(RoutesEnum.CATALOG);
 		} catch (e: any) {
 			alert(e?.response?.data?.message);
@@ -189,7 +189,7 @@ export const NewOrder: React.FC = () => {
 	async function getData() {
 		try {
 			// Получаем данные и куки
-			const cart = getCartFromCookie();
+			const cart = getCartFromLocalStorage();
 			// Получаем актуальные данные о товарах с сервера
 			const response = await getProductsForBasket(
 				cart.map(el => ({article: el.article})),
@@ -197,7 +197,7 @@ export const NewOrder: React.FC = () => {
 			);
 
 			// Удаляем куки с данными о корзине
-			Cookies.remove(COOKIE_CART_NAME);
+			localStorage.removeItem(CART_KEY);
 
 			let productError = false;
 
@@ -205,7 +205,7 @@ export const NewOrder: React.FC = () => {
 			cart.forEach(el => {
 				const item = response.find(r => r.article === el.article)
 				if (item) {
-					saveCartToCookie({
+					saveCartToLocalStorage({
 						article: item.article,
 						qty: el.qty > item.count ? item.count : el.qty,
 					});

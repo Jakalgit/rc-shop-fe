@@ -3,7 +3,7 @@
 import React from 'react';
 import {useTranslations} from "next-intl";
 import Button from "@/components/buttons/Button";
-import {saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import {saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
 import styles from "@/styles/components/CatalogItem.module.css";
 
 interface IProps {
@@ -17,8 +17,8 @@ const ButtonAddToCart: React.FC<IProps> = ({ availability, article }) => {
 
 	const addToCart = () => {
 		if (availability) {
-			saveCartToCookie({article, qty: 1});
 			alert(t("successAdded"));
+			saveCartToLocalStorage({article, qty: 1});
 		} else {
 			alert(t("notAvailable"));
 		}

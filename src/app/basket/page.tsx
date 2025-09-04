@@ -10,7 +10,7 @@ import {useTranslations} from "next-intl";
 import React, {useCallback, useEffect, useState} from "react";
 import {AnimatePresence} from "framer-motion";
 import {ProductResponse} from "@/api/products/types";
-import {COOKIE_CART_NAME, getCartFromCookie, removeItemFromCartByArticle, saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import {CART_KEY, getCartFromLocalStorage, removeItemFromCartByArticle, saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
 import {getProductsForBasket} from "@/api/products/api";
 import Cookies from 'js-cookie';
 import {OrderItem} from "@/widgets/OrderItem";
@@ -55,21 +55,21 @@ export default function BasketPage() {
 		// Получение данных
 		async function getData() {
 			try {
-				const carts = getCartFromCookie();
+				const carts = getCartFromLocalStorage();
 				// Получаем данные для товаров в корзине
 				const response = await getProductsForBasket(
 					carts.map(el => ({article: el.article})),
 					Cookies.get("act") || ""
 				);
 
-				// Удаляем куки с данными о корзине
-				Cookies.remove(COOKIE_CART_NAME);
+				// Удаляем данные о корзине
+				localStorage.removeItem(CART_KEY);
 
-				// Обновляем куки согласно с данными, полученными с сервара
+				// Обновляем хранилище согласно с данными, полученными с сервера
 			  carts.forEach(el => {
 					const item = response.find(r => r.article === el.article)
 					if (item) {
-						saveCartToCookie({
+						saveCartToLocalStorage({
 							article: item.article,
 							qty: el.qty > item.count ? item.count : el.qty,
 						});

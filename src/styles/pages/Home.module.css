@@ -67,6 +67,7 @@
 .categoryBlocks button {
     width: calc((100% - ((var(--number-of-blocks-on-line) - 1) * var(--blocks-gap))) / var(--number-of-blocks-on-line));
     aspect-ratio: 1;
+    height: auto;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     font-size: 18px;
