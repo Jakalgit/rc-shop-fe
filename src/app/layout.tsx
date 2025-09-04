@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import {Geologica, Manrope, Montserrat} from "next/font/google";
 import React from "react";
 import "../styles/globals.css";
-import Header from "@/components/Header";
 import {getMessages} from "next-intl/server";
 import {NextIntlClientProvider} from "next-intl";
 import {ReduxProvider} from "@/store/ReduxProvider";
 import {RootState} from "@/store";
 import Finder from "@/components/Finder";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const geologica = Geologica({

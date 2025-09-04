@@ -2,9 +2,9 @@
 
 import React from 'react';
 import {useTranslations} from "next-intl";
-import styles from "@/styles/components/CatalogItem.module.css";
 import Button from "@/components/buttons/Button";
 import {saveCartToCookie} from "@/shared/lib/func/cookieCart";
+import styles from "@/styles/components/CatalogItem.module.css";
 
 interface IProps {
 	article: string;
