@@ -13,7 +13,6 @@ import MotionMain from "@/components/MotionMain";
 import {Container} from "react-bootstrap";
 import Button from "@/components/buttons/Button";
 import {UpdateEmailPopup, UpdatePasswordPopup} from "../../widgets";
-import Head from "next/head";
 import {OrderResponse} from "@/api/order/types";
 import {getOrdersByProfileId} from "@/api/order/api";
 import {OrderList} from "@/widgets/OrdersList";
@@ -125,10 +124,8 @@ export function Profile() {
 
 	return (
 		<>
-			<Head>
-				<title>{t("title")}</title>
-				<meta name="description" content={t("description")}/>
-			</Head>
+			<title>{t("title")}</title>
+			<meta name="description" content={t("description")}/>
 			<MotionMain>
 				<UpdateEmailPopup
 					isOpen={isOpenChangeEmailPopup}

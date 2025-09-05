@@ -15,7 +15,6 @@ import {getProductsForBasket} from "@/api/products/api";
 import Cookies from 'js-cookie';
 import {OrderItem} from "@/widgets/OrderItem";
 import LoadingPage from "@/components/LoadingPage";
-import Head from "next/head";
 import {useRouter} from "next/navigation";
 import {getBasketPrice} from "@/shared/lib/func/updateOrderPrice";
 
@@ -111,10 +110,8 @@ export default function BasketPage() {
 
 	return (
 		<>
-			<Head>
-				<title>{t("title")}</title>
-				<meta name="description" content={t("description")} />
-			</Head>
+			<title>{t("title")}</title>
+			<meta name="description" content={t("description")}/>
 			<MotionMain>
 				<section>
 					<Container>

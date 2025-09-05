@@ -37,7 +37,7 @@ const Menu: React.FC<MenuProps> = ({ links }) => {
 	}, [buttonRef.current]);
 
 	return (
-		<div className={`relative flex ${styles.blockSize}`}>
+		<div className={`relative ${styles.blockSize}`}>
 			<Button
 				title={t("buttonMenu.title")}
 				aria-label={t("buttonMenu.ariaLabel")}

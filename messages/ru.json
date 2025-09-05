@@ -257,7 +257,9 @@
   "AboutUsPage": {
     "head": "О нас",
     "contacts": "Контакты:",
-    "workTime": "Время работы:"
+    "workTime": "Время работы:",
+    "title": "О нас",
+    "description": "Информация о магазине"
   },
   "ProductPage": {
     "inStock": "В наличии",
@@ -311,7 +313,9 @@
     "buttonView": {
       "title": "Посмотреть",
       "ariaLabel": "Нажмите, чтобы посмотреть информацию о заказе {orderId}"
-    }
+    },
+    "title": "Найти заказ",
+    "description": "Найдите информацию о вашем заказе по его номеру"
   },
   "PartnersPage": {
     "head": "Партнёры WORK-RC",

@@ -51,6 +51,20 @@
     fill: black;
 }
 
+.labelCheckbox {
+    font-size: 14px;
+    flex-wrap: wrap;
+    text-wrap: nowrap;
+}
+
+.labelCheckbox input {
+    margin-right: 8px;
+}
+
+.labelCheckbox a {
+    color: var(--blue-color-1);
+}
+
 @media (max-width: 991px) {
     .inputBlocks {
         gap: 50px;
@@ -95,6 +109,10 @@
         grid-template-columns: repeat(1, 1fr);
         row-gap: 30px;
         margin-top: 30px;
+    }
+
+    .labelCheckbox {
+        font-size: 12px;
     }
 }
 

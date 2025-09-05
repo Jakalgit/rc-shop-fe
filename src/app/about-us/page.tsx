@@ -11,6 +11,17 @@ import TelegramIcon from "@/components/icons/TelegramIcon";
 import WhatsappIcon from "@/components/icons/WhatsappIcon";
 import CompanyDesc from "@/components/CompanyDesc";
 
+export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
+	const { locale } = await params;
+
+	const t = await getTranslations({ locale, namespace: 'AboutUsPage' });
+
+	return {
+		title: t('title'),
+		description: t('description'),
+	};
+}
+
 export default async function AboutUsPage() {
 
 	const t = await getTranslations("AboutUsPage");

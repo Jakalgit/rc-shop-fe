@@ -3,13 +3,10 @@
 import React, {useCallback, useEffect, useState} from "react";
 import MotionMain from "@/components/MotionMain";
 import {useTranslations} from "next-intl";
-import Head from "next/head";
 import {Container} from "react-bootstrap";
-import Input from "@/components/Input";
 import Button, {ButtonFillEnum} from "@/components/buttons/Button";
 import InfoIcon from "@/components/icons/InfoIcon";
 import {VariantSelector} from "@/widgets/VariantSelector/ui/VariantSelector";
-import Textarea from "@/components/Textarea";
 import styles from "./NewOrder.module.css";
 import classNames from "classnames";
 import {CART_KEY, getCartFromLocalStorage, saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
@@ -24,6 +21,8 @@ import {formatPrice} from "@/functions/format";
 import {getBasketPrice} from "@/shared/lib/func/updateOrderPrice";
 import {useRouter} from "next/navigation";
 import {RoutesEnum} from "@/shared";
+import Textarea from "@/components/Textarea";
+import Input from "@/components/Input";
 
 export const NewOrder: React.FC = () => {
 
@@ -49,6 +48,7 @@ export const NewOrder: React.FC = () => {
 
 	const [basketProducts, setBasketProducts] = React.useState<ProductResponse[]>([]);
 	const [isOpenProductList, setIsOpenProductList] = React.useState<boolean>(false);
+	const [policyChecked, setPolicyChecked] = React.useState<boolean>(false);
 
 	// Полная стоимость продуктов
 	const [fullPrice, setFullPrice] = useState<number>(0);
@@ -60,7 +60,6 @@ export const NewOrder: React.FC = () => {
 
 	// Обработчик нажатия кнопки "Отправить заказ"
 	const handleClickSendOrder = useCallback(async () => {
-
 		if (name.length < 1 || name.length > 30) {
 			alert(t.rich("errors.name", {min: 1, max: 30}));
 			return;
@@ -71,7 +70,6 @@ export const NewOrder: React.FC = () => {
 			return;
 		}
 
-		console.log(`Email ${email}`, `Phone: ${phone}`);
 		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 			alert(t("errors.email"));
 			return;
@@ -246,16 +244,10 @@ export const NewOrder: React.FC = () => {
 		return <LoadingPage />
 	}
 
-	if (basketProducts.length === 0) {
-
-	}
-
 	return (
 		<>
-			<Head>
-				<title>{t("title")}</title>
-				<meta name="description" content={t("description")} />
-			</Head>
+			<title>{t("title")}</title>
+			<meta name="description" content={t("description")}/>
 			<ProductListPopup
 				isOpen={isOpenProductList}
 				onClose={() => setIsOpenProductList(false)}
@@ -308,7 +300,7 @@ export const NewOrder: React.FC = () => {
 							<div className={`flex flex-col ${styles.selectorBlocks}`}>
 								<div className={`flex items-center justify-between ${styles.totalPriceBlock}`}>
 									<p className="montserrat">
-										<span className="geologica fw-bold">{t("totalPrice")}</span><br />
+										<span className="geologica fw-bold">{t("totalPrice")}</span><br/>
 										{formatPrice(fullPrice, 2)}
 									</p>
 									<Button
@@ -318,7 +310,7 @@ export const NewOrder: React.FC = () => {
 										onClick={handleClickOpenProductList}
 									>
 										{t("buttonShowItems.title")}
-										<InfoIcon />
+										<InfoIcon/>
 									</Button>
 								</div>
 								{variantSelectors.map((el, i) =>
@@ -330,12 +322,28 @@ export const NewOrder: React.FC = () => {
 										setSelectedVariant={el.setSelectedVariant}
 									/>
 								)}
+								<label className={`flex items-center ${styles.labelCheckbox}`}>
+									<input
+										type="checkbox"
+										name="privacyPolicy"
+										checked={policyChecked}
+										onChange={(e) => setPolicyChecked(e.target.checked)}
+										required
+									/>
+									Я согласен(а) с
+									&nbsp;<a href="/privacy-policy" target="_blank" rel="noopener noreferrer">политикой
+									конфиденциальности</a>
+									&nbsp;и
+									&nbsp;<a href="/user-agreement" target="_blank" rel="noopener noreferrer">пользовательским
+									соглашением</a>
+								</label>
 								<Button
 									title={t("buttonSendOrder.title")}
 									aria-label={t("buttonSendOrder.ariaLabel")}
 									fill={ButtonFillEnum.DARK}
 									loading={loadingButton}
 									onClick={handleClickSendOrder}
+									clickable={policyChecked}
 								>
 									{t("buttonSendOrder.title")}
 								</Button>

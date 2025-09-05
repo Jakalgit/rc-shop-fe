@@ -1,0 +1,1 @@
+export {BecomePartnerForm} from "./ui/BecomePartnerForm";
