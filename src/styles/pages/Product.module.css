@@ -90,6 +90,7 @@
 
 .countWrapper button {
     background-color: var(--foreground-color);
+    height: auto !important;
     width: 24px;
     aspect-ratio: 1;
     border-radius: 50%;

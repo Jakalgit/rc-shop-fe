@@ -492,5 +492,10 @@
     },
     "systemNotificationTitle": "Уведомление",
     "orderItemsTitle": "Товары в заказе"
+  },
+  "DeliveryAndPaymentsPage": {
+    "title": "Доставка и оплата",
+    "description": "Информация о доставке и оплате заказов",
+    "head": "Доставка и оплата"
   }
 }

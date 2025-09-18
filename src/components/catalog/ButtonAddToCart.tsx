@@ -9,14 +9,15 @@ import styles from "@/styles/components/CatalogItem.module.css";
 interface IProps {
 	article: string;
 	availability: boolean;
+	count: number;
 }
 
-const ButtonAddToCart: React.FC<IProps> = ({ availability, article }) => {
+const ButtonAddToCart: React.FC<IProps> = ({ availability, article, count }) => {
 
 	const t = useTranslations("CatalogPage.item");
 
 	const addToCart = () => {
-		if (availability) {
+		if (availability && count > 0) {
 			alert(t("successAdded"));
 			saveCartToLocalStorage({article, qty: 1});
 		} else {

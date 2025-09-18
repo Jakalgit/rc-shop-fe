@@ -74,6 +74,7 @@ const CatalogItem: React.FC<IProps> = async ({ item }) => {
 			<ButtonAddToCart
 				article={item.article}
 				availability={item.availability}
+				count={item.count}
 			/>
 		</article>
 	);

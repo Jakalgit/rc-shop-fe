@@ -1,0 +1,67 @@
+
+.block {
+    gap: 17px;
+    margin-top: 45px;
+}
+
+.pill {
+    background-color: var(--blue-color-1);
+    width: 20px;
+    height: 6px;
+    border-radius: 6px;
+}
+
+.block h2 {
+    font-size: 24px;
+}
+
+.block .header {
+    gap: 18px;
+}
+
+.block p {
+    font-size: 17px;
+}
+
+@media (max-width: 991px) {
+    .block h2 {
+        font-size: 20px;
+    }
+
+    .block p {
+        font-size: 15px;
+    }
+
+    .block .header {
+        gap: 16px;
+    }
+
+    .pill {
+        width: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .block {
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 575px) {
+    .block h2 {
+        font-size: 18px;
+    }
+
+    .pill {
+        width: 12px;
+        height: 4px;
+    }
+
+    .block .header {
+        gap: 14px;
+    }
+
+    .block p {
+        font-size: 13px;
+    }
+}

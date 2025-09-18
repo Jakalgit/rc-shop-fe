@@ -32,3 +32,8 @@ export const getProductsForBasket = async (items: {article: string}[], token: st
 	);
 	return data;
 }
+
+export const getProductsSitemap = async (): Promise<{article: string, updatedAt: string}[]> => {
+	const {data} = await $host.get('/product/sitemap');
+	return data;
+}

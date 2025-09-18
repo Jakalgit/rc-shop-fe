@@ -61,7 +61,7 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 	const description = response.records[0].description;
 
 	const name = response.records[0].name;
-	const availability = response.records[0].availability;
+	const availability = response.records[0].availability && response.records[0].count > 0;
 
 	const promotion = {
 		oldPrice: response.records[0].oldPrice,
