@@ -27,7 +27,7 @@ export default async function AboutUsPage() {
 	const t = await getTranslations("AboutUsPage");
 
 	const phoneNumber = "+74955743853";
-	const mail = "manager@work-rc.ru";
+	const mail = "support@work-rc.ru";
 
 	const address = "м. Бауманская, Спартаковская площадь д. 10 c12";
 

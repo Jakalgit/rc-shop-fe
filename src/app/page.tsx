@@ -34,7 +34,7 @@ export default async function Home() {
     <MotionMain>
       <Container>
         <PromotionsSlider items={responseSliderItems.map(el => ({image: el.filename, href: el.href}))} />
-        <CompanyDesc />
+        <CompanyDesc isHome={true} />
         {responseHomeCategories.length > 0 && (
           <div className={`flex flex-col ${styles.categories}`}>
             <div className="flex justify-between items-center">
