@@ -23,21 +23,23 @@ export function VariantSelector({title, variants, selectedVariantId, setSelected
 				{title}
 			</p>
 			<div className={`flex flex-col ${styles.labels}`}>
-				{variants.map(variant =>
+				{variants.filter(el => !el.hide).map(variant =>
 					<label
 						key={variant.id}
-						className={`flex items-center ${styles.label}`}
-						htmlFor={`variant_selector`}
+						className={`flex flex-col ${styles.label}`}
+						htmlFor={variant.id}
 					>
-						<input
-							type="radio"
-							id={`variant_selector`}
-							checked={selectedVariantId === variant.id}
-							onChange={(e) => handleChange(e, variant.id)}
-						/>
-						<span>{variant.title}</span>
+						<div className="flex items-center">
+							<input
+								type="radio"
+								id={variant.id}
+								checked={selectedVariantId === variant.id}
+								onChange={(e) => handleChange(e, variant.id)}
+							/>
+							<span>{variant.title}</span>
+						</div>
 						{variant.clue && (
-							<p>
+							<p className={styles.clue}>
 								{variant.clue}
 							</p>
 						)}

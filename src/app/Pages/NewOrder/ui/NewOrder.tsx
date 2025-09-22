@@ -80,6 +80,11 @@ export const NewOrder: React.FC = () => {
 			return;
 		}
 
+		if (deliveryMethod !== DeliveryMethodEnum.SELF_PICKUP && paymentMethod === PaymentMethodEnum.CASH_ON_DELIVERY) {
+			alert(t("errors.selectDeliveryMethod"));
+			return;
+		}
+
 		if (deliveryMethod !== DeliveryMethodEnum.SELF_PICKUP && address.length < 5) {
 			alert(t("errors.address"));
 			return;
@@ -117,15 +122,15 @@ export const NewOrder: React.FC = () => {
 	const inputBlocks: InputBlocksType = [
 		[
 			{
-				placeholder: t("inputPlaceholders.namePlaceholder"),
-				value: name,
-				onChange: (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
-				required: true,
-			},
-			{
 				placeholder: t("inputPlaceholders.surnamePlaceholder"),
 				value: surname,
 				onChange: (e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value),
+				required: true,
+			},
+			{
+				placeholder: t("inputPlaceholders.namePlaceholder"),
+				value: name,
+				onChange: (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
 				required: true,
 			},
 			{
@@ -167,8 +172,22 @@ export const NewOrder: React.FC = () => {
 			selectedVariantId: paymentMethod,
 			setSelectedVariant: setPaymentMethod,
 			variants: [
-				{ id: PaymentMethodEnum.CASH_ON_DELIVERY, title: tEnums(`paymentMethodEnum.${PaymentMethodEnum.CASH_ON_DELIVERY}`) },
-				{ id: PaymentMethodEnum.ONLINE, title: tEnums(`paymentMethodEnum.${PaymentMethodEnum.ONLINE}`) },
+				{
+					id: PaymentMethodEnum.CASH_ON_DELIVERY,
+					title: tEnums(`paymentMethodEnum.${PaymentMethodEnum.CASH_ON_DELIVERY}.title`),
+					clue: tEnums(`paymentMethodEnum.${PaymentMethodEnum.CASH_ON_DELIVERY}.clue`),
+					hide: deliveryMethod !== DeliveryMethodEnum.SELF_PICKUP,
+				},
+				{
+					id: PaymentMethodEnum.SBP,
+					title: tEnums(`paymentMethodEnum.${PaymentMethodEnum.SBP}.title`),
+					clue: tEnums(`paymentMethodEnum.${PaymentMethodEnum.SBP}.clue`),
+				},
+				{
+					id: PaymentMethodEnum.BANK_TRANSFER,
+					title: tEnums(`paymentMethodEnum.${PaymentMethodEnum.BANK_TRANSFER}.title`),
+					clue: tEnums(`paymentMethodEnum.${PaymentMethodEnum.BANK_TRANSFER}.clue`),
+				},
 			]
 		},
 		{
@@ -237,6 +256,12 @@ export const NewOrder: React.FC = () => {
 	}, [basketProducts]);
 
 	useEffect(() => {
+		if (deliveryMethod !== DeliveryMethodEnum.SELF_PICKUP && paymentMethod === PaymentMethodEnum.CASH_ON_DELIVERY) {
+			setPaymentMethod(PaymentMethodEnum.SBP);
+		}
+	}, [deliveryMethod]);
+
+	useEffect(() => {
 		getData();
 	}, []);
 
@@ -294,6 +319,7 @@ export const NewOrder: React.FC = () => {
 										value={comment}
 										onChange={(e) => setComment(e.target.value)}
 										className={styles.input}
+										rows={5}
 									/>
 								</div>
 							</div>

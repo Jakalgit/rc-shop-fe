@@ -1,47 +1,58 @@
-import {MetadataRoute} from "next";
-import {getProductsSitemap} from "@/api/products/api";
+import { getProductsSitemap } from "@/api/products/api";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export const dynamic = "force-dynamic";
+
+let cachedSitemap: string | null = null;
+let lastGenerated = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 минут
+
+export default async function sitemap(): Promise<Response> {
+	const now = Date.now();
+
+	if (cachedSitemap && now - lastGenerated < CACHE_TTL) {
+		return new Response(cachedSitemap, {
+			headers: { "Content-Type": "application/xml" },
+		});
+	}
 
 	const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://work-rc.ru";
 
-	const staticPages: MetadataRoute.Sitemap = [
-		{
-			url: `${baseUrl}/`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/about-us`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/catalog`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/delivery-and-payments`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/order-search`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/partners`,
-			lastModified: new Date(),
-		},
-		{
-			url: `${baseUrl}/repair`,
-			lastModified: new Date(),
-		}
+	const staticPages: string[] = [
+		"/",
+		"/about-us",
+		"/catalog",
+		"/delivery-and-payments",
+		"/order-search",
+		"/partners",
+		"/repair",
 	];
 
-	const products = await getProductsSitemap();
+	let products: { article: string; updatedAt?: string }[] = [];
+	try {
+		products = await getProductsSitemap();
+	} catch (e) {
+		console.error("Sitemap generation failed", e);
+	}
 
-	const productPages: MetadataRoute.Sitemap = products.map(p => ({
-		url: `${baseUrl}/product/${p.article}`,
-		lastModified: p.updatedAt ? new Date(p.updatedAt) : new Date(),
-	}));
+	const urls = [
+		...staticPages.map(
+			(path) =>
+				`<url><loc>${baseUrl}${path}</loc><lastmod>${new Date().toISOString()}</lastmod></url>`
+		),
+		...products.map(
+			(p) =>
+				`<url><loc>${baseUrl}/product/${p.article}</loc><lastmod>${
+					p.updatedAt ? new Date(p.updatedAt).toISOString() : new Date().toISOString()
+				}</lastmod></url>`
+		),
+	];
 
-	return [...staticPages, ...productPages];
+	const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.join(
+		""
+	)}</urlset>`;
+
+	cachedSitemap = xml;
+	lastGenerated = now;
+
+	return new Response(xml, { headers: { "Content-Type": "application/xml" } });
 }
