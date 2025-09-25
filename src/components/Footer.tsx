@@ -8,12 +8,14 @@ import {formatPhoneNumber} from "@/functions/format";
 import {generateNavLinks} from "@/functions/generateNavLinks";
 import Cookies from "universal-cookie";
 
-const Footer = async () => {
+interface FooterProps {
+	phone: string;
+	address: string;
+}
+
+const Footer: React.FC<FooterProps> = async ({phone, address}) => {
 
 	const cookies = new Cookies();
-
-	const phoneNumber = "+74955743853";
-	const address = "105082, г. Москва, Спартаковская площадь д. 10, стр. 12";
 
 	const t = await getTranslations("footer");
 	const tHeader = await getTranslations("header");
@@ -34,10 +36,10 @@ const Footer = async () => {
 				<div className="flex flex-col">
 					<a
 						className={`flex items-center ${styles.phoneLink}`}
-						href={`tel:${phoneNumber}`}
+						href={`tel:${phone}`}
 					>
 						<CallIcon />
-						{formatPhoneNumber(phoneNumber)}
+						{formatPhoneNumber(phone)}
 					</a>
 					<p className={`text-white ${styles.address}`}>
 						{address}

@@ -10,6 +10,7 @@ import {RootState} from "@/store";
 import Finder from "@/components/Finder";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {getContacts} from "@/api/contacts/api";
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -55,6 +56,7 @@ export default async function RootLayout({
   const locale = (await params).locale || 'ru';
 
   const messages = await getMessages();
+  const contacts = await getContacts();
 
   const initialState: Partial<RootState> = {
     finder: {
@@ -72,7 +74,7 @@ export default async function RootLayout({
             <Finder />
             <Header />
             {children}
-            <Footer />
+            <Footer {...contacts}/>
           </ReduxProvider>
         </NextIntlClientProvider>
       </body>

@@ -10,6 +10,8 @@ import MailIcon from "@/components/icons/MailIcon";
 import TelegramIcon from "@/components/icons/TelegramIcon";
 import WhatsappIcon from "@/components/icons/WhatsappIcon";
 import CompanyDesc from "@/components/CompanyDesc";
+import {getContacts} from "@/api/contacts/api";
+import {RichText} from "@/widgets/RichText";
 
 export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
 	const { locale } = await params;
@@ -26,13 +28,7 @@ export default async function AboutUsPage() {
 
 	const t = await getTranslations("AboutUsPage");
 
-	const phoneNumber = "+74955743853";
-	const mail = "support@work-rc.ru";
-
-	const address = "м. Бауманская, Спартаковская площадь д. 10 c12";
-
-	const workTime = "Пн - пт: 10:00 - 20:00";
-	const workTimeWeekend = "Cб - вс: 10:00 - 18:00";
+	const contacts = await getContacts();
 
 	return (
 		<MotionMain>
@@ -43,43 +39,40 @@ export default async function AboutUsPage() {
 						<div className={styles.infoBlock}>
 							<MapWidget />
 							<p className={styles.address}>
-								{address}
+								{contacts.address}
 							</p>
 						</div>
 						<div className={styles.infoBlock}>
 							<h2 className={styles.contactText}>{t("contacts")}</h2>
 							<a
-								href={`tel:${phoneNumber}`}
+								href={`tel:${contacts.phone}`}
 								className={styles.contactItem}
 							>
 								<CallIcon/>
 								<p>
-									{formatPhoneNumber(phoneNumber)}
+									{formatPhoneNumber(contacts.phone)}
 								</p>
 							</a>
 							<a
 								className={styles.contactItem}
-								href={`mailto:${mail}`}
+								href={`mailto:${contacts.email}`}
 							>
 								<MailIcon/>
 								<p>
-									{mail}
+									{contacts.email}
 								</p>
 							</a>
 							<div className={`flex ${styles.messengersBlock}`}>
-								<a href="">
+								<a href={`https://t.me/${contacts.tgIdentifier}`}>
 									<TelegramIcon/>
 								</a>
-								<a href="">
+								<a href={`https://wa.me/${contacts.whatsappIdentifier}`}>
 									<WhatsappIcon/>
 								</a>
 							</div>
 							<h2 className={`mt-auto ${styles.contactText}`}>{t("workTime")}</h2>
-							<p className={styles.contactItem}>
-								{workTime}
-							</p>
-							<p className={styles.contactItem}>
-								{workTimeWeekend}
+							<p>
+								<RichText text={contacts.workTime} />
 							</p>
 						</div>
 					</div>
