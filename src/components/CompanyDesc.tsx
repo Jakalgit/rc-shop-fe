@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "@/styles/pages/Home.module.css";
+import styles from "@/app/Pages/Home/ui/Home.module.css";
 import LogoIcon from "@/components/icons/LogoIcon";
 import {getTranslations} from "next-intl/server";
 

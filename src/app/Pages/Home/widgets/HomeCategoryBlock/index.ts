@@ -1,0 +1,1 @@
+export {HomeCategoryBlock} from "./ui/HomeCategoryBlock";
