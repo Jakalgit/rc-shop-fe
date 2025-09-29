@@ -11,6 +11,7 @@ import Finder from "@/components/Finder";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {getContacts} from "@/api/contacts/api";
+import {ProgressBar} from "@/widgets/ProgressBar";
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -69,6 +70,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${geologica.variable} ${manrope.variable} antialiased`}
       >
+        <ProgressBar />
         <NextIntlClientProvider messages={messages}>
           <ReduxProvider initialState={initialState}>
             <Finder />

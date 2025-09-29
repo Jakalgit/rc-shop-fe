@@ -9,14 +9,21 @@ import CloseIcon from "@/components/icons/CloseIcon";
 import {useTranslations} from "next-intl";
 import {useHomeHook} from "../../../providers/HomeProvider";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 export function SubCategoriesPopup() {
+
+	const router = useRouter();
 
 	const t = useTranslations("HomePage.SubCategoriesPopup");
 	const gridRef = useRef<HTMLDivElement>(null);
 	const itemRef = useRef<HTMLButtonElement>(null);
 
 	const {visibleSubCategoriesPopup, toggleSubCategoriesPopup, subCategories} = useHomeHook();
+
+	const onClickSubBlock = (href: string) => {
+		router.push(href);
+	}
 
 	useEffect(() => {
 		if (!visibleSubCategoriesPopup) return;
@@ -70,6 +77,7 @@ export function SubCategoriesPopup() {
 									key={i}
 									ref={itemRef}
 									className={`flex flex-col justify-between ${styles.gridItem}`}
+									onClick={() => onClickSubBlock(el.blockLink)}
 								>
 									<div className={`flex items-center justify-center ${styles.imageWrapper}`}>
 										<Image
