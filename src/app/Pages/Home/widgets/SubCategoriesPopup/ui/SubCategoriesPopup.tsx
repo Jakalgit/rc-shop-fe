@@ -80,11 +80,10 @@ export function SubCategoriesPopup() {
 										className={styles.gridItem}
 										onClick={() => onClickSubBlock(el.blockLink)}
 									>
-										<div className="flex flex-col justify-between h-full">
-											<div className={`flex items-center justify-center ${styles.imageWrapper}`}>
+										<div className="flex flex-col justify-between h-full w-full">
+											<div className={styles.imageWrapper}>
 												<Image
-													width={100}
-													height={100}
+													fill
 													src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${el.image}`}
 													alt={"image"}
 												/>

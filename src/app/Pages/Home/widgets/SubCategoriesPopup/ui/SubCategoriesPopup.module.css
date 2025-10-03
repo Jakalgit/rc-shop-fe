@@ -28,12 +28,14 @@
 .imageWrapper {
     width: 100%;
     flex: 1;
+    position: relative;
 }
 
 .imageWrapper img {
-    max-width: 90%;
-    max-height: 90%;
+    max-height: 85%;
     object-fit: contain;
+    top: 50% !important;
+    transform: translateY(-50%);
 }
 
 @media (max-width: 1199px) {
