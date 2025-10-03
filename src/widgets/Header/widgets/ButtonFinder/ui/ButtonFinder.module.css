@@ -1,0 +1,38 @@
+.button {
+    font-size: 12px;
+    gap: 7px;
+    padding: 0 11px;
+    height: 26px;
+    border-radius: 15px;
+    border: 1px solid var(--blue-color-1);
+    color: white;
+}
+
+.button svg {
+    width: 14px;
+    aspect-ratio: 1;
+    fill: white;
+}
+
+@media (max-width: 991px) {
+    .button {
+        font-size: 11px;
+        padding: 0 9px;
+        height: 22px;
+    }
+
+    .button svg {
+        width: 12px;
+    }
+}
+
+@media (max-width: 767px) {
+    .button {
+        font-size: 12px;
+        height: 24px;
+    }
+
+    .button svg {
+        width: 14px;
+    }
+}

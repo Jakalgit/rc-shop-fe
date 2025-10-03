@@ -7,6 +7,7 @@
     --gap: 13px;
 
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: min-content;
     gap: var(--gap);
     overflow-y: auto;
 }

@@ -1,13 +1,13 @@
 "use client";
 
-import React from 'react';
-import Button from "@/components/buttons/Button";
+import React from "react";
 import {useTranslations} from "next-intl";
-import SearchIcon from "@/components/icons/SearchIcon";
-import styles from "@/styles/components/Header.module.css";
 import {useActions} from "@/store/hooks";
+import Button from "@/components/buttons/Button";
+import styles from "./ButtonFinder.module.css";
+import SearchIcon from "@/components/icons/SearchIcon";
 
-const ButtonFinder = () => {
+export const ButtonFinder = React.memo(() => {
 
 	const t = useTranslations("header");
 
@@ -28,6 +28,4 @@ const ButtonFinder = () => {
 			<SearchIcon />
 		</Button>
 	);
-};
-
-export default ButtonFinder;
+});

@@ -8,10 +8,10 @@ import {NextIntlClientProvider} from "next-intl";
 import {ReduxProvider} from "@/store/ReduxProvider";
 import {RootState} from "@/store";
 import Finder from "@/components/Finder";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {getContacts} from "@/api/contacts/api";
 import {ProgressBar} from "@/widgets/ProgressBar";
+import {Header} from "@/widgets/Header";
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -74,7 +74,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ReduxProvider initialState={initialState}>
             <Finder />
-            <Header />
+            <Header {...contacts}/>
             {children}
             <Footer {...contacts}/>
           </ReduxProvider>

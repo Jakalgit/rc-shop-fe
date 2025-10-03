@@ -43,3 +43,9 @@
         width: 24px;
     }
 }
+
+@media (max-width: 345px) {
+    .blockSize {
+        width: 20px;
+    }
+}

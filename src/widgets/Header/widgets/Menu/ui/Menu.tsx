@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from "react";
+import styles from "./Menu.module.css";
+import {useTranslations} from "next-intl";
 import Button from "@/components/buttons/Button";
 import MenuIcon from "@/components/icons/MenuIcon";
-import styles from "@/styles/components/Menu.module.css";
-import {motion, AnimatePresence} from "framer-motion";
-import {useTranslations} from "next-intl";
+import {AnimatePresence, motion} from "framer-motion";
 import Link from "next/link";
 
 interface MenuProps {
@@ -15,7 +15,7 @@ interface MenuProps {
 	}[]
 }
 
-const Menu: React.FC<MenuProps> = ({ links }) => {
+export const Menu: React.FC<MenuProps> = React.memo(({links}) => {
 
 	const t = useTranslations("header");
 
@@ -72,6 +72,4 @@ const Menu: React.FC<MenuProps> = ({ links }) => {
 			</AnimatePresence>
 		</div>
 	);
-};
-
-export default Menu;
+})

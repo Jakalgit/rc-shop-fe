@@ -1,15 +1,20 @@
-import React from 'react';
+import {getTranslations} from "next-intl/server";
+import {cookies} from "next/headers";
+import {generateNavLinks} from "@/functions/generateNavLinks";
+import styles from "./Header.module.css";
 import {Container} from "react-bootstrap";
 import Link from "next/link";
-import {getTranslations} from "next-intl/server";
 import ShoppingBasketIcon from "@/components/icons/ShoppingBasketIcon";
-import ButtonFinder from "@/components/buttons/ButtonFinder";
-import Menu from "@/components/Menu";
-import {generateNavLinks} from "@/functions/generateNavLinks";
-import {cookies} from "next/headers";
-import styles from "@/styles/components/Header.module.css";
+import React from "react";
+import {formatPhoneNumber} from "@/functions/format";
+import {Menu} from "../widgets/Menu";
+import {ButtonFinder} from "@/widgets/Header/widgets/ButtonFinder";
 
-const Header = async () => {
+interface HeaderProps {
+	phone: string;
+}
+
+export const Header: React.FC<HeaderProps> = async ({ phone }) => {
 
 	const t = await getTranslations("header");
 
@@ -27,6 +32,9 @@ const Header = async () => {
 						WORK-RC
 					</h1>
 				</Link>
+				<a className={`flex items-center ${styles.phoneLink}`} href={`tel:${phone}`}>
+					{formatPhoneNumber(phone)}
+				</a>
 				<div className={`${styles.contentGap} flex items-center`}>
 					{links.map((el, i) =>
 						<Link
@@ -48,6 +56,4 @@ const Header = async () => {
 			</Container>
 		</header>
 	);
-};
-
-export default Header;
+}
