@@ -56,9 +56,9 @@ export function SubCategoriesPopup() {
 						className={`flex flex-col ${stylesPopup.popupContent} ${styles.popupContent}`}
 					>
 						<div className={`flex items-center justify-between ${stylesPopup.popupHead}`}>
-							<h2 id="login-popup-title">
+							<label id="show-sub-categories-popup-label">
 								{t("title")}
-							</h2>
+							</label>
 							<Button
 								className="p-0"
 								onClick={() => toggleSubCategoriesPopup(false)}
@@ -72,25 +72,32 @@ export function SubCategoriesPopup() {
 							ref={gridRef}
 							className={`grid ${styles.grid}`}
 						>
-							{subCategories.sort((a, b) => a.index - b.index).map((el, i) =>
-								<Button
-									key={i}
-									ref={itemRef}
-									className={`flex flex-col justify-between ${styles.gridItem}`}
-									onClick={() => onClickSubBlock(el.blockLink)}
-								>
-									<div className={`flex items-center justify-center ${styles.imageWrapper}`}>
-										<Image
-											width={100}
-											height={100}
-											src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${el.image}`}
-											alt={"image"}
-										/>
-									</div>
-									<h3 className="fw-normal">
-										{el.name}
-									</h3>
-								</Button>
+							{subCategories.length > 0 ? (
+								subCategories.sort((a, b) => a.index - b.index).map((el, i) =>
+									<Button
+										key={i}
+										ref={itemRef}
+										className={styles.gridItem}
+										onClick={() => onClickSubBlock(el.blockLink)}
+									>
+										<div className="flex flex-col justify-between h-full">
+											<div className={`flex items-center justify-center ${styles.imageWrapper}`}>
+												<Image
+													width={100}
+													height={100}
+													src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${el.image}`}
+													alt={"image"}
+												/>
+											</div>
+											<h3 className="fw-normal">
+												{el.name}
+											</h3>
+										</div>
+									</Button>
+								)
+							) : (
+								<>
+								</>
 							)}
 						</div>
 					</motion.div>
