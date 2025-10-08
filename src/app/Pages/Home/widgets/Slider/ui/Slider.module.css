@@ -1,0 +1,65 @@
+
+.wrapper {
+    margin-top: calc(-1 * var(--header-margin));
+    height: 700px;
+}
+
+.sliderDots {
+    --dot-size: 6px;
+    --dot-margin-left: 10px;
+
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.sliderDots ul {
+    list-style: none;
+    margin: -1px 0;
+    padding: 1px 0;
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    position: relative;
+}
+
+.dot {
+    border-radius: 6px;
+    width: var(--dot-size);
+    height: var(--dot-size);
+}
+
+.sliderDotsLi {
+    margin-left: var(--dot-margin-left);
+    background-color: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.leftBtn {
+    left: 0;
+}
+
+.rightBtn {
+    right: 0;
+}
+
+.mainDot {
+
+}
+
+.button {
+    width: 20%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+}
+
+.content {
+    padding-left: 80px;
+    padding-right: 80px;
+}

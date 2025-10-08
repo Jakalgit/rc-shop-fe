@@ -11,6 +11,7 @@ import {HomeCategoryBlock} from "../widgets/HomeCategoryBlock";
 import {SubCategoriesPopup} from "@/app/Pages/Home/widgets/SubCategoriesPopup";
 import {HomeProvider} from "../providers/HomeProvider";
 import {getCategories} from "@/api/category/api";
+import {Slider} from "@/app/Pages/Home/widgets/Slider";
 
 export async function Home() {
 
@@ -24,9 +25,10 @@ export async function Home() {
 	return (
 		<MotionMain>
 			<HomeProvider>
+				<Slider />
 				<Container>
 					<SubCategoriesPopup />
-					<PromotionsSlider items={responseSliderItems.map(el => ({image: el.filename, href: el.href}))} />
+					{/*<PromotionsSlider items={responseSliderItems.map(el => ({image: el.filename, href: el.href}))} />*/}
 					<CompanyDesc isHome={true} />
 					{responseHomeCategories.length > 0 && (
 						<div className={`flex flex-col ${styles.categories}`}>
