@@ -27,7 +27,6 @@ export async function Home() {
 				<Slider items={responseSliderItems} />
 				<Container>
 					<SubCategoriesPopup />
-					{/*<PromotionsSlider items={responseSliderItems.map(el => ({image: el.filename, href: el.href}))} />*/}
 					<CompanyDesc isHome={true} />
 					{responseHomeCategories.length > 0 && (
 						<div className={`flex flex-col ${styles.categories}`}>

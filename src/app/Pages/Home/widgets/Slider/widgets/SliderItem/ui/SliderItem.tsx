@@ -5,10 +5,11 @@ import stylesShared from "../../../shared-styles/SliderShared.module.css";
 import {AnimatePresence, motion} from "framer-motion";
 import {RichText} from "@/widgets/RichText";
 import ArrowRightIcon from "@/widgets/icons/ArrowRightIcon";
-import React, {useEffect, useRef} from "react";
+import React, {useCallback, useEffect, useRef} from "react";
 import {SlideResponse} from "@/api/promotion-slider/types";
 import {FastAverageColor} from "fast-average-color";
 import classNames from "classnames";
+import {useRouter} from "next/navigation";
 
 interface SliderItemProps {
 	slideIndex: number;
@@ -20,9 +21,14 @@ const fac = new FastAverageColor();
 
 export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex, item }) => {
 
+	const router = useRouter();
+
 	const imgRef = useRef<HTMLImageElement>(null);
-	const containerRef = useRef<HTMLDivElement>(null);
 	const [isLightClass, setIsLightClass] = React.useState(true);
+
+	const showContent = useCallback(() => {
+		router.push(item.href);
+	}, [router])
 
 	useEffect(() => {
 		const img = imgRef.current;
@@ -39,16 +45,9 @@ export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex
 		}
 	}, [currentIndex, imgRef]);
 
-	useEffect(() => {
-		if (containerRef.current) {
-			console.log(containerRef.current.getBoundingClientRect().width);
-		}
-	}, [containerRef]);
-
 	return (
 		<AnimatePresence>
 			<motion.div
-				ref={containerRef}
 				className={`relative ${styles.slideWrapper}`}
 				initial={{ width: currentIndex === slideIndex ? "100%" : 0 }}
 				animate={{ width: currentIndex === slideIndex ? "100%" : 0 }}
@@ -82,7 +81,10 @@ export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex
 								animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
 								transition={{delay: 1, duration: 0.5}}
 							>
-								<button className={styles.buttonView}>
+								<button
+									onClick={showContent}
+									className={styles.buttonView}
+								>
 									{item.buttonText}
 									<ArrowRightIcon/>
 								</button>
