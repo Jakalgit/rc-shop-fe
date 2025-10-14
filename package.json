@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "1.11.0",
     "bootstrap": "^5.3.6",
+    "fast-average-color": "^9.5.0",
     "framer-motion": "^12.15.0",
     "html-react-parser": "^5.2.5",
     "i18n": "^0.15.1",

@@ -2,101 +2,19 @@
 
 import React, {useEffect, useRef, useState} from "react";
 import styles from "./Slider.module.css";
-import {AnimatePresence, motion} from "framer-motion";
+import stylesShared from "../shared-styles/SliderShared.module.css";
+import {motion} from "framer-motion";
 import classNames from "classnames";
-import {Container} from "react-bootstrap";
+import {SliderItem} from "../widgets/SliderItem";
+import {SlideResponse} from "@/api/promotion-slider/types";
 
-const slides = [
-	{
-		id: 1,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 2,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	},
-	{
-		id: 3,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 4,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	},
-	{
-		id: 5,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 6,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	},
-	{
-		id: 7,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 8,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	},
-	{
-		id: 9,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 10,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	},
-	{
-		id: 11,
-		image: "/test/GOARC_hero.jpg",
-		title: "Ремонт моделей",
-		text: "Обслуживание и тюнинг вашей модели",
-		button: "Подробнее"
-	},
-	{
-		id: 12,
-		image: "/test/GOARC_hero.jpg",
-		title: "Модели Traxxas",
-		text: "Открой для себя лучшие новинки сезона",
-		button: "Смотреть"
-	}
-];
+interface SliderProps {
+	items: SlideResponse[];
+}
 
-export const Slider = React.memo(() => {
+export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 
-	const [direction, setDirection] = useState<number>(0);
-	const [index, setIndex] = useState<number>(1);
+	const [slideIndex, setSlideIndex] = useState<number>(0);
 
 	const [dotSize, setDotSize] = useState<number>(0);
 	const [dotMarginLeft, setDotMarginLeft] = useState<number>(0);
@@ -104,36 +22,12 @@ export const Slider = React.memo(() => {
 	const sliderDotsRef = useRef<HTMLDivElement>(null);
 
 	const nextSlide = () => {
-		setDirection(1);
-		setIndex((prev) => (prev + 1) % slides.length);
+		setSlideIndex((prev) => (prev + 1) % items.length);
 	};
 
 	const prevSlide = () => {
-		setDirection(-1);
-		setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+		setSlideIndex((prev) => (prev - 1 + items.length) % items.length);
 	};
-
-	const variants = {
-		enter: (dir: 1 | -1) => ({
-			x: dir > 0 ? 200 : -200,
-			opacity: 0,
-			scale: 0.95,
-		}),
-		center: {
-			x: 0,
-			opacity: 1,
-			scale: 1,
-			transition: { duration: 0.8, ease: "easeOut" },
-		},
-		exit: (dir: 1 | -1) => ({
-			x: dir > 0 ? -200 : 200,
-			opacity: 0,
-			scale: 0.95,
-			transition: { duration: 0.6, ease: "easeIn" },
-		}),
-	};
-
-	const slide = slides[index];
 
 	useEffect(() => {
 		if (sliderDotsRef.current) {
@@ -147,33 +41,30 @@ export const Slider = React.memo(() => {
 	}, [sliderDotsRef]);
 
 	return (
-		<div className={`relative w-full overflow-hidden ${styles.wrapper}`}>
-			<AnimatePresence custom={direction}>
-
-			</AnimatePresence>
-
-			<div className={`absolute w-full h-full ${styles.content}`}>
-				<Container>
-
-				</Container>
-			</div>
-
+		<div className={`relative w-full overflow-hidden ${styles.wrapper} ${stylesShared.contentHeight}`}>
+			{items.map((slide, index) =>
+				<SliderItem
+					key={index}
+					slideIndex={slideIndex}
+					currentIndex={index}
+					item={slide}
+				/>
+			)}
 			<nav
 				ref={sliderDotsRef}
 				className={`absolute ${styles.sliderDots}`}
 			>
 				<motion.ul
-					style={{ width: `${(dotMarginLeft + dotSize) * slides.length}px` }}
+					style={{width: `${(dotMarginLeft + dotSize) * items.length}px`}}
 					animate={{
-						left: -dotMarginLeft - (index - 1) * (dotMarginLeft + dotSize)
+						left: -dotMarginLeft - (slideIndex - 1) * (dotMarginLeft + dotSize)
 					}}
 				>
-					{slides.map((s, i) => (
-						<li className={classNames(styles.dot, styles.sliderDotsLi)} key={i} />
+					{items.map((s, i) => (
+						<li className={classNames(styles.dot, styles.sliderDotsLi)} key={i}/>
 					))}
 				</motion.ul>
 			</nav>
-
 			<button
 				onClick={prevSlide}
 				className={classNames(styles.button, styles.leftBtn)}

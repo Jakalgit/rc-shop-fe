@@ -1,0 +1,164 @@
+
+.slideWrapper {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.contentWrapper {
+    padding: 0 80px;
+    z-index: 2;
+}
+
+.light {
+    --text-color: white;
+    --button-text-color: black;
+    --button-color: white;
+    --content-background: rgba(0, 0, 0, 0.35);
+    --content-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark {
+    --text-color: black;
+    --button-text-color: white;
+    --button-color: black;
+    --content-background: rgba(255, 255, 255, 0.35);
+    --content-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.content {
+    display: flex;
+    width: 45vw;
+    color: var(--text-color);
+}
+
+.content > div {
+    background-color: var(--content-background);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
+    box-shadow: var(--content-shadow);
+}
+
+.content h2 {
+    font-size: 60px;
+    margin: 0 0 5px;
+    font-weight: 500;
+}
+
+.content .description {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.buttonView {
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttonView svg {
+    fill: var(--button-text-color);
+    width: 28px;
+    aspect-ratio: 1;
+}
+
+@media (max-width: 1199px) {
+    .content h2 {
+        font-size: 46px;
+    }
+
+    .content .description {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .buttonView {
+        padding: 0 20px;
+        height: 42px;
+        font-size: 14px;
+        border-radius: 4px;
+        gap: 10px;
+    }
+
+    .buttonView svg {
+        fill: var(--button-text-color);
+        width: 22px;
+        aspect-ratio: 1;
+    }
+}
+
+@media (max-width: 991px) {
+    .contentWrapper {
+        padding: 0 40px;
+    }
+
+    .content {
+        width: 50vw;
+    }
+
+    .content > div {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .content h2 {
+        font-size: 40px;
+        margin: 0 0 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .content h2 {
+        font-size: 36px;
+    }
+
+    .content .description {
+        font-size: 14px;
+    }
+
+    .content > div {
+        padding: 15px;
+    }
+
+    .content {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 575px) {
+    .content h2 {
+        font-size: 32px;
+    }
+
+    .buttonView {
+        padding: 0 15px;
+        height: 36px;
+        gap: 8px;
+    }
+
+    .buttonView svg {
+        width: 20px;
+    }
+
+    .contentWrapper {
+        padding: 0 30px;
+    }
+}

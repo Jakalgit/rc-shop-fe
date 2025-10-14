@@ -1,0 +1,24 @@
+
+.contentHeight {
+    height: calc(100vh - 220px);
+    min-height: 530px;
+}
+
+@media (max-width: 1199px) {
+    .contentHeight {
+        min-height: 450px;
+    }
+}
+
+@media (max-width: 991px) {
+    .contentHeight {
+        height: calc(90vh - 220px);
+    }
+}
+
+@media (max-width: 575px) {
+    .contentHeight {
+        height: 420px;
+        min-height: 420px;
+    }
+}

@@ -2,7 +2,6 @@ import {getTranslations} from "next-intl/server";
 import {getSlides} from "@/api/promotion-slider/api";
 import MotionMain from "@/components/MotionMain";
 import {Container} from "react-bootstrap";
-import PromotionsSlider from "@/components/PromotionsSlider";
 import CompanyDesc from "@/components/CompanyDesc";
 import styles from "./Home.module.css";
 import Button from "@/components/buttons/Button";
@@ -25,7 +24,7 @@ export async function Home() {
 	return (
 		<MotionMain>
 			<HomeProvider>
-				<Slider />
+				<Slider items={responseSliderItems} />
 				<Container>
 					<SubCategoriesPopup />
 					{/*<PromotionsSlider items={responseSliderItems.map(el => ({image: el.filename, href: el.href}))} />*/}
