@@ -1,16 +1,16 @@
-import React from 'react';
-import styles from "@/styles/components/CatalogItem.module.css";
-import Image from "next/image";
-import {getTranslations} from "next-intl/server";
-import {formatPrice} from "@/functions/format";
 import {ProductResponse} from "@/api/products/types";
-import ButtonAddToCart from "@/components/catalog/ButtonAddToCart";
+import React from "react";
+import {getTranslations} from "next-intl/server";
+import styles from "./CatalogItem.module.css";
+import Image from "next/image";
+import {formatPrice} from "@/functions/format";
+import {ButtonAddToCart} from "../widgets/ButtonAddToCart";
 
 interface IProps {
 	item: ProductResponse
 }
 
-const CatalogItem: React.FC<IProps> = async ({ item }) => {
+export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 
 	const t = await getTranslations("CatalogPage.item");
 
@@ -78,6 +78,4 @@ const CatalogItem: React.FC<IProps> = async ({ item }) => {
 			/>
 		</article>
 	);
-};
-
-export default CatalogItem;
+})

@@ -6,11 +6,8 @@ import Button from "@/components/buttons/Button";
 import styles from "@/styles/components/filters/CatalogFilter.module.css";
 import FilterCategory from "@/components/filters/FilterCategory";
 import {TagFilersResponse} from "@/api/tags/types";
-import {getTagsForFilter} from "@/api/tags/api";
 import {AnimatePresence, motion} from "framer-motion";
-import {DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE} from "@/consts/filters";
 import {useRouter} from "next/navigation";
-import Loading from "@/components/Loading";
 import FilterDropdownPriceRange from "@/components/filters/FilterDropdownPriceRange";
 
 export interface IFilterProps {
@@ -21,9 +18,12 @@ export interface IFilterProps {
 	partner: boolean;
 	wMinPrice: number;
 	wMaxPrice: number;
+	tagsForFilter: TagFilersResponse;
 }
 
-const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, finder, partner, wMaxPrice, wMinPrice }) => {
+const FiltersComponent: React.FC<IFilterProps> = (
+	{ minPrice, maxPrice, tagIds, finder, partner, wMaxPrice, wMinPrice, tagsForFilter }
+) => {
 
 	const priceFilterId = "price";
 	const wholesaleFilterId = "wholesalePrice";
@@ -32,10 +32,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 
 	const router = useRouter();
 
-	const [responseTags, setResponseTags] = useState<TagFilersResponse | null>(null);
-	const [loading, setLoading] = useState(true);
-
-	const [isVisibleClearFilters, setIsVisibleClearFilters] = useState(false);
 	const [isVisibleSetFilters, setIsVisibleSetFilters] = useState(false);
 
 	const t = useTranslations("CatalogPage.filters");
@@ -66,15 +62,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 		}
 	}, [tagsFilter]);
 
-	// Обработчик нажатия на кнопку "Сбросить фильтры"
-	const clearAllFilters = useCallback(() => {
-		let url = `/catalog`;
-		if (finder) {
-			url += `?finder=${finder}`;
-		}
-		window.location.href = url;
-	}, [router]);
-
 	// Обработчик нажатия на кнопку "Применить фильтры"
 	const setSelectedFilters = useCallback(() => {
 		let url = `/catalog?min=${priceRange[0]}&max=${priceRange[1]}`;
@@ -97,34 +84,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 	}
 
 	useEffect(() => {
-		async function getData() {
-			try {
-				const response = await getTagsForFilter();
-
-				setResponseTags(response);
-
-				setLoading(false);
-			} catch (e: any) {
-				alert(e?.response?.data?.message);
-			}
-		}
-
-		getData();
-	}, []);
-
-	useEffect(() => {
-		if (
-			minPrice !== DEFAULT_MIN_PRICE || maxPrice !== DEFAULT_MAX_PRICE ||
-			wMinPrice !== DEFAULT_MIN_PRICE || wMaxPrice !== DEFAULT_MAX_PRICE ||
-			!arraysEqual(tagIds, [])
-		) {
-			setIsVisibleClearFilters(true);
-		} else {
-			setIsVisibleClearFilters(false);
-		}
-	}, []);
-
-	useEffect(() => {
 		if (
 			minPrice !== priceRange[0] || maxPrice !== priceRange[1] ||
 			wMinPrice !== wholesalePriceRange[0] || wMaxPrice !== wholesalePriceRange[1] ||
@@ -135,14 +94,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 			setIsVisibleSetFilters(false);
 		}
 	}, [priceRange, wholesalePriceRange, tagsFilter]);
-
-	if (loading) {
-		return (
-			<div className="flex items-center justify-center">
-				<Loading className={styles.loadingSvg} />
-			</div>
-		)
-	}
 
 	return (
 		<>
@@ -162,21 +113,6 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 							className={`w-full ${styles.clearFilters} ${styles.setFilters}`}
 						>
 							{t("buttonSetFilter.title")}
-						</Button>
-					</motion.div>
-				)}
-				{isVisibleClearFilters && (
-					<motion.div
-						key="clearFilters"
-						style={{overflow: "hidden"}}
-					>
-						<Button
-							onClick={() => clearAllFilters()}
-							title={t("buttonClearFilter.title")}
-							aria-label={t("buttonClearFilter.ariaLabel")}
-							className={`w-full ${styles.clearFilters}`}
-						>
-							{t("buttonClearFilter.title")}
 						</Button>
 					</motion.div>
 				)}
@@ -201,7 +137,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 					onClick={onClickFilter}
 				/>
 			)}
-			{responseTags?.listOfGroups.map((item, index) =>
+			{tagsForFilter?.listOfGroups.map((item, index) =>
 				<FilterCategory
 					title={item.name}
 					isFilterOpen={openFilterId === item.name}
@@ -216,7 +152,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 				title={t("buttonOtherCategory.title")}
 				isFilterOpen={openFilterId === otherCategoryFilterId}
 				onClick={() => onClickFilter(otherCategoryFilterId)}
-				tags={responseTags?.tagsWithoutGroup || []}
+				tags={tagsForFilter?.tagsWithoutGroup || []}
 				selectedTagIds={tagsFilter}
 				addTagToFilter={addTagToFilter}
 			/>
@@ -224,7 +160,7 @@ const FiltersComponent: React.FC<IFilterProps> = ({ minPrice, maxPrice, tagIds, 
 				title={t("buttonAllCategory.title")}
 				isFilterOpen={openFilterId === allCategoryFilterId}
 				onClick={() => onClickFilter(allCategoryFilterId)}
-				tags={responseTags?.listOfTags || []}
+				tags={tagsForFilter?.listOfTags || []}
 				addTagToFilter={addTagToFilter}
 				selectedTagIds={tagsFilter}
 			/>

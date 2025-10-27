@@ -10,12 +10,14 @@ import FiltersComponent from "@/components/filters/FiltersComponent";
 import CloseIcon from "@/components/icons/CloseIcon";
 import { useSearchParams } from 'next/navigation';
 import {DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE} from "@/consts/filters";
+import {TagFilersResponse} from "@/api/tags/types";
 
 interface FilterPopupProps {
 	partner: boolean;
+	tagsForFilter: TagFilersResponse;
 }
 
-const FilterPopup: React.FC<FilterPopupProps> = ({ partner }) => {
+const FilterPopup: React.FC<FilterPopupProps> = ({ partner, tagsForFilter }) => {
 
 	const t = useTranslations("CatalogPage.filters");
 	const searchParams = useSearchParams();
@@ -89,6 +91,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ partner }) => {
 										wMinPrice={wMinPrice}
 										wMaxPrice={wMaxPrice}
 										partner={partner}
+										tagsForFilter={tagsForFilter}
 									/>
 								</div>
 							</div>

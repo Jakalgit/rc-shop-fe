@@ -2,15 +2,15 @@ import {getTranslations} from "next-intl/server";
 import {getSlides} from "@/api/promotion-slider/api";
 import MotionMain from "@/components/MotionMain";
 import {Container} from "react-bootstrap";
-import CompanyDesc from "@/components/CompanyDesc";
 import styles from "./Home.module.css";
-import Button from "@/components/buttons/Button";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {HomeCategoryBlock} from "../widgets/HomeCategoryBlock";
 import {SubCategoriesPopup} from "@/app/Pages/Home/widgets/SubCategoriesPopup";
 import {HomeProvider} from "../providers/HomeProvider";
 import {getCategories} from "@/api/category/api";
 import {Slider} from "@/app/Pages/Home/widgets/Slider";
+import Link from "next/link";
+import {RoutesEnum} from "@/shared";
 
 export async function Home() {
 
@@ -27,21 +27,21 @@ export async function Home() {
 				<Slider items={responseSliderItems} />
 				<Container>
 					<SubCategoriesPopup />
-					<CompanyDesc isHome={true} />
 					{responseHomeCategories.length > 0 && (
 						<div className={`flex flex-col ${styles.categories}`}>
 							<div className="flex justify-between items-center">
 								<h2>
 									{t("categories")}
 								</h2>
-								<Button
+								<Link
+									href={RoutesEnum.CATALOG}
 									title={t("buttonShowCatalog.title")}
 									aria-label={t("buttonShowCatalog.ariaLabel")}
-									className={`flex items-center ${styles.showCatalogButton}`}
+									className={`flex items-center justify-center ${styles.showCatalogButton}`}
 								>
 									{t("buttonShowCatalog.title")}
 									<ChevronRightIcon/>
-								</Button>
+								</Link>
 							</div>
 							<div className={`flex flex-wrap ${styles.categoryBlocks}`}>
 								{responseHomeCategories.sort((a, b) => a.index - b.index).map((item, i) =>

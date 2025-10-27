@@ -1,10 +1,10 @@
+import {PrivacyPolicy} from "../Pages/PrivacyPolicy";
 import {getTranslations} from "next-intl/server";
-import {Catalog} from "@/app/Pages/Catalog";
 
 export async function generateMetadata({ params }: {params: Promise<{locale: string}>}) {
 	const { locale } = await params;
 
-	const t = await getTranslations({ locale, namespace: 'CatalogPage' });
+	const t = await getTranslations({ locale, namespace: 'PrivacyPolicyPage' });
 
 	return {
 		title: t('title'),
@@ -12,4 +12,4 @@ export async function generateMetadata({ params }: {params: Promise<{locale: str
 	};
 }
 
-export default Catalog;
+export default PrivacyPolicy;

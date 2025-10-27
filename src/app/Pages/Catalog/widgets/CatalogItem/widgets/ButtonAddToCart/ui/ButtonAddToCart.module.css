@@ -1,0 +1,16 @@
+
+.addToCart {
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: white;
+    height: 30px;
+    background-color: var(--foreground-color);
+}
+
+@media (max-width: 375px) {
+    .addToCart {
+        font-size: 11px;
+        border-radius: 7px;
+    }
+}

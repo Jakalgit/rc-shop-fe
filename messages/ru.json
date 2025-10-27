@@ -175,10 +175,46 @@
         "ariaLabel": "Посмотреть услуги ремонта"
       }
     },
+    "activeFilters": {
+      "title": "Активные фильтры",
+      "buttonClearFilter": {
+        "title": "Сбросить фильтр",
+        "ariaLabel": "Нажмите чтобы сбросить все настройки фильтра"
+      },
+      "priceTitle": "Цена",
+      "wholesalePriceTitle": "Оптовая цена",
+      "groupsTitle": "Фильтры по группам",
+      "tagsTitle": "Фильтры по тегам",
+      "priceRange": {
+        "from": "от",
+        "to": "до"
+      }
+    },
     "finderRequest": "<bold>Ваш запрос:</bold> {request}",
     "buttonClearFinder": {
       "title": "Сбросить поиск",
       "ariaLabel": "Сбросить поисковой запрос"
+    },
+    "sortingSection": {
+      "availabilityCheckbox": "Показывать отсутствующие товары",
+      "buttonSorting": {
+        "title": "Сортировка",
+        "ariaLabel": "Выбрать сортировку"
+      },
+      "sortTypes": {
+        "default": {
+          "title": "По умолчанию",
+          "ariaLabel": "Нажмите, чтобы выбрать сортировку по умолчанию"
+        },
+        "priceAsc": {
+          "title": "Дешевле",
+          "ariaLabel": "Нажмите, чтобы посмотреть сначала дешёвые товары"
+        },
+        "priceDesc": {
+          "title": "Дороже",
+          "ariaLabel": "Нажмите, чтобы посмотреть сначала дорогие товары"
+        }
+      }
     },
     "item": {
       "oldPrice": "Старая цена:",
@@ -191,10 +227,6 @@
       "successAdded": "Товар добавлен в корзину"
     },
     "filters": {
-      "buttonClearFilter": {
-        "title": "Сбросить фильтр",
-        "ariaLabel": "Нажмите чтобы сбросить все настройки фильтра"
-      },
       "buttonSetFilter": {
         "title": "Применить фильтры",
         "ariaLabel": "Нажмите, чтобы применить выбранные фильтры"
@@ -515,5 +547,13 @@
     "title": "Доставка и оплата",
     "description": "Информация о доставке и оплате заказов",
     "head": "Доставка и оплата"
+  },
+  "PersonalDataPage": {
+    "title": "Согласие на обработку персональных данных",
+    "description": "Согласие на обработку персональных данных"
+  },
+  "PrivacyPolicyPage": {
+    "title": "Политика конфиденциальности",
+    "description": "Политика конфиденциальности"
   }
 }

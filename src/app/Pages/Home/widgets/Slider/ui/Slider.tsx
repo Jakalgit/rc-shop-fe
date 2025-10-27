@@ -20,13 +20,28 @@ export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 	const [dotMarginLeft, setDotMarginLeft] = useState<number>(0);
 
 	const sliderDotsRef = useRef<HTMLDivElement>(null);
+	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+	const genInterval = () => {
+		return setInterval(() => {
+			setSlideIndex(prevState => (prevState + 1) % items.length);
+		}, 10000);
+	}
 
 	const nextSlide = () => {
 		setSlideIndex((prev) => (prev + 1) % items.length);
+		if (intervalRef.current) {
+			clearInterval(intervalRef.current);
+			intervalRef.current = genInterval();
+		}
 	};
 
 	const prevSlide = () => {
 		setSlideIndex((prev) => (prev - 1 + items.length) % items.length);
+		if (intervalRef.current) {
+			clearInterval(intervalRef.current);
+			intervalRef.current = genInterval();
+		}
 	};
 
 	useEffect(() => {
@@ -39,6 +54,16 @@ export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 			setDotMarginLeft(dotMarginLeft);
 		}
 	}, [sliderDotsRef]);
+
+	useEffect(() => {
+		intervalRef.current = genInterval();
+
+		return () => {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+		}
+	}, []);
 
 	return (
 		<div className={`relative w-full overflow-hidden ${styles.wrapper} ${stylesShared.contentHeight}`}>

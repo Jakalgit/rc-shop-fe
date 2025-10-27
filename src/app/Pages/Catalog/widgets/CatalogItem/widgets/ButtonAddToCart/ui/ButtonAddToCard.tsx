@@ -1,10 +1,10 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import {useTranslations} from "next-intl";
-import Button from "@/components/buttons/Button";
 import {saveCartToLocalStorage} from "@/shared/lib/func/localStorageCart";
-import styles from "@/styles/components/CatalogItem.module.css";
+import Button from "@/components/buttons/Button";
+import styles from "./ButtonAddToCart.module.css";
 
 interface IProps {
 	article: string;
@@ -12,7 +12,7 @@ interface IProps {
 	count: number;
 }
 
-const ButtonAddToCart: React.FC<IProps> = ({ availability, article, count }) => {
+export const ButtonAddToCart: React.FC<IProps> = React.memo(({ availability, article, count }) => {
 
 	const t = useTranslations("CatalogPage.item");
 
@@ -35,6 +35,4 @@ const ButtonAddToCart: React.FC<IProps> = ({ availability, article, count }) => 
 			{t("buttonAddToCart.title")}
 		</Button>
 	);
-};
-
-export default ButtonAddToCart;
+})

@@ -1,0 +1,78 @@
+
+.section {
+    margin-bottom: 30px;
+}
+
+.labelCheckbox {
+    font-size: 14px;
+    gap: 7px;
+    cursor: pointer;
+}
+
+.labelCheckbox input {
+    display: none;
+}
+
+.labelCheckbox span {
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    border: 2px solid var(--foreground-color)
+}
+
+.labelCheckbox span > svg {
+    display: none;
+    width: 90%;
+    aspect-ratio: 1;
+    fill: white;
+}
+
+.labelCheckbox input:checked + span > svg  {
+    display: block;
+}
+
+.labelCheckbox input:checked + span  {
+    background-color: var(--blue-color-1);
+    border-color: var(--blue-color-1);
+}
+
+.buttonSorting {
+    gap: 7px;
+    font-size: 14px;
+}
+
+.buttonSorting svg {
+    width: 22px;
+    aspect-ratio: 1;
+    fill: black;
+}
+
+.sortUl {
+    list-style: none;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 180px;
+    top: calc(100% - 5px);
+    right: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+.sortUl li > button {
+    padding: 7px 14px;
+    font-size: 14px;
+    height: auto;
+    width: 100%;
+    border-radius: 0;
+}
+
+.sortUl li > button:hover {
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+.sortUl li > button svg {
+    width: 16px;
+    aspect-ratio: 1;
+    fill: black;
+}

@@ -356,12 +356,8 @@ export const NewOrder: React.FC = () => {
 										onChange={(e) => setPolicyChecked(e.target.checked)}
 										required
 									/>
-									Я согласен(а) с
-									&nbsp;<a href="/privacy-policy" target="_blank" rel="noopener noreferrer">политикой
-									конфиденциальности</a>
-									&nbsp;и
-									&nbsp;<a href="/user-agreement" target="_blank" rel="noopener noreferrer">пользовательским
-									соглашением</a>
+									Я даю согласие на
+									&nbsp;<a href="/personal-data" target="_blank" rel="noopener noreferrer">обработку персональных данных</a>
 								</label>
 								<Button
 									title={t("buttonSendOrder.title")}

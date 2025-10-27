@@ -44,15 +44,6 @@
     margin-top: 2px;
 }
 
-.addToCart {
-    margin-top: 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    color: white;
-    height: 30px;
-    background-color: var(--foreground-color);
-}
-
 .promptLine {
     --prompt-line-margin: var(--padding-border);
 
@@ -181,16 +172,8 @@
         font-size: 16px;
     }
 
-    .addToCart {
-        font-size: 11px;
-    }
-
     .wholesalePriceBlock {
         font-size: 11px;
-    }
-
-    .wholesalePriceBlock, .addToCart {
-        border-radius: 7px;
     }
 
     .promptLine {

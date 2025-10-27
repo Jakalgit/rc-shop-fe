@@ -25,7 +25,7 @@ export const Menu: React.FC<MenuProps> = React.memo(({links}) => {
 	useEffect(() => {
 		const handleClickOutside = (event: any) => {
 			if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-				setTimeout(() => setIsMenuOpen(false), 100);
+				setTimeout(() => setIsMenuOpen(false), 300);
 			}
 		}
 

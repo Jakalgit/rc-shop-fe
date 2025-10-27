@@ -1,3 +1,5 @@
+import {SortOrder} from "@/shared/lib/sorting/sorting";
+
 export interface GetProductPagination {
 	id?: number;
 	finder?: string;
@@ -10,6 +12,8 @@ export interface GetProductPagination {
 	maxPrice?: number;
 	wMaxPrice?: number;
 	wMinPrice?: number;
+	unavailable?: number;
+	sort?: SortOrder;
 }
 
 export enum DetailEnum {

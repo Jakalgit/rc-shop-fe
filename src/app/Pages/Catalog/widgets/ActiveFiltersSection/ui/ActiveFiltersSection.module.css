@@ -1,0 +1,167 @@
+
+.section {
+    border: 1px solid var(--space-color-1);
+    border-radius: 14px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.sectionHeader {
+
+}
+
+.section h3 {
+    font-size: 20px;
+}
+
+.clearButton {
+    color: white;
+    background-color: var(--red-color);
+    height: 34px;
+    font-size: 14px;
+    border-radius: 8px;
+    padding: 0 10px 0 7px;
+}
+
+.clearButton svg {
+    margin-right: 10px;
+    width: 20px;
+    aspect-ratio: 1;
+}
+
+.grid {
+    margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.gridCell {
+    gap: 9px;
+}
+
+.gridCell h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.priceRange {
+    font-size: 14px;
+    gap: 13px;
+}
+
+.priceRange svg {
+    width: 22px;
+    aspect-ratio: 1;
+    fill: var(--blue-color-1);
+}
+
+.tagList {
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.tagList li {
+    height: 20px;
+    padding: 0 12px;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--space-color-1);
+}
+
+@media (max-width: 991px) {
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .section h3 {
+        font-size: 18px;
+    }
+
+    .clearButton {
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .clearButton svg {
+        margin-right: 8px;
+        width: 18px;
+    }
+
+    .grid {
+        margin-top: 15px;
+        gap: 14px;
+    }
+
+    .gridCell h4 {
+        font-size: 14px;
+    }
+
+    .priceRange {
+        font-size: 13px;
+        gap: 10px;
+    }
+
+    .priceRange svg {
+        width: 20px;
+    }
+
+    .tagList {
+        gap: 8px;
+    }
+
+    .tagList li {
+        padding: 0 10px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 767px) {
+    .grid {
+        gap: 20px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 450px) {
+    .section {
+        margin-bottom: 10px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    .section h3 {
+        font-size: 16px;
+    }
+
+    .clearButton {
+        height: 28px;
+        font-size: 12px;
+        padding: 0 8px 0 5px;
+    }
+
+    .clearButton svg {
+        margin-right: 5px;
+        width: 16px;
+    }
+}
+
+@media (max-width: 350px) {
+    .section h3 {
+        font-size: 15px;
+    }
+
+    .clearButton {
+        height: 26px;
+        font-size: 11px;
+        padding: 0 8px 0 5px;
+    }
+
+    .clearButton svg {
+        margin-right: 5px;
+        width: 16px;
+    }
+}
