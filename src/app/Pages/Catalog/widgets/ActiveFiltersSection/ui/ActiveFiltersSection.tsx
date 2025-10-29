@@ -62,6 +62,8 @@ export const ActiveFiltersSection: React.FC<IProps> = React.memo(({data}) => {
 		el => data.tagIds.includes(el.id)
 	).map(el => el.name);
 
+	console.log(data);
+
 	if (!visiblePanel) return null;
 
 	return (
@@ -81,7 +83,7 @@ export const ActiveFiltersSection: React.FC<IProps> = React.memo(({data}) => {
 				</Button>
 			</div>
 			<div className={`grid ${styles.grid}`}>
-				{data.minPrice !== DEFAULT_MIN_PRICE || data.maxPrice !== DEFAULT_MAX_PRICE && (
+				{(data.minPrice !== DEFAULT_MIN_PRICE || data.maxPrice !== DEFAULT_MAX_PRICE) && (
 					<PriceRange
 						title={t('priceTitle')}
 						from={data.minPrice}

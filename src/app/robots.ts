@@ -7,7 +7,8 @@ export default function robots(): MetadataRoute.Robots {
 		rules: [
 			{
 				userAgent: "*",
-				disallow: ["/reset-password", "/profile", "/order", "/new-order", "/confirmation-update"],
+				disallow: ['/reset-password', '/profile', '/order', '/new-order',
+					'/confirmation-update', '/privacy-policy', '/personal-data'],
 			},
 			{
 				userAgent: "*",
