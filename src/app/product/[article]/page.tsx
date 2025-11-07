@@ -12,15 +12,15 @@ import {getProducts} from "@/api/products/api";
 import NotFound from "next/dist/client/components/not-found-error";
 import {cookies} from "next/headers";
 
-export async function generateMetadata({ params }: {params: Promise<{locale: string, article: string}>}) {
-	const { locale, article } = await params;
+export async function generateMetadata({ params }: {params: any}) {
+	const { locale, article } = params;
 	const t = await getTranslations({ locale, namespace: 'ProductPage' });
 
 	// Получаем токен авторизации
 	const cookieStore = await cookies();
 	const act: string = cookieStore.get("act")?.value || "";
 
-	const response = await getProducts({ article, limit: 1 }, act);
+	const response = await getProducts({ article, unavailable: Number(true), limit: 1 }, act);
 
 	const product = response.records[0];
 
@@ -46,7 +46,7 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 	const cookieStore = await cookies();
 	const act: string = cookieStore.get("act")?.value || "";
 
-	const response = await getProducts({article, limit: 1}, act);
+	const response = await getProducts({article, unavailable: Number(true), limit: 1}, act);
 
 	if (response.records.length === 0) {
 		return NotFound();
