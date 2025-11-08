@@ -9,11 +9,11 @@ import {generateNavLinks} from "@/functions/generateNavLinks";
 import Cookies from "universal-cookie";
 
 interface FooterProps {
-	phone: string;
+	phone1: string;
 	address: string;
 }
 
-const Footer: React.FC<FooterProps> = async ({phone, address}) => {
+const Footer: React.FC<FooterProps> = async ({phone1, address}) => {
 
 	const cookies = new Cookies();
 
@@ -36,10 +36,10 @@ const Footer: React.FC<FooterProps> = async ({phone, address}) => {
 				<div className="flex flex-col">
 					<a
 						className={`flex items-center ${styles.phoneLink}`}
-						href={`tel:${phone}`}
+						href={`tel:${phone1}`}
 					>
 						<CallIcon />
-						{formatPhoneNumber(phone)}
+						{formatPhoneNumber(phone1)}
 					</a>
 					<p className={`text-white ${styles.address}`}>
 						{address}

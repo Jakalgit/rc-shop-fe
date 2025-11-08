@@ -7,37 +7,20 @@ import Button from "@/components/buttons/Button";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {motion} from "framer-motion";
 import Image from "next/image";
+import {ProductGroupItemResponse} from "@/api/product-groups/types";
+import {getProductGroupItems} from "@/api/product-groups/api";
 
 interface IProps {
-
+	article: string;
+	productGroupId: number;
 }
 
-const SimilarProducts: React.FC<IProps> = () => {
+const SimilarProducts: React.FC<IProps> = ({ productGroupId, article }) => {
 
 	const t = useTranslations("ProductPage");
 
-	const items = [
-		{
-			image: "kraton.png",
-			href: "",
-		},
-		{
-			image: "xmax.png",
-			href: "",
-		},
-		{
-			image: "felony.png",
-			href: "",
-		},
-		{
-			image: "kraton.png",
-			href: "",
-		},
-		{
-			image: "xmax.png",
-			href: "",
-		},
-	]
+	const [loading, setLoading] = useState<boolean>(true);
+	const [groupItems, setGroupItems] = useState<ProductGroupItemResponse[]>([]);
 
 	const [position, setPosition] = useState(0);
 	const [maxOffset, setMaxOffset] = useState(0);
@@ -55,6 +38,19 @@ const SimilarProducts: React.FC<IProps> = () => {
 	const scrollRight = () => {
 		setPosition(prev => Math.max(prev - (cardSize + ribbonGap), -maxOffset));
 	};
+
+	async function getData() {
+		try {
+			const response = await getProductGroupItems(productGroupId);
+
+			setGroupItems(response.filter(el => el.article !== article));
+			setLoading(false);
+		} catch {}
+	}
+
+	useEffect(() => {
+		getData();
+	}, []);
 
 	useEffect(() => {
 		if (sliderRef.current) {
@@ -74,6 +70,8 @@ const SimilarProducts: React.FC<IProps> = () => {
 			setRibbonGap(parseFloat(valueGap));
 		}
 	}, [sectionRef]);
+
+	if (loading && groupItems.length > 0) return null;
 
 	return (
 		<section
@@ -105,15 +103,16 @@ const SimilarProducts: React.FC<IProps> = () => {
 					animate={{ x: position }}
 					transition={{ type: 'spring', stiffness: 300, damping: 30 }}
 				>
-					{items.map((image, i) =>
+					{groupItems.map((item, i) =>
 						<motion.a
 							key={i}
 							className={styles.sliderHref}
+							href={`https://work-rc.ru/product/${item.article}`}
 						>
 							<Image
 								width={1000}
 								height={1000}
-								src={`/test/${image.image}`}
+								src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.filename}`}
 								alt=""
 								className={styles.imageSlider}
 							/>

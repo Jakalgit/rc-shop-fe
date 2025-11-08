@@ -11,10 +11,11 @@ import {Menu} from "../widgets/Menu";
 import {ButtonFinder} from "@/widgets/Header/widgets/ButtonFinder";
 
 interface HeaderProps {
-	phone: string;
+	phone1: string;
+	phone2: string;
 }
 
-export const Header: React.FC<HeaderProps> = async ({ phone }) => {
+export const Header: React.FC<HeaderProps> = async ({ phone1, phone2 }) => {
 
 	const t = await getTranslations("header");
 
@@ -32,9 +33,14 @@ export const Header: React.FC<HeaderProps> = async ({ phone }) => {
 						WORK-RC
 					</h1>
 				</Link>
-				<a className={`flex items-center ${styles.phoneLink}`} href={`tel:${phone}`}>
-					{formatPhoneNumber(phone)}
-				</a>
+				<div className={`flex items-center ${styles.phoneLinks}`}>
+					<a className={`flex items-center ${styles.phoneLink}`} href={`tel:${phone1}`}>
+						{formatPhoneNumber(phone1)}
+					</a>
+					<a className={`flex items-center ${styles.phoneLink} ${styles.secondPhone}`} href={`tel:${phone2}`}>
+						{formatPhoneNumber(phone2)}
+					</a>
+				</div>
 				<div className={`${styles.contentGap} flex items-center`}>
 					{links.map((el, i) =>
 						<Link
@@ -48,10 +54,10 @@ export const Header: React.FC<HeaderProps> = async ({ phone }) => {
 					<a
 						href="/basket"
 					>
-						<ShoppingBasketIcon className={styles.icon} />
+						<ShoppingBasketIcon className={styles.icon}/>
 					</a>
-					<ButtonFinder />
-					<Menu links={links} />
+					<ButtonFinder/>
+					<Menu links={links}/>
 				</div>
 			</Container>
 		</header>

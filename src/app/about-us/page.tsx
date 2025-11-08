@@ -45,12 +45,21 @@ export default async function AboutUsPage() {
 						<div className={styles.infoBlock}>
 							<h2 className={styles.contactText}>{t("contacts")}</h2>
 							<a
-								href={`tel:${contacts.phone}`}
+								href={`tel:${contacts.phone1}`}
 								className={styles.contactItem}
 							>
 								<CallIcon/>
 								<p>
-									{formatPhoneNumber(contacts.phone)}
+									{formatPhoneNumber(contacts.phone1)}
+								</p>
+							</a>
+							<a
+								href={`tel:${contacts.phone2}`}
+								className={styles.contactItem}
+							>
+								<CallIcon/>
+								<p>
+									{formatPhoneNumber(contacts.phone2)}
 								</p>
 							</a>
 							<a
@@ -72,11 +81,11 @@ export default async function AboutUsPage() {
 							</div>
 							<h2 className={`mt-auto ${styles.contactText}`}>{t("workTime")}</h2>
 							<p>
-								<RichText text={contacts.workTime} />
+								<RichText text={contacts.workTime}/>
 							</p>
 						</div>
 					</div>
-					<CompanyDesc />
+					<CompanyDesc/>
 				</Container>
 			</section>
 		</MotionMain>

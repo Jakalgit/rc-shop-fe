@@ -121,8 +121,23 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 						/>
 					</div>
 				</section>
-				{response.records[0].productGroupId && (
-					<SimilarProducts/>
+				<section className={`flex items-center justify-center ${styles.links}`}>
+					{response.records[0].partsUrl && (
+						<a className="flex items-center" href="">
+							{t('partsLink')}
+						</a>
+					)}
+					{response.records[0].tuningUrl && (
+						<a className="flex items-center" href="">
+							{t('tuningLink')}
+						</a>
+					)}
+				</section>
+				{response.records[0]?.productGroupId && (
+					<SimilarProducts
+						article={response.records[0].article}
+						productGroupId={response.records[0].productGroupId}
+					/>
 				)}
 				<section className="flex flex-col">
 					<div className={`flex justify-between ${styles.specificationAndEquipment}`}>

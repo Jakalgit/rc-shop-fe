@@ -30,9 +30,13 @@
     fill: white;
 }
 
-.phoneLink {
-    margin-right: auto;
+.phoneLinks {
     margin-left: 12px;
+    margin-right: auto;
+    gap: 5px;
+}
+
+.phoneLink {
     height: 26px;
     padding: 0 10px;
     color: white;
@@ -44,9 +48,19 @@
     text-overflow: ellipsis;
 }
 
+@media (max-width: 1399px) {
+    .link {
+        font-size: 13px;
+    }
+}
+
 @media (max-width: 1199px) {
     .contentGap {
         gap: 23px;
+    }
+
+    .secondPhone {
+        display: none;
     }
 }
 
@@ -63,10 +77,13 @@
         font-size: 11px;
     }
 
+    .phoneLinks {
+        margin-left: 6px;
+    }
+
     .phoneLink {
         font-size: 11px;
         padding: 0 8px;
-        margin-left: 6px;
         height: 20px;
     }
 
@@ -83,6 +100,16 @@
     .icon {
         width: 20px;
     }
+
+    .secondPhone {
+        display: flex;
+    }
+}
+
+@media (max-width: 470px) {
+    .secondPhone {
+        display: none;
+    }
 }
 
 @media (max-width: 450px) {
@@ -98,6 +125,9 @@
 
     .phoneLink {
         font-size: 10px;
+    }
+
+    .phoneLinks {
         margin-left: 5px;
     }
 }
@@ -118,8 +148,11 @@
         gap: 5px;
     }
 
-    .phoneLink {
+    .phoneLinks {
         margin-left: 4px;
+    }
+
+    .phoneLink {
         padding: 0 4px;
     }
 

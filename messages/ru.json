@@ -315,6 +315,8 @@
     "notAvailable": "Нет в наличии",
     "oldPrice": "Старая цена:",
     "wholesalePrice": "Оптовая цена",
+    "tuningLink": "Тюнинг",
+    "partsLink": "Запчасти",
     "buttonAddToBasket": {
       "title": "Добавить в корзину",
       "ariaLabel": "Нажмите, чтобы добавить товар в корзину"

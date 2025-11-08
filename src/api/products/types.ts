@@ -44,6 +44,8 @@ export type ProductResponse = {
 	width?: number;
 	length?: number;
 	productGroupId?: number;
+	partsUrl?: string;
+	tuningUrl?: string;
 	createdAt?: Date;
 	updatedAt?: Date;
 	description: Detail[];
