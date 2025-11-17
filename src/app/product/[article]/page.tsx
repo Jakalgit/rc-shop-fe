@@ -123,12 +123,12 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 				</section>
 				<section className={`flex items-center justify-center ${styles.links}`}>
 					{response.records[0].partsUrl && (
-						<a className="flex items-center" href="">
+						<a className="flex items-center" href={response.records[0].partsUrl}>
 							{t('partsLink')}
 						</a>
 					)}
 					{response.records[0].tuningUrl && (
-						<a className="flex items-center" href="">
+						<a className="flex items-center" href={response.records[0].tuningUrl}>
 							{t('tuningLink')}
 						</a>
 					)}
