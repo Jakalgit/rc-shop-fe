@@ -96,12 +96,13 @@ const FiltersComponent: React.FC<IFilterProps> = (
 	}, [priceRange, wholesalePriceRange, tagsFilter]);
 
 	return (
-		<>
+		<div className={`${styles.filtersBlock} w-full`}>
 			<AnimatePresence initial={false}>
 				{isVisibleSetFilters && (
 					<motion.div
 						key="setFilters"
-						style={{overflow: "hidden"}}
+						className={styles.paddingRight}
+						style={{overflow: "hidden", flexShrink: 0}}
 						initial={{opacity: 0, height: 0}}
 						animate={{opacity: 1, height: 'auto'}}
 						exit={{opacity: 0, height: 0}}
@@ -110,61 +111,65 @@ const FiltersComponent: React.FC<IFilterProps> = (
 							onClick={() => setSelectedFilters()}
 							title={t("buttonSetFilter.title")}
 							aria-label={t("buttonSetFilter.ariaLabel")}
-							className={`w-full ${styles.clearFilters} ${styles.setFilters}`}
+							className={`w-full ${styles.setFilters}`}
 						>
 							{t("buttonSetFilter.title")}
 						</Button>
 					</motion.div>
 				)}
 			</AnimatePresence>
-			<FilterDropdownPriceRange
-				title={t("price.title")}
-				priceRange={priceRange}
-				setPriceRange={setPriceRange}
-				openFilterId={openFilterId}
-				filterId={priceFilterId}
-				step={STEP}
-				onClick={onClickFilter}
-			/>
-			{partner && (
-				<FilterDropdownPriceRange
-					title={t("price.wholesaleTitle")}
-					priceRange={wholesalePriceRange}
-					setPriceRange={setWholesalePriceRange}
-					openFilterId={openFilterId}
-					filterId={wholesaleFilterId}
-					step={STEP}
-					onClick={onClickFilter}
-				/>
-			)}
-			{tagsForFilter?.listOfGroups.map((item, index) =>
-				<FilterCategory
-					title={item.name}
-					isFilterOpen={openFilterId === item.name}
-					onClick={() => onClickFilter(item.name)}
-					tags={item.tags || []}
-					selectedTagIds={tagsFilter}
-					addTagToFilter={addTagToFilter}
-					key={index}
-				/>
-			)}
-			<FilterCategory
-				title={t("buttonOtherCategory.title")}
-				isFilterOpen={openFilterId === otherCategoryFilterId}
-				onClick={() => onClickFilter(otherCategoryFilterId)}
-				tags={tagsForFilter?.tagsWithoutGroup || []}
-				selectedTagIds={tagsFilter}
-				addTagToFilter={addTagToFilter}
-			/>
-			<FilterCategory
-				title={t("buttonAllCategory.title")}
-				isFilterOpen={openFilterId === allCategoryFilterId}
-				onClick={() => onClickFilter(allCategoryFilterId)}
-				tags={tagsForFilter?.listOfTags || []}
-				addTagToFilter={addTagToFilter}
-				selectedTagIds={tagsFilter}
-			/>
-		</>
+			<div className={`${styles.groupsList} w-full`}>
+				<div className={`${styles.filtersBlock} ${styles.paddingRight}`}>
+					<FilterDropdownPriceRange
+						title={t("price.title")}
+						priceRange={priceRange}
+						setPriceRange={setPriceRange}
+						openFilterId={openFilterId}
+						filterId={priceFilterId}
+						step={STEP}
+						onClick={onClickFilter}
+					/>
+					{partner && (
+						<FilterDropdownPriceRange
+							title={t("price.wholesaleTitle")}
+							priceRange={wholesalePriceRange}
+							setPriceRange={setWholesalePriceRange}
+							openFilterId={openFilterId}
+							filterId={wholesaleFilterId}
+							step={STEP}
+							onClick={onClickFilter}
+						/>
+					)}
+					{tagsForFilter?.listOfGroups.map((item, index) =>
+						<FilterCategory
+							title={item.name}
+							isFilterOpen={openFilterId === item.name}
+							onClick={() => onClickFilter(item.name)}
+							tags={item.tags || []}
+							selectedTagIds={tagsFilter}
+							addTagToFilter={addTagToFilter}
+							key={index}
+						/>
+					)}
+					<FilterCategory
+						title={t("buttonOtherCategory.title")}
+						isFilterOpen={openFilterId === otherCategoryFilterId}
+						onClick={() => onClickFilter(otherCategoryFilterId)}
+						tags={tagsForFilter?.tagsWithoutGroup || []}
+						selectedTagIds={tagsFilter}
+						addTagToFilter={addTagToFilter}
+					/>
+					<FilterCategory
+						title={t("buttonAllCategory.title")}
+						isFilterOpen={openFilterId === allCategoryFilterId}
+						onClick={() => onClickFilter(allCategoryFilterId)}
+						tags={tagsForFilter?.listOfTags || []}
+						addTagToFilter={addTagToFilter}
+						selectedTagIds={tagsFilter}
+					/>
+				</div>
+			</div>
+		</div>
 	);
 };
 

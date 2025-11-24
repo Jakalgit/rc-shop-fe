@@ -78,22 +78,20 @@ const FilterPopup: React.FC<FilterPopupProps> = ({ partner, tagsForFilter }) => 
 									aria-label={t("popup.buttonClosePopup.ariaLabel")}
 									onClick={() => setIsOpenFilters(false)}
 								>
-									<CloseIcon />
+									<CloseIcon/>
 								</Button>
 							</div>
-							<div className={styles.contentWrapper}>
-								<div className={`flex flex-col ${styles.filtersContent}`}>
-									<FiltersComponent
-										tagIds={tagIds}
-										maxPrice={maxPrice}
-										minPrice={minPrice}
-										finder={finder || ""}
-										wMinPrice={wMinPrice}
-										wMaxPrice={wMaxPrice}
-										partner={partner}
-										tagsForFilter={tagsForFilter}
-									/>
-								</div>
+							<div className={`${styles.contentWrapper}`}>
+								<FiltersComponent
+									tagIds={tagIds}
+									maxPrice={maxPrice}
+									minPrice={minPrice}
+									finder={finder || ""}
+									wMinPrice={wMinPrice}
+									wMaxPrice={wMaxPrice}
+									partner={partner}
+									tagsForFilter={tagsForFilter}
+								/>
 							</div>
 						</motion.div>
 					</motion.div>

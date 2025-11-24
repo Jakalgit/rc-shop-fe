@@ -1,8 +1,9 @@
 import {$host} from "@/api";
 import {DeliveryMethodEnum, OrderResponse, PaymentMethodEnum} from "@/api/order/types";
+import {CdekMetadataType} from "@/widgets/CDEKWidget/model/types";
 
 export const createOrder = async (
-	{name, surname, patronymic, phone, email, deliveryMethod, paymentMethod, address, comment, items, token}:
+	{name, surname, patronymic, phone, email, deliveryMethod, paymentMethod, address, comment, items, token, cdekMetadata}:
 	{
 		name: string,
 		surname: string,
@@ -15,11 +16,12 @@ export const createOrder = async (
 		comment?: string,
 		items: {article: string, qty: number}[],
 		token: string,
+		cdekMetadata?: CdekMetadataType,
 	},
 ): Promise<void> => {
 	const {data} = await $host.post(
 		'/order',
-		{name, surname, patronymic, phone, email, deliveryMethod, paymentMethod, address, comment, items},
+		{name, surname, patronymic, phone, email, deliveryMethod, paymentMethod, address, comment, items, cdekMetadata},
 		{headers: {Authorization: `Bearer ${token}`}}
 	);
 	return data;

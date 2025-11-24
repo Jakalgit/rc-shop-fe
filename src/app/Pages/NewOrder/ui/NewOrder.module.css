@@ -21,6 +21,22 @@
     font-size: 16px;
 }
 
+.cdekBlock {
+    gap: 10px;
+}
+
+.cdekDeliveryDataBlock {
+    border-radius: 8px;
+    border: 1px solid var(--foreground-color);
+    padding: 10px;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.cdekDeliveryDataBlock > p {
+    font-size: 14px;
+}
+
 .textarea {
     margin-top: auto;
 }
@@ -68,6 +84,10 @@
 @media (max-width: 991px) {
     .inputBlocks {
         gap: 50px;
+    }
+
+    .cdekDeliveryDataBlock > p {
+        font-size: 12px;
     }
 
     .inputBlock {

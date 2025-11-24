@@ -2,23 +2,35 @@
 .filtersSection {
     position: sticky;
     top: calc(var(--header-height) + 20px);
+    width: 27%;
+
+    max-height: calc(100vh - (var(--header-height) + 40px));
+}
+
+.filtersBlock {
     align-self: start;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 27%;
+    max-height: 100%;
 }
 
-.clearFilters {
-    background-color: var(--red-color);
+.paddingRight {
+    margin-right: 10px;
+}
+
+.groupsList {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.setFilters {
+    background-color: var(--blue-color-1);
     color: white;
     height: 40px;
     font-size: 16px;
     border-radius: 10px;
-}
-
-.setFilters {
-    background-color: var(--blue-color-1) !important;
 }
 
 .priceRange {
@@ -36,11 +48,11 @@
 }
 
 @media (max-width: 1199px) {
-    .filtersSection {
+    .filtersBlock {
         gap: 12px;
     }
 
-    .clearFilters {
+    .setFilters {
         height: 36px;
         font-size: 14px;
     }

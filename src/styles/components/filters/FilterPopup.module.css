@@ -49,6 +49,8 @@
     height: 70vh;
     width: 80%;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .head {
@@ -65,8 +67,8 @@
 }
 
 .contentWrapper {
-    max-height: 90%;
-    overflow-y: auto;
+    min-height: 0;
+    flex: 1;
 }
 
 .filtersContent {

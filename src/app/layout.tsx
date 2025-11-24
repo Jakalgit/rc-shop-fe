@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import {getContacts} from "@/api/contacts/api";
 import {ProgressBar} from "@/widgets/ProgressBar";
 import {Header} from "@/widgets/Header";
+import Script from 'next/script';
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -67,18 +68,24 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <Script
+          src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body
         className={`${montserrat.variable} ${geologica.variable} ${manrope.variable} antialiased`}
       >
-        <ProgressBar />
-        <NextIntlClientProvider messages={messages}>
-          <ReduxProvider initialState={initialState}>
-            <Finder />
-            <Header {...contacts}/>
-            {children}
-            <Footer {...contacts}/>
-          </ReduxProvider>
-        </NextIntlClientProvider>
+      <ProgressBar/>
+      <NextIntlClientProvider messages={messages}>
+        <ReduxProvider initialState={initialState}>
+          <Finder/>
+          <Header {...contacts}/>
+          {children}
+          <Footer {...contacts}/>
+        </ReduxProvider>
+      </NextIntlClientProvider>
       </body>
     </html>
   );

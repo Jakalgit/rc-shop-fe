@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import MotionMain from "@/components/MotionMain";
 import {useTranslations} from "next-intl";
 import {Container} from "react-bootstrap";
@@ -23,6 +23,9 @@ import {useRouter} from "next/navigation";
 import {RoutesEnum} from "@/shared";
 import Textarea from "@/components/Textarea";
 import Input from "@/components/Input";
+import {CdekOfficeAddressType, CdekTariffCode, CdekWidget, CDEKWidgetType, CdekDeliveryEnum, CdekDoorAddressType} from "@/widgets/CDEKWidget";
+import {motion} from "framer-motion";
+import {CdekMetadataType} from "@/widgets/CDEKWidget/model/types";
 
 export const NewOrder: React.FC = () => {
 
@@ -30,7 +33,10 @@ export const NewOrder: React.FC = () => {
 	const tEnums = useTranslations("enums");
 	const router = useRouter();
 
+	const widgetRef = useRef<CDEKWidgetType | null>(null);
+
 	const [loading, setLoading] = React.useState<boolean>(false);
+	const [loadingCdek, setLoadingCdek] = React.useState(true);
 	const [loadingButton, setLoadingButton] = React.useState<boolean>(false);
 
 	const [name, setName] = React.useState<string>("");
@@ -46,6 +52,9 @@ export const NewOrder: React.FC = () => {
 	const [deliveryMethod, setDeliveryMethod] = React.useState<DeliveryMethodEnum>(DeliveryMethodEnum.SELF_PICKUP);
 	const [paymentMethod, setPaymentMethod] = React.useState<PaymentMethodEnum>(PaymentMethodEnum.CASH_ON_DELIVERY);
 
+	const [cdekDelivery, setCdekDelivery] = React.useState<CdekMetadataType | null>(null);
+	const [deliveryPrice, setDeliveryPrice] = React.useState<number>(0);
+
 	const [basketProducts, setBasketProducts] = React.useState<ProductResponse[]>([]);
 	const [isOpenProductList, setIsOpenProductList] = React.useState<boolean>(false);
 	const [policyChecked, setPolicyChecked] = React.useState<boolean>(false);
@@ -56,6 +65,22 @@ export const NewOrder: React.FC = () => {
 	// Обработчик нажатия кнопки "Посмотреть товары"
 	const handleClickOpenProductList = useCallback(() => {
 		setIsOpenProductList(true);
+	}, []);
+
+	const handleClickOpenCdekWidget = useCallback(() => {
+		if (widgetRef.current) {
+			try {
+				widgetRef.current.open();
+			} catch (error) {
+				console.error('Error opening CDEK Widget:', error);
+			}
+		}
+	}, [widgetRef]);
+
+	const handleClickChoosePoint = useCallback(
+		(delivery: CdekDeliveryEnum, rate: CdekTariffCode, address: CdekOfficeAddressType | CdekDoorAddressType) => {
+		setCdekDelivery({delivery, rate, address})
+		alert(t('successCdek'));
 	}, []);
 
 	// Обработчик нажатия кнопки "Отправить заказ"
@@ -85,8 +110,13 @@ export const NewOrder: React.FC = () => {
 			return;
 		}
 
-		if (deliveryMethod !== DeliveryMethodEnum.SELF_PICKUP && address.length < 5) {
+		if (deliveryMethod === DeliveryMethodEnum.DELIVERY_MOSCOW && address.length < 5) {
 			alert(t("errors.address"));
+			return;
+		}
+
+		if (deliveryMethod === DeliveryMethodEnum.DELIVERY_COUNTRY && !cdekDelivery) {
+			alert(t("errors.cdekDelivery"));
 			return;
 		}
 
@@ -98,7 +128,8 @@ export const NewOrder: React.FC = () => {
 
 			await createOrder({
 				name, surname, patronymic, phone, email, deliveryMethod,
-				paymentMethod, address, comment, items: cart, token: act
+				paymentMethod, address, comment, items: cart, token: act,
+				cdekMetadata: cdekDelivery || undefined,
 			});
 
 			alert(t("success"));
@@ -108,7 +139,7 @@ export const NewOrder: React.FC = () => {
 			alert(e?.response?.data?.message);
 		}
 		setLoadingButton(false);
-	}, [name, surname, patronymic, phone, email, address, comment, deliveryMethod, paymentMethod]);
+	}, [name, surname, cdekDelivery, patronymic, phone, email, address, comment, deliveryMethod, paymentMethod]);
 
 	type InputBlocksType = {
 		placeholder: string;
@@ -160,7 +191,7 @@ export const NewOrder: React.FC = () => {
 				placeholder: t("inputPlaceholders.addressPlaceholder"),
 				value: address,
 				onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value),
-				hide: deliveryMethod === DeliveryMethodEnum.SELF_PICKUP,
+				hide: deliveryMethod !== DeliveryMethodEnum.DELIVERY_MOSCOW,
 				required: true,
 			},
 		]
@@ -265,6 +296,12 @@ export const NewOrder: React.FC = () => {
 		getData();
 	}, []);
 
+	useEffect(() => {
+		if (deliveryMethod === DeliveryMethodEnum.DELIVERY_COUNTRY) {
+			setDeliveryPrice(cdekDelivery?.rate.delivery_sum || 0);
+		}
+	}, [cdekDelivery, deliveryMethod]);
+
 	if (loading) {
 		return <LoadingPage />
 	}
@@ -277,6 +314,17 @@ export const NewOrder: React.FC = () => {
 				isOpen={isOpenProductList}
 				onClose={() => setIsOpenProductList(false)}
 				basketProducts={basketProducts}
+			/>
+			<CdekWidget
+				goods={[{
+					width: 10,
+					height: 10,
+					length: 10,
+					weight: 10
+				}]}
+				onChoosePointAction={handleClickChoosePoint}
+				onReady={() => setLoadingCdek(false)}
+				widget={widgetRef}
 			/>
 			<MotionMain>
 				<section>
@@ -313,6 +361,40 @@ export const NewOrder: React.FC = () => {
 										)
 									}
 								})}
+								{deliveryMethod === DeliveryMethodEnum.DELIVERY_COUNTRY && (
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										className={`flex flex-col ${styles.cdekBlock}`}
+									>
+										<Button
+											title={t("buttonOpenCdekMap.title")}
+											aria-label={t("buttonOpenCdekMap.ariaLabel")}
+											fill={ButtonFillEnum.DARK}
+											loading={loadingCdek}
+											onClick={handleClickOpenCdekWidget}
+										>
+											{t("buttonOpenCdekMap.title")}
+										</Button>
+										{cdekDelivery && (
+											<motion.div
+												initial={{ opacity: 0, height: 0 }}
+												animate={{ opacity: 1, height: 'auto' }}
+												className={`flex flex-col ${styles.cdekDeliveryDataBlock}`}
+											>
+												<p>
+													<strong>{t('cdekData.address')}:</strong> {cdekDelivery.address.name}
+												</p>
+												<p>
+													<strong>{t('cdekData.price')}:</strong> {formatPrice(cdekDelivery.rate.delivery_sum, 2)}
+												</p>
+												<p>
+													<strong>{t('cdekData.type.title')}:</strong> {t(`cdekData.type.values.${cdekDelivery.delivery}`)}
+												</p>
+											</motion.div>
+										)}
+									</motion.div>
+								)}
 								<div className={`flex flex-col ${classNames(styles.inputBlock, styles.textarea)}`}>
 									<Textarea
 										placeholder={t("inputPlaceholders.commentPlaceholder")}
@@ -327,7 +409,7 @@ export const NewOrder: React.FC = () => {
 								<div className={`flex items-center justify-between ${styles.totalPriceBlock}`}>
 									<p className="montserrat">
 										<span className="geologica fw-bold">{t("totalPrice")}</span><br/>
-										{formatPrice(fullPrice, 2)}
+										{formatPrice(fullPrice + deliveryPrice, 2)}
 									</p>
 									<Button
 										title={t("buttonShowItems.title")}
