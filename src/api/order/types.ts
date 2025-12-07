@@ -1,3 +1,4 @@
+import {CdekMetadataType} from "@/api/order/cdek.types";
 
 export enum DeliveryMethodEnum {
 	SELF_PICKUP = "self_pickup",
@@ -60,4 +61,5 @@ export type OrderResponse = {
 	createdAt: string;
 	status: OrderStatusEnum;
 	items: OrderItem[];
+	cdekMetadata?: CdekMetadataType;
 }

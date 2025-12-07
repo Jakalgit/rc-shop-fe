@@ -6,6 +6,7 @@ import {getTranslations} from "next-intl/server";
 import {formatPhoneNumber, formatPrice} from "@/functions/format";
 import {DeliveryMethodEnum} from "@/api/order/types";
 import {OrderItem, OrderItemAccessEnum} from "@/widgets/OrderItem";
+import {CdekDeliveryEnum} from "@/api/order/cdek.types";
 
 
 export async function Order(
@@ -20,6 +21,23 @@ export async function Order(
 	const orderNumber = (await params).orderNumber || "";
 	const responseOrder = await getOrderByNumber({orderNumber});
 
+	const cdekDeliveryTypes: Record<CdekDeliveryEnum, string> = {
+		[CdekDeliveryEnum.DOOR]: t('doorDelivery'),
+		[CdekDeliveryEnum.OFFICE]: t('officeDelivery'),
+	}
+
+	const cdekMetadata = responseOrder.cdekMetadata;
+	let addressValue: string = responseOrder.address;
+
+	if (responseOrder.deliveryMethod === DeliveryMethodEnum.DELIVERY_COUNTRY && cdekMetadata) {
+		if (cdekMetadata.delivery === CdekDeliveryEnum.DOOR) {
+			addressValue = cdekMetadata.address.formatted;
+		} else if (cdekMetadata.delivery === CdekDeliveryEnum.OFFICE) {
+			addressValue = `${cdekMetadata.address.name} (${cdekMetadata.address.address})`
+		}
+		addressValue += ` | ${cdekDeliveryTypes[cdekMetadata.delivery]}`;
+	}
+
 	const fields = [
 		{
 			name: t("fields.name"),
@@ -27,7 +45,7 @@ export async function Order(
 		},
 		{
 			name: t("fields.paymentMethod"),
-			value: tEnums(`paymentMethodEnum.${responseOrder.paymentMethod}`),
+			value: tEnums(`paymentMethodEnum.${responseOrder.paymentMethod}.title`),
 		},
 		{
 			name: t("fields.status"),
@@ -52,7 +70,7 @@ export async function Order(
 		},
 		{
 			name: t("fields.address"),
-			value: responseOrder.address,
+			value: addressValue,
 			hide: responseOrder.deliveryMethod === DeliveryMethodEnum.SELF_PICKUP,
 		}
 	]
@@ -78,7 +96,7 @@ export async function Order(
 								}
 							})}
 						</div>
-						<p className={styles.price}>
+						<p className={`${styles.price} text-nowrap`}>
 							{t("fields.price")}:<br/>
 							<span className="montserrat">{formatPrice(responseOrder.subtotal, 2)}</span>
 						</p>

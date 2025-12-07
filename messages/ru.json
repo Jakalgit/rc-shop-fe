@@ -560,7 +560,9 @@
       "comment": "Комментарий к заказу"
     },
     "systemNotificationTitle": "Уведомление",
-    "orderItemsTitle": "Товары в заказе"
+    "orderItemsTitle": "Товары в заказе",
+    "doorDelivery": "Доставка до двери",
+    "officeDelivery": "Доставка до ПВЗ"
   },
   "DeliveryAndPaymentsPage": {
     "title": "Доставка и оплата",
