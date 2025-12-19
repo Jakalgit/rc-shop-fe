@@ -16,6 +16,7 @@ export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 
 	const popular = "Популярное";
 	const novelty = "Новинки";
+	const onTheWay = "В пути"
 
 	return (
 		<article className={`relative flex flex-col ${styles.item}`}>
@@ -35,8 +36,13 @@ export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 						-{item.promotionPercentage}%
 					</span>
 				)}
+				{item.tags.find(el => el.name === onTheWay) && (
+					<span className={`flex items-center justify-center bg-[color:var(--blue-color-4)] ${styles.prompt}`}>
+						{onTheWay}
+					</span>
+				)}
 			</div>
-			<a style={{ textAlign: "center" }} href={`/product/${item.article}`}>
+			<a style={{textAlign: "center"}} href={`/product/${item.article}`}>
 				<Image
 					width={500}
 					height={500}
