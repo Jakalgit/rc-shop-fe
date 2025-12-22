@@ -59,6 +59,34 @@
     margin-bottom: 20px;
 }
 
+.tagsBlock {
+    top: 6%;
+    left: 20%;
+    z-index: 10;
+    gap: 20px;
+}
+
+.new {
+    background-color: var(--turquoise-color);
+}
+
+.onTheWay {
+    background-color: var(--blue-color-4);
+}
+
+.popular {
+    background-color: var(--yellow-color);
+}
+
+.tag {
+    font-size: 18px;
+    height: 46px;
+    padding: 0 20px;
+    color: white;
+    border-radius: 30px;
+    text-wrap: nowrap;
+}
+
 .buttonView {
     padding: 0 25px;
     height: 50px;

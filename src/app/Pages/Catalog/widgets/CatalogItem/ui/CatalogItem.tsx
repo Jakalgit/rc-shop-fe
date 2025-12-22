@@ -31,14 +31,14 @@ export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 						{novelty}
 					</span>
 				)}
-				{item.oldPrice && item.promotionPercentage && (
-					<span className={`flex ml-auto items-center manrope justify-center bg-[var(--red-color)] ${styles.prompt}`}>
-						-{item.promotionPercentage}%
-					</span>
-				)}
 				{item.tags.find(el => el.name === onTheWay) && (
 					<span className={`flex items-center justify-center bg-[color:var(--blue-color-4)] ${styles.prompt}`}>
 						{onTheWay}
+					</span>
+				)}
+				{item.oldPrice && item.promotionPercentage && (
+					<span className={`flex ml-auto items-center manrope justify-center bg-[var(--red-color)] ${styles.prompt}`}>
+						-{item.promotionPercentage}%
 					</span>
 				)}
 			</div>
