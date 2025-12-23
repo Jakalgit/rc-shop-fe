@@ -151,6 +151,18 @@
         font-size: 40px;
         margin: 0 0 5px;
     }
+
+    .tagsBlock {
+        top: 5%;
+        left: 10%;
+        gap: 15px;
+    }
+
+    .tag {
+        font-size: 15px;
+        height: 40px;
+        padding: 0 20px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -168,6 +180,10 @@
 
     .content {
         width: 60vw;
+    }
+
+    .tagsBlock {
+        left: 7%;
     }
 }
 
@@ -188,5 +204,17 @@
 
     .contentWrapper {
         padding: 0 30px;
+    }
+
+    .tagsBlock {
+        top: 4%;
+        left: 3%;
+        gap: 10px;
+    }
+
+    .tag {
+        font-size: 14px;
+        height: 36px;
+        padding: 0 15px;
     }
 }
