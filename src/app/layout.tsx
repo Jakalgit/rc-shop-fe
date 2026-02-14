@@ -13,6 +13,7 @@ import {getContacts} from "@/api/contacts/api";
 import {ProgressBar} from "@/widgets/ProgressBar";
 import {Header} from "@/widgets/Header";
 import Script from 'next/script';
+import {SupportChat} from "@/widgets/SupportChat";
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -82,6 +83,7 @@ export default async function RootLayout({
         <ReduxProvider initialState={initialState}>
           <Finder/>
           <Header {...contacts}/>
+          <SupportChat />
           {children}
           <Footer {...contacts}/>
         </ReduxProvider>

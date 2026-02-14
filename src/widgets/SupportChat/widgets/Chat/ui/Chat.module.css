@@ -1,0 +1,14 @@
+
+.chat {
+    all: unset;
+    position: fixed;
+    z-index: 101;
+    width: 320px;
+    height: 420px;
+    border-radius: 18px;
+    background-color: var(--foreground-color);
+    right: 30px;
+    bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+}
