@@ -92,7 +92,7 @@ export function OrderItem({ itemData, removeItem, updateCartPrice, itemType = Or
 					</Button>
 				)}
 				{itemData.images && itemData.images.length > 0 && (
-					<a href={`/product/${itemData.article}`}>
+					<a href={`/product/${encodeURIComponent(itemData.article)}`}>
 						<Image
 							width={100}
 							height={100}

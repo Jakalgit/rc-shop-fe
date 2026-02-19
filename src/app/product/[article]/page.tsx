@@ -13,7 +13,8 @@ import NotFound from "next/dist/client/components/not-found-error";
 import {cookies} from "next/headers";
 
 export async function generateMetadata({ params }: {params: any}) {
-	const { locale, article } = params;
+	let { locale, article } = params;
+	article = decodeURIComponent(article);
 	const t = await getTranslations({ locale, namespace: 'ProductPage' });
 
 	// Получаем токен авторизации

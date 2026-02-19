@@ -107,7 +107,7 @@ const SimilarProducts: React.FC<IProps> = ({ productGroupId, article }) => {
 						<motion.a
 							key={i}
 							className={styles.sliderHref}
-							href={`https://work-rc.ru/product/${item.article}`}
+							href={`https://work-rc.ru/product/${encodeURIComponent(item.article)}`}
 						>
 							<Image
 								width={1000}

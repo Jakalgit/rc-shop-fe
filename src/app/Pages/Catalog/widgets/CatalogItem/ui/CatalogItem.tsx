@@ -42,7 +42,7 @@ export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 					</span>
 				)}
 			</div>
-			<a style={{textAlign: "center"}} href={`/product/${item.article}`}>
+			<a style={{textAlign: "center"}} href={`/product/${encodeURIComponent(item.article)}`}>
 				<Image
 					width={500}
 					height={500}

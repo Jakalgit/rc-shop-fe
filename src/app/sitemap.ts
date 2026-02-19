@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<Response> {
 		),
 		...products.map(
 			(p) =>
-				`<url><loc>${baseUrl}/product/${p.article}</loc><lastmod>${
+				`<url><loc>${baseUrl}/product/${encodeURIComponent(p.article)}</loc><lastmod>${
 					p.updatedAt ? new Date(p.updatedAt).toISOString() : new Date().toISOString()
 				}</lastmod></url>`
 		),
