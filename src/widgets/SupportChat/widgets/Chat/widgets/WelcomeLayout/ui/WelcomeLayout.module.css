@@ -1,0 +1,27 @@
+.welcome {
+    top: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.buttonNext {
+    color: var(--blue-color-1);
+    font-size: 16px;
+    margin-top: 22px;
+    height: auto;
+}
+
+.section h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.inputWrapper {
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    margin-top: 15px;
+}
+
+.inputWrapper input {
+    color: white;
+}
