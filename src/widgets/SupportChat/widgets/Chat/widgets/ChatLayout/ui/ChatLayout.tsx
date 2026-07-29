@@ -58,7 +58,7 @@ export const ChatLayout: React.FC<ChatLayoutProps> = React.memo(({ messages, set
 			e.preventDefault();
 			await handleClickSendMessage();
 		}
-	}, [message]);
+	}, [message, loadingSendButton]);
 
 	const handleClickSendMessage = React.useCallback(async () => {
 		try {
@@ -67,9 +67,10 @@ export const ChatLayout: React.FC<ChatLayoutProps> = React.memo(({ messages, set
 				return;
 			}
 
-			const clientId: string = cookies.get("cc_id");
-
+			if (loadingSendButton) return;
 			setLoadingSendButton(true);
+
+			const clientId: string = cookies.get("cc_id");
 
 			await sendChatMessage({message, clientId});
 
@@ -83,7 +84,7 @@ export const ChatLayout: React.FC<ChatLayoutProps> = React.memo(({ messages, set
 			}
 		}
 		setLoadingSendButton(false);
-	}, [message]);
+	}, [message, loadingSendButton]);
 
 	const scrollRibbonToBottom = React.useCallback(() => {
 		if (scrollableRef.current) {

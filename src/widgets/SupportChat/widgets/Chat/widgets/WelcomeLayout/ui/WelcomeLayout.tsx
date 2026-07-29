@@ -29,12 +29,22 @@ export const WelcomeLayout: React.FC<LayoutProps> = React.memo(({ setLayout }) =
 			return;
 		}
 
-		const clientId = uuidv4();
-		await createChat({clientId, name});
+		setLoadingButton(true);
+		try {
+			const clientId = uuidv4();
+			await createChat({clientId, name});
 
-		cookies.set('cc_id', clientId);
+			cookies.set('cc_id', clientId);
 
-		setLayout(ChatLayoutEnum.CHAT);
+			setLayout(ChatLayoutEnum.CHAT);
+		} catch (e: any) {
+			if (e.status === 404) {
+				alert('Произошла ошибка, пожалуйста, попробуйте позже');
+				setLayout(ChatLayoutEnum.WELCOME);
+			}
+		}
+
+		setLoadingButton(false);
 	}, [name, setLayout]);
 
 	return (
