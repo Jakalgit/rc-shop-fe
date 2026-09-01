@@ -69,16 +69,16 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <head>
-        <Script
-          src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
-          strategy="beforeInteractive"
-        />
-        <Script
-          id="yandex-metrika"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+    <head>
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+        strategy="beforeInteractive"
+      />
+      <Script
+        id="yandex-metrika"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
               (function(m,e,t,r,i,k,a){
                   m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                   m[i].l=1*new Date();
@@ -106,11 +106,12 @@ export default async function RootLayout({
                   trackLinks: true
               });
             `,
-          }}
-        />
-      </head>
-      <body
-        className={`${montserrat.variable} ${geologica.variable} ${manrope.variable} antialiased`}
+        }}
+      />
+      <meta name="yandex-verification" content="bca5e19f9a873902"/>
+    </head>
+    <body
+      className={`${montserrat.variable} ${geologica.variable} ${manrope.variable} antialiased`}
       >
         <ProgressBar/>
         <NextIntlClientProvider messages={messages}>
