@@ -8,5 +8,6 @@ export enum RoutesEnum {
 	CONFIRMATION_UPDATE = '/confirmation-update',
 	CATALOG = '/catalog',
 	BASKET = '/basket',
-	ABOUT_US = '/about-us'
+	ABOUT_US = '/about-us',
+	ORDER_PLACED = '/order-placed'
 }

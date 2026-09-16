@@ -132,9 +132,8 @@ export const NewOrder: React.FC = () => {
 				cdekMetadata: cdekDelivery || undefined,
 			});
 
-			alert(t("success"));
 			Cookies.remove(CART_KEY);
-			router.push(RoutesEnum.CATALOG);
+			router.push(RoutesEnum.ORDER_PLACED);
 		} catch (e: any) {
 			alert(e?.response?.data?.message);
 		}
