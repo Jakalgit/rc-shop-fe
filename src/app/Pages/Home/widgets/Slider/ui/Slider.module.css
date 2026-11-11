@@ -1,64 +1,157 @@
-
 .wrapper {
+    --autoplay-duration: 10s;
+
     margin-top: calc(-1 * var(--header-margin));
     background-color: white;
     display: flex;
 }
 
 .sliderDots {
-    --dot-size: 6px;
-    --dot-margin-left: 10px;
-
-    bottom: 20px;
+    position: absolute;
+    bottom: 22px;
     left: 50%;
     transform: translateX(-50%);
-    overflow: hidden;
-    z-index: 2;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: min(72vw, 440px);
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(17, 24, 39, 0.38);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    overflow-x: auto;
+    scrollbar-width: none;
 }
 
-.sliderDots ul {
-    list-style: none;
-    margin: -1px 0;
-    padding: 1px 0;
-    display: flex;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    position: relative;
+.sliderDots::-webkit-scrollbar {
+    display: none;
 }
 
 .dot {
-    border-radius: 6px;
-    width: var(--dot-size);
-    height: var(--dot-size);
+    position: relative;
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.48);
+    flex-shrink: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.28s ease, background-color 0.28s ease;
 }
 
-.sliderDotsLi {
-    margin-left: var(--dot-margin-left);
-    background-color: rgba(0, 0, 0, 0.2);
-    flex-shrink: 0;
+.dotActive {
+    width: 28px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.dotActive::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 100%;
+    background: white;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: sliderProgress var(--autoplay-duration, 10s) linear forwards;
+}
+
+.navBtn {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(8px);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.navBtn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.06);
+}
+
+.navBtn:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
+.navBtn:focus-visible,
+.dot:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
 }
 
 .leftBtn {
-    left: 0;
+    left: 24px;
 }
 
 .rightBtn {
-    right: 0;
+    right: 24px;
 }
 
-.mainDot {
-
+.icon {
+    width: 26px;
+    height: 26px;
+    fill: var(--foreground-color-3);
 }
 
-.button {
-    width: 20%;
-    height: 100%;
-    top: 0;
-    position: absolute;
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0;
-    z-index: 3;
+.iconPrev {
+    transform: scaleX(-1);
 }
 
+@keyframes sliderProgress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (max-width: 767px) {
+    .navBtn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .leftBtn {
+        left: 12px;
+    }
+
+    .rightBtn {
+        right: 12px;
+    }
+
+    .icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .sliderDots {
+        bottom: 14px;
+        gap: 6px;
+        padding: 7px 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dot,
+    .navBtn {
+        transition: none;
+    }
+
+    .dotActive::after {
+        animation: none;
+        transform: scaleX(1);
+    }
+}

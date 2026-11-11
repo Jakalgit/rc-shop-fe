@@ -4,6 +4,12 @@
     margin-bottom: 30px;
 }
 
+.microdata,
+.priceBlock > meta,
+.priceBlock > link {
+    display: none;
+}
+
 .sliderWrapper {
     padding: 0 30px;
 }

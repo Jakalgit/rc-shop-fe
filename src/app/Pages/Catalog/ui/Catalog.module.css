@@ -63,6 +63,11 @@
     gap: 20px;
 }
 
+.catalogGrid > meta,
+.catalogGrid > link {
+    display: none;
+}
+
 @media (max-width: 1199px) {
     .panelsGrid {
         gap: 20px;

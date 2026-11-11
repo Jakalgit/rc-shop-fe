@@ -11,6 +11,16 @@ import SimilarProducts from "@/components/product/SimilarProducts";
 import {getProducts} from "@/api/products/api";
 import NotFound from "next/dist/client/components/not-found-error";
 import {cookies} from "next/headers";
+import {
+	formatSchemaPrice,
+	getAvailabilityUrl,
+	getCloudImageUrl,
+	getOfferDescription,
+	getProductUrl,
+	offerType,
+	priceCurrency,
+	productType,
+} from "@/shared/lib/schema/offerMicrodata";
 
 export async function generateMetadata({ params }: {params: any}) {
 	let { locale, article } = params;
@@ -71,18 +81,23 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 
 	const price = response.records[0].price;
 	const wholesalePrice = response.records[0].wholesalePrice;
+	const onTheWay = response.records[0].tags?.some((tag) => tag.name === "В пути") ?? false;
+	const descriptionText = getOfferDescription(description, name);
 
 	return (
 		<MotionMain>
-			<Container>
+			<Container itemScope itemType={productType}>
+				<meta className={styles.microdata} itemProp="brand" content="WORK-RC" />
+				{images[0] && (
+					<link className={styles.microdata} itemProp="image" href={getCloudImageUrl(images[0])} />
+				)}
+				<meta className={styles.microdata} itemProp="description" content={descriptionText} />
 				<section className={styles.sectionFirst}>
 					<div className={styles.sliderWrapper}>
 						<ProductSlider images={images} />
 					</div>
 					<div className={`flex flex-col ${styles.infoWrapper}`}>
-						<h1 className={styles.name}>
-							{name}
-						</h1>
+						<h1 className={styles.name} itemProp="name">{name}</h1>
 						<p className={`fw-bold ${styles.article}`}>
 							{article}
 						</p>
@@ -94,7 +109,16 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 							}
 							<p>{t(availability ? "inStock" : "notAvailable")}</p>
 						</div>
-						<div className={`flex flex-col ${styles.priceBlock}`}>
+						<div
+							className={`flex flex-col ${styles.priceBlock}`}
+							itemProp="offers"
+							itemScope
+							itemType={offerType}
+						>
+							<link itemProp="url" href={getProductUrl(article)} />
+							<meta itemProp="price" content={formatSchemaPrice(price)} />
+							<meta itemProp="priceCurrency" content={priceCurrency} />
+							<link itemProp="availability" href={getAvailabilityUrl(availability, onTheWay)} />
 							{promotion.oldPrice && (
 								<p className={`montserrat fw-bold ${styles.additionalPrice}`}>
 									{t("oldPrice")} <span className="line-through">{formatPrice(promotion.oldPrice, 2)}</span>

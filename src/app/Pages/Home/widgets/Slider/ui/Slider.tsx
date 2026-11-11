@@ -3,101 +3,110 @@
 import React, {useEffect, useRef, useState} from "react";
 import styles from "./Slider.module.css";
 import stylesShared from "../shared-styles/SliderShared.module.css";
-import {motion} from "framer-motion";
 import classNames from "classnames";
 import {SliderItem} from "../widgets/SliderItem";
 import {SlideResponse} from "@/api/promotion-slider/types";
+import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 
 interface SliderProps {
 	items: SlideResponse[];
 }
 
+const AUTOPLAY_MS = 10000;
+
 export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 
 	const [slideIndex, setSlideIndex] = useState<number>(0);
+	const dotsRef = useRef<HTMLDivElement>(null);
 
-	const [dotSize, setDotSize] = useState<number>(0);
-	const [dotMarginLeft, setDotMarginLeft] = useState<number>(0);
+	const count = items.length;
 
-	const sliderDotsRef = useRef<HTMLDivElement>(null);
-	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+	useEffect(() => {
+		if (count < 2) return;
 
-	const genInterval = () => {
-		return setInterval(() => {
-			setSlideIndex(prevState => (prevState + 1) % items.length);
-		}, 10000);
-	}
+		const id = window.setTimeout(() => {
+			setSlideIndex((prev) => (prev + 1) % count);
+		}, AUTOPLAY_MS);
+
+		return () => window.clearTimeout(id);
+	}, [slideIndex, count]);
+
+	useEffect(() => {
+		const root = dotsRef.current;
+		const active = root?.querySelector<HTMLButtonElement>("[aria-selected='true']");
+		if (!root || !active) return;
+
+		const left = active.offsetLeft - root.clientWidth / 2 + active.clientWidth / 2;
+		root.scrollTo({left, behavior: "smooth"});
+	}, [slideIndex]);
+
+	const goTo = (index: number) => {
+		if (index === slideIndex) return;
+		setSlideIndex(index);
+	};
 
 	const nextSlide = () => {
-		setSlideIndex((prev) => (prev + 1) % items.length);
-		if (intervalRef.current) {
-			clearInterval(intervalRef.current);
-			intervalRef.current = genInterval();
-		}
+		goTo((slideIndex + 1) % count);
 	};
 
 	const prevSlide = () => {
-		setSlideIndex((prev) => (prev - 1 + items.length) % items.length);
-		if (intervalRef.current) {
-			clearInterval(intervalRef.current);
-			intervalRef.current = genInterval();
-		}
+		goTo((slideIndex - 1 + count) % count);
 	};
 
-	useEffect(() => {
-		if (sliderDotsRef.current) {
-			const dotWidth = Number(getComputedStyle(sliderDotsRef.current).getPropertyValue("--dot-size").replace("px", ""));
-			const dotMarginLeft = Number(getComputedStyle(sliderDotsRef.current).getPropertyValue("--dot-margin-left").replace("px", ""));
-			const newWidth = (dotWidth + dotMarginLeft) * 5;
-			sliderDotsRef.current.style.width = `${newWidth}px`;
-			setDotSize(dotWidth);
-			setDotMarginLeft(dotMarginLeft);
-		}
-	}, [sliderDotsRef]);
-
-	useEffect(() => {
-		intervalRef.current = genInterval();
-
-		return () => {
-			if (intervalRef.current) {
-				clearInterval(intervalRef.current);
-			}
-		}
-	}, []);
+	if (count === 0) return null;
 
 	return (
-		<div className={`relative w-full overflow-hidden ${styles.wrapper} ${stylesShared.contentHeight}`}>
+		<div
+			className={`relative w-full overflow-hidden ${styles.wrapper} ${stylesShared.contentHeight}`}
+		>
 			{items.map((slide, index) =>
 				<SliderItem
-					key={index}
+					key={slide.id}
 					slideIndex={slideIndex}
 					currentIndex={index}
 					item={slide}
 				/>
 			)}
-			<nav
-				ref={sliderDotsRef}
-				className={`absolute ${styles.sliderDots}`}
-			>
-				<motion.ul
-					style={{width: `${(dotMarginLeft + dotSize) * items.length}px`}}
-					animate={{
-						left: -dotMarginLeft - (slideIndex - 1) * (dotMarginLeft + dotSize)
-					}}
-				>
-					{items.map((s, i) => (
-						<li className={classNames(styles.dot, styles.sliderDotsLi)} key={i}/>
-					))}
-				</motion.ul>
-			</nav>
-			<button
-				onClick={prevSlide}
-				className={classNames(styles.button, styles.leftBtn)}
-			/>
-			<button
-				onClick={nextSlide}
-				className={classNames(styles.button, styles.rightBtn)}
-			/>
+			{count > 1 && (
+				<>
+					<button
+						type="button"
+						onClick={prevSlide}
+						className={classNames(styles.navBtn, styles.leftBtn)}
+						aria-label="Предыдущий слайд"
+						title="Предыдущий слайд"
+					>
+						<ChevronRightIcon className={classNames(styles.icon, styles.iconPrev)} />
+					</button>
+					<button
+						type="button"
+						onClick={nextSlide}
+						className={classNames(styles.navBtn, styles.rightBtn)}
+						aria-label="Следующий слайд"
+						title="Следующий слайд"
+					>
+						<ChevronRightIcon className={styles.icon} />
+					</button>
+					<div
+						ref={dotsRef}
+						className={styles.sliderDots}
+						role="tablist"
+						aria-label="Слайды"
+					>
+						{items.map((slide, index) => (
+							<button
+								key={slide.id}
+								type="button"
+								role="tab"
+								aria-label={`Слайд ${index + 1}`}
+								aria-selected={index === slideIndex}
+								className={classNames(styles.dot, {[styles.dotActive]: index === slideIndex})}
+								onClick={() => goTo(index)}
+							/>
+						))}
+					</div>
+				</>
+			)}
 		</div>
 	)
 })

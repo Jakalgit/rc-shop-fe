@@ -20,6 +20,7 @@ import {ActiveFiltersSection} from "../widgets/ActiveFiltersSection";
 import {getTagsForFilter} from "@/api/tags/api";
 import {SortingSection} from "@/app/Pages/Catalog/widgets/SortingSection";
 import {isSortOrder, SortOrder} from "@/shared/lib/sorting/sorting";
+import {getCatalogImageUrl, offerCatalogType} from "@/shared/lib/schema/offerMicrodata";
 
 export const Catalog = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
 
@@ -160,7 +161,14 @@ export const Catalog = async ({ searchParams }: { searchParams: Promise<{ [key: 
 							<SortingSection />
 							{response?.records.length || 0 > 0 ? (
 								<>
-									<div className={`grid ml-auto ${styles.catalogGrid}`}>
+									<div
+										className={`grid ml-auto ${styles.catalogGrid}`}
+										itemScope
+										itemType={offerCatalogType}
+									>
+										<meta itemProp="name" content={t("title")} />
+										<meta itemProp="description" content={t("description")} />
+										<link itemProp="image" href={getCatalogImageUrl()} />
 										{response?.records.map((item) =>
 											<CatalogItem
 												key={item.article}

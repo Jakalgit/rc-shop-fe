@@ -1,4 +1,9 @@
 
+.item > meta,
+.item > link {
+    display: none;
+}
+
 .item {
     --padding-border: 12px;
     --wholesale-price-block-height: 26px;

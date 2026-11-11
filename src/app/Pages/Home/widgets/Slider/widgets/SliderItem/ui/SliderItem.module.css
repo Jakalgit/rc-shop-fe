@@ -35,6 +35,7 @@
 
 .content {
     display: flex;
+    justify-content: flex-end;
     width: 45vw;
     color: var(--text-color);
 }
@@ -42,9 +43,11 @@
 .content > div {
     background-color: var(--content-background);
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 20px;
     backdrop-filter: blur(2px);
     box-shadow: var(--content-shadow);
+    min-width: 30vw;
+    margin-right: 3vw;
 }
 
 .content h2 {
