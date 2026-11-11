@@ -62,8 +62,6 @@ export const ActiveFiltersSection: React.FC<IProps> = React.memo(({data}) => {
 		el => data.tagIds.includes(el.id)
 	).map(el => el.name);
 
-	console.log(data);
-
 	if (!visiblePanel) return null;
 
 	return (

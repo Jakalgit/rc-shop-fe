@@ -51,7 +51,6 @@ export const Chat: React.FC<ChatProps> = React.memo(({ visible, setVisible }) =>
 			}
 		}
 
-		console.log('render');
 		getData();
 	}, []);
 

@@ -11,8 +11,6 @@ const CompanyDesc: React.FC<CompanyDescProps> = async ({ isHome }) => {
 
 	const t = await getTranslations("HomePage");
 
-	console.log(isHome);
-
 	const jobListLength = 4;
 
 	return (

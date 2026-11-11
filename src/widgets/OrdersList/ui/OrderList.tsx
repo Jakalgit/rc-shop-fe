@@ -16,8 +16,6 @@ export function OrderList({orders}: OrderListProps) {
 
 	const t = useTranslations("OrderSearchPage");
 
-	console.log(orders);
-
 	return (
 		<ul className={`flex flex-col ${styles.orderUl}`}>
 			{orders.map((order, index) =>
