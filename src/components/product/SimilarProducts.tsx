@@ -53,23 +53,22 @@ const SimilarProducts: React.FC<IProps> = ({ productGroupId, article }) => {
 	}, []);
 
 	useEffect(() => {
-		if (sliderRef.current) {
+		const measure = () => {
+			if (!sectionRef.current || !sliderRef.current) return;
+
+			const style = getComputedStyle(sectionRef.current);
+			setCardSize(parseFloat(style.getPropertyValue('--card-size')));
+			setRibbonGap(parseFloat(style.getPropertyValue('--ribbon-gap')));
+
 			const totalWidth = sliderRef.current.scrollWidth;
 			const visibleWidth = sliderRef.current.offsetWidth;
-			setMaxOffset(totalWidth - visibleWidth);
-		}
-	}, []);
+			setMaxOffset(Math.max(0, totalWidth - visibleWidth));
+		};
 
-	useEffect(() => {
-		if (sectionRef.current) {
-			const style = getComputedStyle(sectionRef.current);
-			const valueSize = style.getPropertyValue('--card-size');
-			const valueGap = style.getPropertyValue('--ribbon-gap');
-
-			setCardSize(parseFloat(valueSize));
-			setRibbonGap(parseFloat(valueGap));
-		}
-	}, [sectionRef]);
+		measure();
+		window.addEventListener("resize", measure);
+		return () => window.removeEventListener("resize", measure);
+	}, [groupItems]);
 
 	if (loading && groupItems.length > 0) return null;
 
@@ -79,46 +78,55 @@ const SimilarProducts: React.FC<IProps> = ({ productGroupId, article }) => {
 			className={`relative flex flex-col ${styles.similarProductsSection}`}
 		>
 			<h2>{t("similarProducts.head")}</h2>
-			<Button
-				className={`absolute flex items-center justify-center ${styles.changeSlideButton} ${styles.leftChangeButton}`}
-				title={t("similarProducts.buttonPreviousSlide.title")}
-				aria-label={t("similarProducts.buttonPreviousSlide.ariaLabel")}
-				onClick={scrollLeft}
-			>
-				<ChevronRightIcon style={{transform: `rotate(180deg)`}} />
-			</Button>
-			<Button
-				className={`absolute flex items-center justify-center ${styles.changeSlideButton} ${styles.rightChangeButton}`}
-				title={t("similarProducts.buttonNextSlide.title")}
-				aria-label={t("similarProducts.buttonNextSlide.ariaLabel")}
-				onClick={scrollRight}
-			>
-				<ChevronRightIcon />
-			</Button>
-			<div className="overflow-hidden">
-				<motion.div
-					ref={sliderRef}
-					className="flex"
-					style={{ gap: 'var(--ribbon-gap)' }}
-					animate={{ x: position }}
-					transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+			<div className={styles.similarRibbon}>
+				<Button
+					className={`absolute flex items-center justify-center ${styles.changeSlideButton} ${styles.leftChangeButton}`}
+					title={t("similarProducts.buttonPreviousSlide.title")}
+					aria-label={t("similarProducts.buttonPreviousSlide.ariaLabel")}
+					onClick={scrollLeft}
+					disabled={position >= 0}
 				>
-					{groupItems.map((item, i) =>
-						<motion.a
-							key={i}
-							className={styles.sliderHref}
-							href={`https://work-rc.ru/product/${encodeURIComponent(item.article)}`}
-						>
-							<Image
-								width={1000}
-								height={1000}
-								src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.filename}`}
-								alt=""
-								className={styles.imageSlider}
-							/>
-						</motion.a>
-					)}
-				</motion.div>
+					<ChevronRightIcon style={{transform: `rotate(180deg)`}} />
+				</Button>
+				<Button
+					className={`absolute flex items-center justify-center ${styles.changeSlideButton} ${styles.rightChangeButton}`}
+					title={t("similarProducts.buttonNextSlide.title")}
+					aria-label={t("similarProducts.buttonNextSlide.ariaLabel")}
+					onClick={scrollRight}
+					disabled={maxOffset <= 0 || position <= -maxOffset}
+				>
+					<ChevronRightIcon />
+				</Button>
+				<div className="overflow-hidden">
+					<motion.div
+						ref={sliderRef}
+						className="flex"
+						style={{ gap: 'var(--ribbon-gap)' }}
+						animate={{ x: position }}
+						transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+					>
+						{groupItems.map((item) =>
+							<motion.a
+								key={item.article}
+								className={styles.sliderHref}
+								href={`/product/${encodeURIComponent(item.article)}`}
+							>
+								<span className={styles.imageFrame}>
+									<Image
+										width={1000}
+										height={1000}
+										src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.filename}`}
+										alt={item.name || item.article}
+										className={styles.imageSlider}
+									/>
+								</span>
+								<span className={styles.cardName}>
+									{item.name || item.article}
+								</span>
+							</motion.a>
+						)}
+					</motion.div>
+				</div>
 			</div>
 		</section>
 	);

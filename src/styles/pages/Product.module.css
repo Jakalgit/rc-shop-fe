@@ -146,6 +146,10 @@
     font-size: 20px;
 }
 
+.similarRibbon {
+    position: relative;
+}
+
 .leftChangeButton {
     left: -15px;
 }
@@ -160,23 +164,73 @@
     border-radius: 50%;
     background-color: var(--foreground-color);
     transform: translateY(-50%);
-    top: 50%;
+    top: calc(var(--card-size) / 2);
     padding: 0;
     z-index: 99;
+}
+
+.changeSlideButton:disabled {
+    opacity: 0.35;
+    cursor: default;
 }
 
 .changeSlideButton svg {
     width: 85%;
 }
 
+.sliderHref {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: var(--card-size);
+    flex-shrink: 0;
+    color: var(--foreground-color-3);
+}
+
 .sliderHref:hover {
     filter: none;
 }
 
-.imageSlider {
-    object-fit: contain;
+.imageFrame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--card-size);
     height: var(--card-size);
+    border-radius: 14px;
+    background-color: var(--blue-color-3);
+    border: 1px solid transparent;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.sliderHref:hover .imageFrame {
+    border-color: var(--blue-color-1);
+}
+
+.imageSlider {
+    object-fit: contain;
+    width: 84%;
+    height: 84%;
+    transition: transform 0.25s ease;
+}
+
+.sliderHref:hover .imageSlider {
+    transform: scale(1.06);
+}
+
+.cardName {
+    width: 100%;
+    min-height: 2.6em;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--foreground-color-3);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .specificationAndEquipment {
@@ -352,6 +406,10 @@
         font-size: 18px;
     }
 
+    .cardName {
+        font-size: 11px;
+    }
+
     .specificationAndEquipment h3 {
         font-size: 18px;
     }
@@ -424,6 +482,14 @@
 
     .similarProductsSection h2 {
         font-size: 16px;
+    }
+
+    .cardName {
+        font-size: 10px;
+    }
+
+    .imageFrame {
+        border-radius: 12px;
     }
 
     .changeSlideButton {

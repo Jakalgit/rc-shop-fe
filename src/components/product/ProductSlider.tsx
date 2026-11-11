@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import styles from "@/styles/components/Slider.module.css";
 import Image from "next/image";
 import {motion, AnimatePresence} from "framer-motion";
@@ -71,9 +71,16 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 		}
 	}, [isOpenPopup]);
 
-	usePreloadImagesWithCallback(images, () => {
+	const imageUrls = useMemo(
+		() => images.map((filename) => `${process.env.NEXT_PUBLIC_CLOUD_URL}/${filename}`),
+		[images],
+	);
+
+	const handleImagesLoaded = useCallback(() => {
 		setLoadingImages(false);
-	});
+	}, []);
+
+	usePreloadImagesWithCallback(imageUrls, handleImagesLoaded);
 
 	return (
 		<>

@@ -22,9 +22,9 @@ import {
 	productType,
 } from "@/shared/lib/schema/offerMicrodata";
 
-export async function generateMetadata({ params }: {params: any}) {
-	let { locale, article } = params;
-	article = decodeURIComponent(article);
+export async function generateMetadata({ params }: {params: Promise<{ locale?: string, article: string }>}) {
+	const { locale, article: rawArticle } = await params;
+	const article = decodeURIComponent(rawArticle || "");
 	const t = await getTranslations({ locale, namespace: 'ProductPage' });
 
 	// Получаем токен авторизации
