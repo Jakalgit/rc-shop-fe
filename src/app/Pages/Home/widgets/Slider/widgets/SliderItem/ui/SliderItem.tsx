@@ -73,7 +73,8 @@ export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex
 					{(item.tagType !== SliderTagEnum.NONE || typeof item.price !== 'undefined') && (
 						<div className={`absolute flex ${styles.tagsBlock}`}>
 							{item.tagType !== SliderTagEnum.NONE && (
-								<div className={`flex items-center justify-center ${styles.tag} ${sliderTagUI[item.tagType].className}`}>
+								<div
+									className={`flex items-center justify-center ${styles.tag} ${sliderTagUI[item.tagType].className}`}>
 									{sliderTagUI[item.tagType].title}
 								</div>
 							)}
@@ -87,45 +88,47 @@ export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex
 							)}
 						</div>
 					)}
-					{item?.text && (
-						<motion.div
-							className={classNames(styles.content, {[styles.light]: isLightClass}, {[styles.dark]: !isLightClass})}
-							initial={{opacity: 0}}
-							animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
-							transition={{delay: 0.6, duration: 0.2}}
-						>
-							<div>
-								<motion.h2
-									initial={{opacity: 0}}
-									animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
-									transition={{delay: 0.8, duration: 0.5}}
+					<motion.div
+						className={classNames(styles.content, {[styles.light]: isLightClass}, {[styles.dark]: !isLightClass})}
+						initial={{opacity: 0}}
+						animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
+						transition={{delay: 0.6, duration: 0.2}}
+					>
+						<div>
+							{item.title &&
+                  <motion.h2
+                      initial={{opacity: 0}}
+                      animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
+                      transition={{delay: 0.8, duration: 0.5}}
+                  >
+										{item.title}
+                  </motion.h2>
+							}
+							{item.text &&
+                  <motion.div
+                      className={styles.description}
+                      initial={{opacity: 0}}
+                      animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
+                      transition={{delay: 0.9, duration: 0.5}}
+                  >
+                      <RichText text={item.text}/>
+                  </motion.div>
+							}
+							<motion.div
+								initial={{opacity: 0}}
+								animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
+								transition={{delay: 1, duration: 0.5}}
+							>
+								<button
+									onClick={showContent}
+									className={styles.buttonView}
 								>
-									{item.title}
-								</motion.h2>
-								<motion.div
-									className={styles.description}
-									initial={{opacity: 0}}
-									animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
-									transition={{delay: 0.9, duration: 0.5}}
-								>
-									<RichText text={item.text}/>
-								</motion.div>
-								<motion.div
-									initial={{opacity: 0}}
-									animate={{opacity: currentIndex === slideIndex ? 1 : 0}}
-									transition={{delay: 1, duration: 0.5}}
-								>
-									<button
-										onClick={showContent}
-										className={styles.buttonView}
-									>
-										{item.buttonText}
-										<ArrowRightIcon/>
-									</button>
-								</motion.div>
-							</div>
-						</motion.div>
-					)}
+									{item.buttonText}
+									<ArrowRightIcon/>
+								</button>
+							</motion.div>
+						</div>
+					</motion.div>
 				</div>
 				<motion.img
 					ref={imgRef}
