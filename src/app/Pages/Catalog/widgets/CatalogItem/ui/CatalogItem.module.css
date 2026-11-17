@@ -39,6 +39,11 @@
     font-size: 13px;
 }
 
+.nameLink {
+    color: inherit;
+    text-decoration: none;
+}
+
 .additionalPrice {
     color: var(--space-color-2);
     font-size: 12px;

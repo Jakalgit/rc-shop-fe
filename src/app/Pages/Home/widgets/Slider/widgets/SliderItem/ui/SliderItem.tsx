@@ -133,7 +133,7 @@ export const SliderItem: React.FC<SliderItemProps> = ({ slideIndex, currentIndex
 				<motion.img
 					ref={imgRef}
 					src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.filename}`}
-					alt="Slide"
+					alt={item.title || "Акция WORK-RC"}
 					className={`absolute ${styles.image} ${stylesShared.contentHeight}`}
 				/>
 			</motion.div>

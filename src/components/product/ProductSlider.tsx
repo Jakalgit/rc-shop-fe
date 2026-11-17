@@ -3,6 +3,7 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import styles from "@/styles/components/Slider.module.css";
 import Image from "next/image";
+import {ProductImage, ProductImageCover} from "@/components/product/ProductImage";
 import {motion, AnimatePresence} from "framer-motion";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {usePreloadImagesWithCallback} from "@/functions/usePreloadImages";
@@ -12,9 +13,10 @@ import "yet-another-react-lightbox/styles.css";
 
 interface IProps {
 	images: string[];
+	imageAlt?: string;
 }
 
-const ProductSlider: React.FC<IProps> = ({ images }) => {
+const ProductSlider: React.FC<IProps> = ({ images, imageAlt = "Фото товара" }) => {
 
 	const [loadingImages, setLoadingImages] = useState<boolean>(true);
 
@@ -111,31 +113,28 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 						<ChevronRightIcon style={{transform: "rotate(180deg)"}}/>
 					</button>
 					<div className={`relative flex justify-center flex-grow ${styles.imageWrapper}`}>
+						{loadingImages && <ProductImageCover />}
 						<AnimatePresence initial={false}>
-							<motion.div
-								key={index}
-								className="absolute"
-								style={{transform: 'translateX(-50%)'}}
-								initial={{opacity: 0, y: 50}}
-								animate={{opacity: 1, y: 0}}
-								exit={{opacity: 0, y: -50}}
-								transition={{duration: 0.5}}
-								onClick={openImagePopup}
-							>
-								{loadingImages ? (
-									<>
-										Loading...
-									</>
-								) : (
+							{!loadingImages && (
+								<motion.div
+									key={index}
+									className="absolute"
+									style={{transform: 'translateX(-50%)'}}
+									initial={{opacity: 0, y: 50}}
+									animate={{opacity: 1, y: 0}}
+									exit={{opacity: 0, y: -50}}
+									transition={{duration: 0.5}}
+									onClick={openImagePopup}
+								>
 									<Image
 										src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${images[index]}`}
-										alt="Slide image"
+										alt={imageAlt}
 										width={500}
 										height={500}
 										className={styles.currentImage}
 									/>
-								)}
-							</motion.div>
+								</motion.div>
+							)}
 						</AnimatePresence>
 					</div>
 					<button
@@ -152,13 +151,13 @@ const ProductSlider: React.FC<IProps> = ({ images }) => {
 				>
 					<div className="flex">
 						{images.map((filename, i) =>
-							<Image
-								key={i}
+							<ProductImage
+								key={`${filename}-${i}`}
 								src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${filename}`}
 								width={500}
 								height={500}
-								alt="Slide image"
-								style={i === index ? {outline: '1px solid red'} : {}}
+								alt={`${imageAlt}, фото ${i + 1}`}
+								frameStyle={i === index ? {outline: "1px solid red", borderRadius: 10} : {borderRadius: 10}}
 								onClick={() => updateIndex(i)}
 							/>
 						)}

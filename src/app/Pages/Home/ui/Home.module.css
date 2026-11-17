@@ -4,9 +4,10 @@
     gap: 40px;
 }
 
-.textBlock h1 {
+.textBlock .lead {
     font-size: 20px;
     text-align: center;
+    margin-top: 0.67em;
 }
 
 .textBlock ul {
@@ -70,7 +71,7 @@
         gap: 30px;
     }
 
-    .textBlock h1 {
+    .textBlock .lead {
         font-size: 18px;
     }
 
@@ -110,7 +111,7 @@
         gap: 20px;
     }
 
-    .textBlock h1 {
+    .textBlock .lead {
         font-size: 16px;
     }
 

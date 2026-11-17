@@ -7,7 +7,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
 import Button from "@/components/buttons/Button";
 import CloseIcon from "@/components/icons/CloseIcon";
-import Image from "next/image";
+import {ProductImage} from "@/components/product/ProductImage";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {formatPrice} from "@/functions/format";
 import {OrderItemAccessEnum} from "@/widgets/OrderItem";
@@ -93,11 +93,11 @@ export function OrderItem({ itemData, removeItem, updateCartPrice, itemType = Or
 				)}
 				{itemData.images && itemData.images.length > 0 && (
 					<a href={`/product/${encodeURIComponent(itemData.article)}`}>
-						<Image
+						<ProductImage
 							width={100}
 							height={100}
 							src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${itemData.images[0].filename}`}
-							alt={itemData.images[0].filename}
+							alt={itemData.name}
 							style={{objectFit: "contain"}}
 						/>
 					</a>

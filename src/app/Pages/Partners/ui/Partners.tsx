@@ -45,9 +45,9 @@ export const Partners = async () => {
 							key={i}
 							className={styles.listBlock}
 						>
-							<h3>
+							<h2>
 								{t(`list${i + 1}.head`)}
-							</h3>
+							</h2>
 							<ul aria-label={t(`list${i + 1}.head`)}>
 								{new Array(item).fill(0).map((_, k) =>
 									<li

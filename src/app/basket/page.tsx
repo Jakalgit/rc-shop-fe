@@ -102,6 +102,7 @@ export default function BasketPage() {
 		return (
 			<MotionMain>
 				<section className="flex items-center justify-center h-full">
+					<h1 className="visuallyHidden">{t("headText")}</h1>
 					<a style={{color: 'black'}} href={'/catalog'}>{t("itemsNotFound")}</a>
 				</section>
 			</MotionMain>

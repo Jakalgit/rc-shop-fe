@@ -26,12 +26,12 @@ export const Header: React.FC<HeaderProps> = async ({ phone1, phone2 }) => {
 	const links = generateNavLinks(t, act);
 
 	return (
-		<header className={`${styles.header} bg-[color:var(--foreground-color)] sticky top-0 left-0 flex`}>
+		<header className={`${styles.header} bg-[color:var(--foreground-color)] flex`}>
 			<Container className="flex items-center justify-between">
-				<Link className="text-decoration-none" href="/">
-					<h1 className={`${styles.brand} text-white fw-bold`}>
+				<Link className="text-decoration-none" href="/" aria-label="WORK-RC, на главную">
+					<p className={`${styles.brand} text-white fw-bold`}>
 						WORK-RC
-					</h1>
+					</p>
 				</Link>
 				<div className={`flex items-center ${styles.phoneLinks}`}>
 					<a className={`flex items-center ${styles.phoneLink}`} href={`tel:${phone1}`}>
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = async ({ phone1, phone2 }) => {
 						{formatPhoneNumber(phone2)}
 					</a>
 				</div>
-				<div className={`${styles.contentGap} flex items-center`}>
+				<nav className={`${styles.contentGap} flex items-center`} aria-label="Основное меню">
 					{links.map((el, i) =>
 						<Link
 							className={`duration-200 ${styles.link}`}
@@ -53,12 +53,13 @@ export const Header: React.FC<HeaderProps> = async ({ phone1, phone2 }) => {
 					)}
 					<a
 						href="/basket"
+						aria-label="Корзина"
 					>
 						<ShoppingBasketIcon className={styles.icon}/>
 					</a>
 					<ButtonFinder/>
 					<Menu links={links}/>
-				</div>
+				</nav>
 			</Container>
 		</header>
 	);

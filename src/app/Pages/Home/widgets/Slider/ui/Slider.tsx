@@ -56,8 +56,9 @@ export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 	if (count === 0) return null;
 
 	return (
-		<div
+		<section
 			className={`relative w-full overflow-hidden ${styles.wrapper} ${stylesShared.contentHeight}`}
+			aria-label="Акции"
 		>
 			{items.map((slide, index) =>
 				<SliderItem
@@ -107,6 +108,6 @@ export const Slider: React.FC<SliderProps> = React.memo(({ items }) => {
 					</div>
 				</>
 			)}
-		</div>
+		</section>
 	)
 })

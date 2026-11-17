@@ -19,7 +19,7 @@ export function HomeCategoryBlock({item}: HomeCategoryBlockProps) {
 	}
 
 	return (
-		<div className={`flex flex-col ${styles.block}`}>
+		<article className={`flex flex-col ${styles.block}`}>
 			<div
 				onClick={onClickBlock}
 				className={`flex justify-center items-center ${styles.imageWrapper}`}
@@ -28,7 +28,7 @@ export function HomeCategoryBlock({item}: HomeCategoryBlockProps) {
 					width={200}
 					height={200}
 					src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.image}`}
-					alt="image"
+					alt={item.blockText}
 				/>
 			</div>
 			<div className={`flex-grow-1 ${styles.textPart}`}>
@@ -47,6 +47,6 @@ export function HomeCategoryBlock({item}: HomeCategoryBlockProps) {
 					)}
 				</div>
 			</div>
-		</div>
+		</article>
 	)
 }

@@ -26,13 +26,13 @@ const Footer: React.FC<FooterProps> = async ({phone1, address}) => {
 	return (
 		<footer className={styles.footer}>
 			<Container>
-				<div className={`flex ${styles.linksLine}`}>
+				<nav className={`flex ${styles.linksLine}`} aria-label="Навигация в подвале">
 					{links.map((el, i) =>
 						<Link href={el.link} key={i}>
 							{el.text}
 						</Link>
 					)}
-				</div>
+				</nav>
 				<div className="flex flex-col">
 					<a
 						className={`flex items-center ${styles.phoneLink}`}
@@ -41,9 +41,9 @@ const Footer: React.FC<FooterProps> = async ({phone1, address}) => {
 						<CallIcon />
 						{formatPhoneNumber(phone1)}
 					</a>
-					<p className={`text-white ${styles.address}`}>
+					<address className={`text-white ${styles.address}`}>
 						{address}
-					</p>
+					</address>
 				</div>
 				<div className={`flex flex-col ${styles.secondaryInfo}`}>
 					<span>

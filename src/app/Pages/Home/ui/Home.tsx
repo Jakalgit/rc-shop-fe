@@ -24,13 +24,14 @@ export async function Home() {
 	return (
 		<MotionMain>
 			<HomeProvider>
+				<h1 className="visuallyHidden">{t("title")}</h1>
 				<Slider items={responseSliderItems} />
 				<Container>
 					<SubCategoriesPopup />
 					{responseHomeCategories.length > 0 && (
-						<div className={`flex flex-col ${styles.categories}`}>
+						<section className={`flex flex-col ${styles.categories}`} aria-labelledby="home-categories-title">
 							<div className="flex justify-between items-center">
-								<h2>
+								<h2 id="home-categories-title">
 									{t("categories")}
 								</h2>
 								<Link
@@ -51,7 +52,7 @@ export async function Home() {
 									/>
 								)}
 							</div>
-						</div>
+						</section>
 					)}
 				</Container>
 			</HomeProvider>

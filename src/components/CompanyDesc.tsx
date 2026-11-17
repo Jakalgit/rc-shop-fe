@@ -16,12 +16,12 @@ const CompanyDesc: React.FC<CompanyDescProps> = async ({ isHome }) => {
 	return (
 		<div className={`flex flex-col ${styles.textBlock}`}>
 			{!isHome && (
-				<h1>
+				<h2 className={styles.lead}>
 					{t.rich("firstText", {
 						bold: (chunk) => <span className="fw-bold">{chunk}</span>,
 						br: () => <br/>
 					})}
-				</h1>
+				</h2>
 			)}
 			<div className="flex flex-col items-center">
 				{!isHome && (

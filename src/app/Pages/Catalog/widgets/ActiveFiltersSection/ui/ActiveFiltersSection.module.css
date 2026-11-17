@@ -10,8 +10,9 @@
 
 }
 
-.section h3 {
+.section h2 {
     font-size: 20px;
+    margin-top: 1em;
 }
 
 .clearButton {
@@ -39,9 +40,10 @@
     gap: 9px;
 }
 
-.gridCell h4 {
+.gridCell h3 {
     font-size: 16px;
     font-weight: bold;
+    margin-top: 1.33em;
 }
 
 .priceRange {
@@ -75,7 +77,7 @@
         margin-bottom: 20px;
     }
 
-    .section h3 {
+    .section h2 {
         font-size: 18px;
     }
 
@@ -94,7 +96,7 @@
         gap: 14px;
     }
 
-    .gridCell h4 {
+    .gridCell h3 {
         font-size: 14px;
     }
 
@@ -133,7 +135,7 @@
         gap: 16px;
     }
 
-    .section h3 {
+    .section h2 {
         font-size: 16px;
     }
 
@@ -150,7 +152,7 @@
 }
 
 @media (max-width: 350px) {
-    .section h3 {
+    .section h2 {
         font-size: 15px;
     }
 

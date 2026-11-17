@@ -2,7 +2,7 @@ import {ProductResponse} from "@/api/products/types";
 import React from "react";
 import {getTranslations} from "next-intl/server";
 import styles from "./CatalogItem.module.css";
-import Image from "next/image";
+import {ProductImage} from "@/components/product/ProductImage";
 import {formatPrice} from "@/functions/format";
 import {ButtonAddToCart} from "../widgets/ButtonAddToCart";
 import {
@@ -65,17 +65,21 @@ export const CatalogItem: React.FC<IProps>  = React.memo(async ({ item }) => {
 				)}
 			</div>
 			<a style={{textAlign: "center"}} href={`/product/${encodeURIComponent(item.article)}`}>
-				<Image
+				<ProductImage
 					width={500}
 					height={500}
 					src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.images[0].filename}`}
-					alt={item.images[0].filename}
+					alt={item.name}
 				/>
 			</a>
 			<p className={`fw-bold text-center ${styles.article}`}>
 				{item.article}
 			</p>
-			<h2 className={styles.name} itemProp="name">{item.name}</h2>
+			<h2 className={styles.name} itemProp="name">
+				<a className={styles.nameLink} href={`/product/${encodeURIComponent(item.article)}`}>
+					{item.name}
+				</a>
+			</h2>
 			<div className="mt-auto">
 				{item.oldPrice && item.promotionPercentage && (
 					<p className={`montserrat fw-bold ${styles.oldPrice}`}>

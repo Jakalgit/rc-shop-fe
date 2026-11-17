@@ -67,9 +67,9 @@ export const ActiveFiltersSection: React.FC<IProps> = React.memo(({data}) => {
 	return (
 		<section className={styles.section}>
 			<div className="flex items-center justify-between">
-				<h3>
+				<h2>
 					{t('title')}
-				</h3>
+				</h2>
 				<Button
 					className={styles.clearButton}
 					title={t('buttonClearFilter.title')}
@@ -119,7 +119,7 @@ const PriceRange: React.FC<{ title: string, from: number, to: number}> = React.m
 
 	return (
 		<div className={`flex flex-col ${styles.gridCell}`}>
-			<h4>{title}</h4>
+			<h3>{title}</h3>
 			<div className={`flex items-center manrope fw-bold ${styles.priceRange}`}>
 				<p>{t('priceRange.from')} {formatPrice(from, 2)}</p>
 				<RangeIcon/>
@@ -133,7 +133,7 @@ const TagGroup: React.FC<{title: string, names: string[]}> = React.memo(({ title
 
 	return (
 		<div className={`flex flex-col ${styles.gridCell}`}>
-			<h4>{title}</h4>
+			<h3>{title}</h3>
 			<ul className={`flex flex-wrap overflow-hidden ${styles.tagList}`}>
 				{names.map((name, index) =>
 					<li

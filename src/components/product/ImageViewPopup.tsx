@@ -7,7 +7,7 @@ import styles from "@/styles/components/ImageViewPopup.module.css"
 import Button from "@/components/buttons/Button";
 import CloseIcon from "@/components/icons/CloseIcon";
 import {useTranslations} from "next-intl";
-import Image from "next/image";
+import {ProductImage} from "@/components/product/ProductImage";
 
 interface IProps {
 	isOpen: boolean;
@@ -63,9 +63,9 @@ const ImageViewPopup: React.FC<IProps> = ({ isOpen, closePopup, source }) => {
 							ref={wrapperRef}
 							className="flex items-center justify-center flex-grow-1 w-full"
 						>
-							<Image
+							<ProductImage
 								src={source}
-								alt="model image"
+								alt="Фото товара"
 								width={800}
 								height={800}
 								style={{ maxWidth: maxSize.width, maxHeight: maxSize.height }}

@@ -6,7 +6,8 @@ import {useTranslations} from "next-intl";
 import Button from "@/components/buttons/Button";
 import ChevronRightIcon from "@/components/icons/ChevronRightIcon";
 import {motion} from "framer-motion";
-import Image from "next/image";
+import {ProductImage} from "@/components/product/ProductImage";
+import imageStyles from "@/components/product/ProductImage.module.css";
 import {ProductGroupItemResponse} from "@/api/product-groups/types";
 import {getProductGroupItems} from "@/api/product-groups/api";
 
@@ -112,12 +113,13 @@ const SimilarProducts: React.FC<IProps> = ({ productGroupId, article }) => {
 								href={`/product/${encodeURIComponent(item.article)}`}
 							>
 								<span className={styles.imageFrame}>
-									<Image
+									<ProductImage
 										width={1000}
 										height={1000}
 										src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${item.filename}`}
 										alt={item.name || item.article}
 										className={styles.imageSlider}
+										frameClassName={imageStyles.stretch}
 									/>
 								</span>
 								<span className={styles.cardName}>

@@ -25,7 +25,7 @@ const RepairSlider = () => {
 							width={1500}
 							height={1500}
 							src={`/repair/${image}`}
-							alt="slider image"
+							alt="Ремонт радиоуправляемой модели"
 							className={styles.sliderImage}
 						/>
 					</div>

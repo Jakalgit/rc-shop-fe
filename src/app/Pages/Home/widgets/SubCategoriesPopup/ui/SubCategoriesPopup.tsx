@@ -85,7 +85,7 @@ export function SubCategoriesPopup() {
 												<Image
 													fill
 													src={`${process.env.NEXT_PUBLIC_CLOUD_URL}/${el.image}`}
-													alt={"image"}
+													alt={el.name}
 												/>
 											</div>
 											<h3 className="fw-normal">

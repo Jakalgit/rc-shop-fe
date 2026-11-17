@@ -241,8 +241,9 @@
     width: 48%;
 }
 
-.specificationAndEquipment h3 {
+.specificationAndEquipment h2 {
     font-size: 20px;
+    margin-top: 1em;
 }
 
 .specificationAndEquipment ul {
@@ -410,7 +411,7 @@
         font-size: 11px;
     }
 
-    .specificationAndEquipment h3 {
+    .specificationAndEquipment h2 {
         font-size: 18px;
     }
 

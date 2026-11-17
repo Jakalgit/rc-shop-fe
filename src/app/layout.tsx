@@ -12,8 +12,11 @@ import Footer from "@/components/Footer";
 import {getContacts} from "@/api/contacts/api";
 import {ProgressBar} from "@/widgets/ProgressBar";
 import {Header} from "@/widgets/Header";
+import {HeaderSearchSlot} from "@/widgets/HeaderSearch";
+import headerStackStyles from "@/widgets/HeaderSearch/ui/HeaderSearch.module.css";
 import Script from 'next/script';
 import {SupportChat} from "@/widgets/SupportChat";
+import {getSiteUrl} from "@/shared/lib/schema/offerMicrodata";
 
 const geologica = Geologica({
   variable: "--font-geologica",
@@ -30,9 +33,20 @@ const manrope = Manrope({
   subsets: ["cyrillic"],
 });
 
+const siteDescription = "Маркетплейс радиоуправляемых моделей: автомобили, самолёты, квадрокоптеры, запчасти и аксессуары. Широкий выбор, доставка, выгодные цены.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: "WORK-RC",
-  description: "Маркетплейс радиоуправляемых моделей: автомобили, самолёты, квадрокоптеры, запчасти и аксессуары. Широкий выбор, доставка, выгодные цены.",
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: "WORK-RC",
+    title: "WORK-RC",
+    description: siteDescription,
+    images: ["/logo512.png"],
+  },
   icons: {
     icon: '/favicon.ico', // для всех браузеров
     apple: '/apple-touch-icon.png', // для Safari/iOS
@@ -60,6 +74,35 @@ export default async function RootLayout({
 
   const messages = await getMessages();
   const contacts = await getContacts();
+  const siteUrl = getSiteUrl();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "WORK-RC",
+        url: siteUrl,
+        logo: `${siteUrl}/logo512.png`,
+        email: contacts.email,
+        telephone: contacts.phone1,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: contacts.address,
+          addressCountry: "RU",
+        },
+      },
+      {
+        "@type": "WebSite",
+        name: "WORK-RC",
+        url: siteUrl,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${siteUrl}/catalog?finder={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
 
   const initialState: Partial<RootState> = {
     finder: {
@@ -113,11 +156,19 @@ export default async function RootLayout({
     <body
       className={`${montserrat.variable} ${geologica.variable} ${manrope.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}
+        />
         <ProgressBar/>
         <NextIntlClientProvider messages={messages}>
           <ReduxProvider initialState={initialState}>
             <Finder/>
-            <Header {...contacts}/>
+            <div className={headerStackStyles.stack}>
+              <Header {...contacts}/>
+              <HeaderSearchSlot/>
+            </div>
+            <div className={headerStackStyles.pageOffset} aria-hidden="true"/>
             <SupportChat/>
             {children}
             <Footer {...contacts}/>

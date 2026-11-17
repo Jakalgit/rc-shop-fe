@@ -2,6 +2,7 @@
 :root {
     --header-height: 50px;
     --header-margin: 40px;
+    --header-search-height: 77px;
 
     --geologica-font: 'Geologica';
     --manrope-font: 'Manrope';
@@ -35,4 +36,10 @@
 
 .montserrat {
     font-family: var(--montserrat-font), sans-serif;
+}
+
+@media (max-width: 767px) {
+    :root {
+        --header-search-height: 65px;
+    }
 }

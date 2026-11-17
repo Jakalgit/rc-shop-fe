@@ -120,6 +120,7 @@ export const Catalog = async ({ searchParams }: { searchParams: Promise<{ [key: 
 			/>
 			<MotionMain>
 				<Container>
+					<h1 className="visuallyHidden">{t("title")}</h1>
 					<section className={`grid ${styles.panelsGrid}`}>
 						{panelButtons.map((button, index) =>
 							<a

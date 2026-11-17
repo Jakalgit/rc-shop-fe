@@ -42,9 +42,24 @@ export async function generateMetadata({ params }: {params: Promise<{ article: s
 		};
 	}
 
+	const description = product.description?.[0]?.text || product.name;
+	const image = product.images?.[0]?.filename
+		? getCloudImageUrl(product.images[0].filename)
+		: undefined;
+	const canonical = `/product/${encodeURIComponent(article)}`;
+
 	return {
 		title: product.name,
-		description: product.description[0].text,
+		description,
+		alternates: {canonical},
+		openGraph: {
+			title: product.name,
+			description,
+			url: canonical,
+			locale: "ru_RU",
+			type: "website",
+			images: image ? [{url: image, alt: product.name}] : undefined,
+		},
 	};
 }
 
@@ -94,11 +109,11 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 				<meta className={styles.microdata} itemProp="description" content={descriptionText} />
 				<section className={styles.sectionFirst}>
 					<div className={styles.sliderWrapper}>
-						<ProductSlider images={images} />
+						<ProductSlider images={images} imageAlt={name} />
 					</div>
 					<div className={`flex flex-col ${styles.infoWrapper}`}>
 						<h1 className={styles.name} itemProp="name">{name}</h1>
-						<p className={`fw-bold ${styles.article}`}>
+						<p className={`fw-bold ${styles.article}`} itemProp="sku">
 							{article}
 						</p>
 						<div className={`flex ${styles.availabilityBlock}`}>
@@ -168,9 +183,9 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 					<div className={`flex justify-between ${styles.specificationAndEquipment}`}>
 						{specification.length > 0 && (
 							<div>
-								<h3>
+								<h2>
 									{t("specification")}
-								</h3>
+								</h2>
 								<ul className="flex flex-col">
 									{specification.map((item, i) =>
 										<li className="flex items-center" key={i}>
@@ -183,9 +198,9 @@ export default async function ProductPage({params}: {params: Promise<{ article: 
 						)}
 						{equipment.length > 0 && (
 							<div>
-								<h3>
+								<h2>
 									{t("equipment")}
-								</h3>
+								</h2>
 								<ul className="flex flex-col">
 									{equipment.map((item, i) =>
 										<li className="flex items-center" key={i}>

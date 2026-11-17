@@ -145,7 +145,7 @@ export const BecomePartnerForm = () => {
 			<div className={`flex items-center justify-center ${styles.partForm}`}>
 				<Image
 					src={'/partners/gklasse.jpg'}
-					alt="g-class 6x6"
+					alt="Радиоуправляемая модель Mercedes-Benz G-Class 6x6"
 					className={styles.formImage}
 					width={200}
 					height={200}

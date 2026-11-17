@@ -8,6 +8,14 @@ export async function generateMetadata({ params }: {params: Promise<{locale: str
 	return {
 		title: t("title"),
 		description: t("description"),
+		alternates: {canonical: "/delivery-and-payments"},
+		openGraph: {
+			title: t("title"),
+			description: t("description"),
+			url: "/delivery-and-payments",
+			locale: "ru_RU",
+			type: "website",
+		},
 	};
 }
 
